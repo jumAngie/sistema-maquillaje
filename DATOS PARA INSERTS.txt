@@ -1,0 +1,18 @@
+-- PROVEEDORES --
+Lubre Cosmética Natural
+Ortrade
+Yesensy
+Bamboo Cosméticos
+Laboratorios Anteii
+Disava Cosmetics
+CosmetiChile
+Kylie Cosmetics
+
+-- CATEGORIAS --
+Labiales
+Delineadores
+Sombras
+Rubores
+Rimeles
+Polvos
+Cuidado de la Piel
