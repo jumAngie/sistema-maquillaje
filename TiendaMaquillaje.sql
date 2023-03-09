@@ -1,6 +1,4 @@
 
-
-
 CREATE DATABASE TiendaMaquillaje
 GO
 USE TiendaMaquillaje
@@ -20,6 +18,15 @@ CREATE TABLE Gral.tbEstadoCivil(
 
 );
 
+-------------------------------------------------** INSERTS DE ESTADOS CIVILES **--------------------------------------------------------------------------
+INSERT INTO Gral.tbEstadoCivil (est_Descripcion, est_UsuarioCrea)
+VALUES							('Soltero(a)',		1),
+								('Casado(a)',		1),
+								('Viudo(a)',		1),
+								('Divorciado(a)',	1),
+								('Unión Libre',		1)
+
+
 CREATE TABLE Gral.tbDepartamentos(
 		dep_ID				INT IDENTITY(1,1) PRIMARY KEY,
 		dep_Descripcion		NVARCHAR(250)			NOT NULL,
@@ -29,6 +36,8 @@ CREATE TABLE Gral.tbDepartamentos(
 		dep_FechaModi		DATETIME
 
 );
+
+-------------------------------------------------** INSERTS DE DEPARTAMENTOS **--------------------------------------------------------------------------
 
 CREATE TABLE Gral.tbMunicipios(
 		mun_ID				INT IDENTITY(1,1) PRIMARY KEY,
@@ -237,8 +246,9 @@ CREATE TABLE Maqui.tbCategoriaProductos(
 
 CREATE TABLE Maqui.tbInventario(
 		inv_Id				INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-		inv_Cantidad		INT NOT NULL,
 		inv_Producto		INT NOT NULL,
+		inv_Cantidad		INT NOT NULL,
+		
 
 		inv_UsuCrea			INT,
 		inv_FechaCrea		DATETIME DEFAULT GETDATE(),
@@ -277,17 +287,17 @@ CREATE TABLE Maqui.tbVentas(
 
 
 CREATE TABLE Maqui.tbVentasDetalle(
-		VD_Id			INT IDENTITY(1,1)	NOT NULL PRIMARY KEY,
-		VD_VentaId		INT					NOT NULL,
-		VD_Producto		INT					NOT NULL,
-		VD_Precio		DECIMAL(18,2)		NOT NULL,
-		VD_Cantidad		INT					NOT NULL,
+		vde_Id			INT IDENTITY(1,1)	NOT NULL PRIMARY KEY,
+		vde_VentaId		INT					NOT NULL,
+		vde_Producto	INT					NOT NULL,
+		vde_Precio		DECIMAL(18,2)		NOT NULL,
+		vde_Cantidad	INT					NOT NULL,
 
-		VD_UsuCrea		INT,
-		VD_FechaCrea	DATETIME			DEFAULT GETDATE(),
-		VD_UsuModi		INT,
-		VD_FechaModi	DATETIME,
-		VD_Estado		BIT					DEFAULT 1
+		vde_UsuCrea		INT,
+		vde_FechaCrea	DATETIME			DEFAULT GETDATE(),
+		vde_UsuModi		INT,
+		vde_FechaModi	DATETIME,
+		vde_Estado		BIT					DEFAULT 1
 
 		CONSTRAINT FK_Maqui_tbVentas_MaquiDetalles_tbVentasDetalle_VD_VentaId	FOREIGN KEY (VD_VentaId)		REFERENCES Maqui.tbVentas(ven_Id),
 		CONSTRAINT FK_Maqui_tbVentasDetalles_tbMaqui_Produtos_VD_Producto		FOREIGN KEY (VD_Producto)		REFERENCES Maqui.tbProductos(pro_Id),
