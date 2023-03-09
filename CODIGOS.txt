@@ -1,0 +1,10 @@
+"ConnectionStrings": {
+    "AHMLibreriaConn": "data source=LAPTOP-MGDRFP79\\SQLEXPRESS; initial catalog=Libreria; user id=; password="
+  },
+
+MappingProfileExntensions
+services.DataAccess(Configuration.GetConnectionString(""));
+            services.BusinessLogic();
+            services.AddAutoMapper(x=> x.AddProfile<MappingProfileExntensions>(), AppDomain.CurrentDomain.GetAssemblies());
+
+            services.AddControllersWithViews();
