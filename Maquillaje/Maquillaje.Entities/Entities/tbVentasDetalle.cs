@@ -8,18 +8,18 @@ namespace Maquillaje.Entities.Entities
 {
     public partial class tbVentasDetalle
     {
-        public int VD_Id { get; set; }
-        public int VD_VentaId { get; set; }
-        public int VD_Producto { get; set; }
-        public decimal VD_Precio { get; set; }
-        public int VD_Cantidad { get; set; }
-        public int? VD_UsuCrea { get; set; }
-        public DateTime? VD_FechaCrea { get; set; }
-        public int? VD_UsuModi { get; set; }
-        public DateTime? VD_FechaModi { get; set; }
-        public bool? VD_Estado { get; set; }
+        public int vde_Id { get; set; }
+        public int vde_VentaId { get; set; }
+        public int vde_Producto { get; set; }
+        public decimal vde_Precio { get; set; }
+        public int vde_Cantidad { get; set; }
+        public int? vde_UsuCrea { get; set; }
+        public DateTime? vde_FechaCrea { get; set; }
+        public int? vde_UsuModi { get; set; }
+        public DateTime? vde_FechaModi { get; set; }
+        public bool? vde_Estado { get; set; }
 
-        public virtual tbProductos VD_ProductoNavigation { get; set; }
-        public virtual tbVentas VD_Venta { get; set; }
+        public virtual tbProductos vde_ProductoNavigation { get; set; }
+        public virtual tbVentas vde_Venta { get; set; }
     }
 }

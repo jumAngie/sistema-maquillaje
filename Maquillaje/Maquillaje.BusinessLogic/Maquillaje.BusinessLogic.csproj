@@ -4,4 +4,8 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Maquillaje.DataAccess\Maquillaje.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

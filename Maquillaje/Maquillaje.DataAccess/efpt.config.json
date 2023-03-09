@@ -1,0 +1,93 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "TiendamaquillajeContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": null,
+   "OutputPath": "Context",
+   "ProjectRootNamespace": "Maquillaje.DataAccess",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 1,
+   "Tables": [
+      {
+         "Name": "[Gral].[tbClientes]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbDepartamentos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbEmpleados]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbEstadoCivil]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbMunicipios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbSucursales]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Gral].[tbUsuarios]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Maqui].[tbCategoriaProductos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Maqui].[tbCategorias]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Maqui].[tbInventario]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Maqui].[tbMetodoPago]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Maqui].[tbProductos]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Maqui].[tbProveedores]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Maqui].[tbVentas]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[Maqui].[tbVentasDetalle]",
+         "ObjectType": 0
+      }
+   ],
+   "UiHint": "DESKTOP-36LBO8D\\SQLEXPRESS.TiendaMaquillaje",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": true,
+   "UseHandleBars": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
