@@ -37,7 +37,23 @@ CREATE TABLE Gral.tbDepartamentos(
 
 );
 
--------------------------------------------------** INSERTS DE DEPARTAMENTOS **--------------------------------------------------------------------------
+-------------------------------------------------** INSERTS DE DEPARTAMENTOS **---------------------------------------------------------------------
+INSERT INTO Gral.tbDepartamentos(dep_Descripcion, dep_UsuarioCrea)
+VALUES							('Atlántida',			1),
+								('Colón',				1),
+								('Comayagua',			1),
+								('Copán',				1),
+								('Choluteca',			1),
+								('El Paraíso',			1),
+
+								('Francisco Morazán',	1),
+								('Gracias a Dios',		1),
+								('Intibucá',			1),
+								('Islas de la Bahía',	1)
+
+
+
+
 
 CREATE TABLE Gral.tbMunicipios(
 		mun_ID				INT IDENTITY(1,1) PRIMARY KEY,
@@ -299,8 +315,8 @@ CREATE TABLE Maqui.tbVentasDetalle(
 		vde_FechaModi	DATETIME,
 		vde_Estado		BIT					DEFAULT 1
 
-		CONSTRAINT FK_Maqui_tbVentas_MaquiDetalles_tbVentasDetalle_VD_VentaId	FOREIGN KEY (VD_VentaId)		REFERENCES Maqui.tbVentas(ven_Id),
-		CONSTRAINT FK_Maqui_tbVentasDetalles_tbMaqui_Produtos_VD_Producto		FOREIGN KEY (VD_Producto)		REFERENCES Maqui.tbProductos(pro_Id),
+		CONSTRAINT FK_Maqui_tbVentas_MaquiDetalles_tbVentasDetalle_VD_VentaId	FOREIGN KEY (vde_VentaId)		REFERENCES Maqui.tbVentas(ven_Id),
+		CONSTRAINT FK_Maqui_tbVentasDetalles_tbMaqui_Produtos_VD_Producto		FOREIGN KEY (vde_Producto)		REFERENCES Maqui.tbProductos(pro_Id),
 );
 GO
 

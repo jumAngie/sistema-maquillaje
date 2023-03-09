@@ -14,6 +14,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.cat_Id)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.cat_Descripcion)
             </th>
             <th>
@@ -29,7 +32,7 @@
                 @Html.DisplayNameFor(model => model.cat_FechaModi)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.cat_Estado)
+                Acciones
             </th>
             <th></th>
         </tr>
@@ -37,6 +40,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.cat_Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.cat_Descripcion)
             </td>
@@ -51,9 +57,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.cat_FechaModi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cat_Estado)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.cat_Id">Edit</a> |
