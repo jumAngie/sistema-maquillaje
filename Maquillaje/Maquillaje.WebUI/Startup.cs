@@ -1,3 +1,6 @@
+using AutoMapper;
+using Maquillaje.BusinessLogic;
+using Maquillaje.WebUI.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -23,6 +26,10 @@ namespace Maquillaje.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.DataAccess(Configuration.GetConnectionString("MaquiCon"));
+            services.BussinessLogic();
+            services.AddAutoMapper(x => x.AddProfile<MappingProfileExtensions>(), AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddControllersWithViews();
         }
 
