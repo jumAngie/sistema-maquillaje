@@ -1,4 +1,3 @@
-
 CREATE DATABASE TiendaMaquillaje
 GO
 USE TiendaMaquillaje
@@ -8,7 +7,7 @@ GO
 CREATE SCHEMA Gral
 GO
 
-CREATE TABLE Gral.tbEstadoCivil(
+CREATE TABLE Gral.tbEstadosCiviles(
 		est_ID				INT IDENTITY(1,1) PRIMARY KEY,
 		est_Descripcion		NVARCHAR(250)			NOT NULL,
 		est_UsuarioCrea		INT						NOT NULL,
@@ -18,38 +17,50 @@ CREATE TABLE Gral.tbEstadoCivil(
 
 );
 
--------------------------------------------------** INSERTS DE ESTADOS CIVILES **--------------------------------------------------------------------------
-INSERT INTO Gral.tbEstadoCivil (est_Descripcion, est_UsuarioCrea)
-VALUES							('Soltero(a)',		1),
-								('Casado(a)',		1),
-								('Viudo(a)',		1),
-								('Divorciado(a)',	1),
-								('Unión Libre',		1)
+INSERT INTO Gral.tbEstadosCiviles
+VALUES  ('Amante',			1, GETDATE(), null, null),
+		('Casado(a)',		1, GETDATE(), null, null),
+		('Comprometido(a)', 1, GETDATE(), null, null),
+		('Divorciado(a)',	1, GETDATE(), null, null),
+		('Soltero(a)',		1, GETDATE(), null, null),
+		('Unión Libre',		1, GETDATE(), null, null),
+		('Viudo(a)',		1, GETDATE(), null, null);
 
 
 CREATE TABLE Gral.tbDepartamentos(
-		dep_ID				INT IDENTITY(1,1) PRIMARY KEY,
-		dep_Descripcion		NVARCHAR(250)			NOT NULL,
-		dep_UsuarioCrea		INT						NOT NULL,
-		dep_FechaCrea		DATETIME				DEFAULT GETDATE(),
-		dep_UsuarioModi		INT,
-		dep_FechaModi		DATETIME
+		dep_ID					INT IDENTITY(1,1) PRIMARY KEY,
+		dep_Descripcion			NVARCHAR(250)			NOT NULL,
+		dep_UsuarioCrea			INT						NOT NULL,
+		dep_FechaCrea			DATETIME				DEFAULT GETDATE(),
+		dep_UsuarioModi			INT,
+		dep_FechaModi			DATETIME
 
 );
 
--------------------------------------------------** INSERTS DE DEPARTAMENTOS **---------------------------------------------------------------------
-INSERT INTO Gral.tbDepartamentos(dep_Descripcion, dep_UsuarioCrea)
-VALUES							('Atlántida',			1),
-								('Colón',				1),
-								('Comayagua',			1),
-								('Copán',				1),
-								('Choluteca',			1),
-								('El Paraíso',			1),
+INSERT INTO Gral.tbDepartamentos
+VALUES	('Atlántida',		    1, GETDATE(), NULL, NULL),
+		('Colón',			    1, GETDATE(), NULL, NULL),
+		('Comayagua',		    1, GETDATE(), NULL, NULL),
+		('Copán',			    1, GETDATE(), NULL, NULL),
+		('Cortés',			    1, GETDATE(), NULL, NULL),
+		('Choluteca',		    1, GETDATE(), NULL, NULL),
+		('El Paraíso',		    1, GETDATE(), NULL, NULL),
+		('Francisco Morazán',   1, GETDATE(), NULL, NULL),
+		('Gracias a Dios',	    1, GETDATE(), NULL, NULL),
+		('Intibuca',		    1, GETDATE(), NULL, NULL),
+		('Islas de la Bahía',   1, GETDATE(), NULL, NULL),
+		('La Paz',			    1, GETDATE(), NULL, NULL),
+		('Lempira',			    1, GETDATE(), NULL, NULL),
+		('Ocotepeque',		    1, GETDATE(), NULL, NULL),
+		('Olancho',			    1, GETDATE(), NULL, NULL),
+		('Santa Bárbara',	    1, GETDATE(), NULL, NULL),
+		('Valle',			    1, GETDATE(), NULL, NULL),
+		('Yoro',			    1, GETDATE(), NULL, NULL);
 
-								('Francisco Morazán',	1),
-								('Gracias a Dios',		1),
-								('Intibucá',			1),
-								('Islas de la Bahía',	1)
+		
+
+
+
 
 
 
@@ -67,6 +78,305 @@ CREATE TABLE Gral.tbMunicipios(
 		CONSTRAINT FK_Gral_tbMunicipios_mun_depID_Gral_tbDepartamentos_dep_ID	FOREIGN KEY (mun_depID) REFERENCES Gral.tbDepartamentos (dep_ID)
 );
 
+INSERT INTO Gral.tbMunicipios
+VALUES   ( 1, 'La Ceiba',				   1, GETDATE(), NULL, NULL),
+		 ( 1, 'Tela',					   1, GETDATE(), NULL, NULL),
+	     ( 1, 'La Masica',				   1, GETDATE(), NULL, NULL),
+		 ( 1, 'Arizona',				   1, GETDATE(), NULL, NULL),
+		 ( 1, 'Jutiapa',				   1, GETDATE(), NULL, NULL),
+		 ( 1, 'El Porvenir',			   1, GETDATE(), NULL, NULL),
+		 ( 1, 'Esparta',				   1, GETDATE(), NULL, NULL),
+	     ( 1, 'San Francisco',			   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Trujillo',				   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Balfate',				   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Iriona',					   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Limón',					   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Sabá',					   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Santa Fé',				   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Santa Rosa de Aguán',	   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Sonaguera',				   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Tocoa',					   1, GETDATE(), NULL, NULL),
+		 ( 2, 'Bonito Oriental',		   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Comayagua',				   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Ajuterique',				   1, GETDATE(), NULL, NULL),
+		 ( 3, 'El Rosario',				   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Esquías',				   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Humuya',					   1, GETDATE(), NULL, NULL),
+		 ( 3, 'La Libertad',			   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Lamaní',					   1, GETDATE(), NULL, NULL),
+		 ( 3, 'La Trinidad',			   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Lejamaní',				   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Meambár',				   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Minas de Oro',			   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Ojos de Agua',			   1, GETDATE(), NULL, NULL),
+		 ( 3, 'San Jerónimo',			   1, GETDATE(), NULL, NULL),
+		 ( 3, 'San José de Comayagua',	   1, GETDATE(), NULL, NULL),
+		 ( 3, 'San José del Potrero',	   1, GETDATE(), NULL, NULL),
+		 ( 3, 'San Luis',				   1, GETDATE(), NULL, NULL),
+		 ( 3, 'San Sebastián',			   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Siguatepeque',			   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Villas de San Antonio',	   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Las Lajas',				   1, GETDATE(), NULL, NULL),
+		 ( 3, 'Taulabé',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Santa Rosa de Copán',	   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Cabañas',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Concepción',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Copán Ruinas',			   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Corquín',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Cucuyagua',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Dolores',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Dulce Nombre',			   1, GETDATE(), NULL, NULL),
+		 ( 4, 'El Paraíso',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Florida',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Lajigua',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'La Unión',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Nueva Arcadia',			   1, GETDATE(), NULL, NULL),
+		 ( 4, 'San Agustín',			   1, GETDATE(), NULL, NULL),
+		 ( 4, 'San Antonio',			   1, GETDATE(), NULL, NULL),
+		 ( 4, 'San Jerónimo',			   1, GETDATE(), NULL, NULL),
+		 ( 4, 'San José',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'San Juan de Ocoa',		   1, GETDATE(), NULL, NULL),
+		 ( 4, 'San Nicolás',			   1, GETDATE(), NULL, NULL),
+		 ( 4, 'San Pedro',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Santa Rita',				   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Trinidad de Copán',		   1, GETDATE(), NULL, NULL),
+		 ( 4, 'Veracrúz',				   1, GETDATE(), NULL, NULL),
+		 ( 5, 'San Pedro Sula',			   1, GETDATE(), NULL, NULL),
+		 ( 5, 'Choloma',				   1, GETDATE(), NULL, NULL),
+		 ( 5, 'Omoa',					   1, GETDATE(), NULL, NULL),
+		 ( 5, 'Pimienta',				   1, GETDATE(), NULL, NULL),
+		 ( 5, 'Potrerillos',			   1, GETDATE(), NULL, NULL),
+		 ( 5, 'Puerto Cortés',			   1, GETDATE(), NULL, NULL),
+		 ( 5, 'San Antonio de Cortés',	   1, GETDATE(), NULL, NULL),
+	     ( 5, 'San Francisco de Yojoa',    1, GETDATE(), NULL, NULL),
+		 ( 5, 'San Manuel',				   1, GETDATE(), NULL, NULL),
+		 ( 5, 'Santa Cruz de Yoja',		   1, GETDATE(), NULL, NULL),
+		 ( 5, 'La Lima',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Pascilagua',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Comcepción de María',	   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Duyure',					   1, GETDATE(), NULL, NULL),
+		 ( 6, 'El Corpues',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'El Triunfo',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Marcovia',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Morolica',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Namasigue',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Orocuina',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Pespire',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'San Antonio de Flores',	   1, GETDATE(), NULL, NULL),
+		 ( 6, 'San Isidrio',			   1, GETDATE(), NULL, NULL),
+		 ( 6, 'San José',				   1, GETDATE(), NULL, NULL),
+		 ( 6, 'San Marcos de Colón',	   1, GETDATE(), NULL, NULL),
+		 ( 6, 'Santa Ana de Yuscuare',	   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Yuscarán',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Alauca',					   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Danlí',					   1, GETDATE(), NULL, NULL),
+		 ( 7, 'El Paraíso',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Guinope',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Jacaleapa',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Liure',					   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Morocelí',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Oropolí',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Potrerillos',			   1, GETDATE(), NULL, NULL),
+		 ( 7, 'San Antonio de Flores',	   1, GETDATE(), NULL, NULL),
+		 ( 7, 'San Lucas',				   1, GETDATE(), NULL, NULL),		 
+		 ( 7, 'San Matías',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Soledad',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Teupasenti',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Texiguat',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Vado Ancho',				   1, GETDATE(), NULL, NULL),		
+		 ( 7, 'Yauyupe',				   1, GETDATE(), NULL, NULL),
+		 ( 7, 'Trojes',					   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Distrito Central',		   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Alubarén',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Cedros',					   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Cucarén',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'El Porvenir',			   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Guaimaca',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'La Libertad',			   1, GETDATE(), NULL, NULL),
+		 ( 8, 'La Venta',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Lepaterique',			   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Maraita',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Maralé',					   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Nueva Armedia',			   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Ojojona',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Orica',					   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Reitoca',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Sabana Grande',			   1, GETDATE(), NULL, NULL),
+		 ( 8, 'San Antonio de Oriente',    1, GETDATE(), NULL, NULL),
+		 ( 8, 'San Buenaventura',		   1, GETDATE(), NULL, NULL),
+		 ( 8, 'San Ignacio',			   1, GETDATE(), NULL, NULL),
+		 ( 8, 'San Juan de Flores',		   1, GETDATE(), NULL, NULL),
+		 ( 8, 'San Miguelito',			   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Santa Ana',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Santa Lucía',			   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Talanga',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Tatumbla',				   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Valle de Ángeles',		   1, GETDATE(), NULL, NULL),
+		 ( 8, 'Villas de San Fernando',    1, GETDATE(), NULL, NULL),
+		 ( 8, 'Vallecillo',				   1, GETDATE(), NULL, NULL),
+		 ( 9, 'Puerto Lempira',			   1, GETDATE(), NULL, NULL),
+		 ( 9, 'Brus Laguna',			   1, GETDATE(), NULL, NULL),
+		 ( 9, 'Hauas',					   1, GETDATE(), NULL, NULL),
+		 ( 9, 'Juan Francisco Bulnes',	   1, GETDATE(), NULL, NULL),
+		 ( 9, 'Villeda Morales',		   1, GETDATE(), NULL, NULL),
+		 ( 9, 'Wanpucirpe',				   1, GETDATE(), NULL, NULL),
+		 (10, 'La Esperanza',			   1, GETDATE(), NULL, NULL),
+		 (10, 'Camasca',				   1, GETDATE(), NULL, NULL),
+		 (10, 'Colomcagua',				   1, GETDATE(), NULL, NULL),
+		 (10, 'Concepción',				   1, GETDATE(), NULL, NULL),
+		 (10, 'Dolores',				   1, GETDATE(), NULL, NULL),
+		 (10, 'Intibuca',				   1, GETDATE(), NULL, NULL),
+		 (10, 'Jesus de Otoro',			   1, GETDATE(), NULL, NULL),
+		 (10, 'Magadalena',				   1, GETDATE(), NULL, NULL),
+		 (10, 'Masaguara',				   1, GETDATE(), NULL, NULL),
+		 (10, 'San Antonio',			   1, GETDATE(), NULL, NULL),
+		 (10, 'San Isidro',				   1, GETDATE(), NULL, NULL),
+		 (10, 'San Juan',				   1, GETDATE(), NULL, NULL),
+		 (10, 'San Marcos de la Sierra',   1, GETDATE(), NULL, NULL),
+		 (10, 'San Miguelito',			   1, GETDATE(), NULL, NULL),
+		 (10, 'Santa Lucía',			   1, GETDATE(), NULL, NULL),
+		 (10, 'Yamaranguila',			   1, GETDATE(), NULL, NULL),
+		 (10, 'San Francisco de Opalaca',  1, GETDATE(), NULL, NULL),
+		 (11, 'Roatán',					   1, GETDATE(), NULL, NULL),
+		 (11, 'Guanaja',				   1, GETDATE(), NULL, NULL),
+		 (11, 'José Santos Guardiola',	   1, GETDATE(), NULL, NULL),
+		 (11, 'Utila',					   1, GETDATE(), NULL, NULL),
+		 (12, 'Aguanqueterique',		   1, GETDATE(), NULL, NULL),
+		 (12, 'Cabañas',				   1, GETDATE(), NULL, NULL),
+		 (12, 'Cane',					   1, GETDATE(), NULL, NULL),
+		 (12, 'Chinacla',				   1, GETDATE(), NULL, NULL),
+		 (12, 'Guagiquiro',				   1, GETDATE(), NULL, NULL),
+		 (12, 'Lauterique',				   1, GETDATE(), NULL, NULL),
+		 (12, 'Marcala',				   1, GETDATE(), NULL, NULL),
+		 (12, 'Mercedes de Oriente',	   1, GETDATE(), NULL, NULL),
+		 (12, 'Opatoro',				   1, GETDATE(), NULL, NULL),
+		 (12, 'San Antonio del Norte',	   1, GETDATE(), NULL, NULL),
+		 (12, 'San José',				   1, GETDATE(), NULL, NULL),
+		 (12, 'San Juan',				   1, GETDATE(), NULL, NULL),
+		 (12, 'San Pedro de Tutule',	   1, GETDATE(), NULL, NULL),
+		 (12, 'Santa Ana',				   1, GETDATE(), NULL, NULL),
+		 (12, 'San Elena',				   1, GETDATE(), NULL, NULL),
+		 (12, 'Santa María',			   1, GETDATE(), NULL, NULL),
+		 (12, 'Santiago de Puringla',	   1, GETDATE(), NULL, NULL),
+		 (12, 'Yarula',					   1, GETDATE(), NULL, NULL),
+		 (13, 'Gracias',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Belén',					   1, GETDATE(), NULL, NULL),
+		 (13, 'Candelaria',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Cololaca',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Erandique',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Guascinse',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Guarita',				   1, GETDATE(), NULL, NULL),
+		 (13, 'La Campa',				   1, GETDATE(), NULL, NULL),
+		 (13, 'La Iguala',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Las Flores',				   1, GETDATE(), NULL, NULL),
+		 (13, 'La Unión',				   1, GETDATE(), NULL, NULL),
+		 (13, 'La Virtud',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Lepaera',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Mapulaca',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Piraera',				   1, GETDATE(), NULL, NULL),
+		 (13, 'San Andrés',				   1, GETDATE(), NULL, NULL),
+		 (13, 'San Francisco',			   1, GETDATE(), NULL, NULL),
+		 (13, 'San Juan Guarita',		   1, GETDATE(), NULL, NULL),
+		 (13, 'San Manuel Colohete',	   1, GETDATE(), NULL, NULL),
+		 (13, 'San Rafael',				   1, GETDATE(), NULL, NULL),
+		 (13, 'San Sebastián',			   1, GETDATE(), NULL, NULL),
+		 (13, 'Santa Crúz',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Talgua',					   1, GETDATE(), NULL, NULL),
+		 (13, 'Tambla',					   1, GETDATE(), NULL, NULL),
+		 (13, 'Tomalá',					   1, GETDATE(), NULL, NULL),
+		 (13, 'Valladolid',				   1, GETDATE(), NULL, NULL),
+		 (13, 'Virginia',				   1, GETDATE(), NULL, NULL),
+		 (13, 'San Marcos de Caiquin',	   1, GETDATE(), NULL, NULL),
+		 (14, 'Ocotepeque',				   1, GETDATE(), NULL, NULL),
+		 (14, 'Belén Gualcho',			   1, GETDATE(), NULL, NULL),
+		 (14, 'Concepción',				   1, GETDATE(), NULL, NULL),
+		 (14, 'Dolores Merendón',		   1, GETDATE(), NULL, NULL),
+		 (14, 'Fraternidad',			   1, GETDATE(), NULL, NULL),
+		 (14, 'La Encarnación',			   1, GETDATE(), NULL, NULL),
+		 (14, 'La Labor',				   1, GETDATE(), NULL, NULL),
+		 (14, 'Lucerna',				   1, GETDATE(), NULL, NULL),
+		 (14, 'Mercedes',				   1, GETDATE(), NULL, NULL),
+		 (14, 'San Fernando',			   1, GETDATE(), NULL, NULL),
+		 (14, 'San Francisco del Valle',   1, GETDATE(), NULL, NULL),
+		 (14, 'San Jorge',				   1, GETDATE(), NULL, NULL),
+		 (14, 'San Marcos',				   1, GETDATE(), NULL, NULL),
+		 (14, 'Santa Fé',				   1, GETDATE(), NULL, NULL),
+		 (14, 'Sesenti',				   1, GETDATE(), NULL, NULL),
+		 (14, 'Sinuapa',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Juticalpa',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Campamento',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Catacamas',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Concordia',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Dulce Nombre de Culmí',	   1, GETDATE(), NULL, NULL),
+		 (15, 'El Rosario',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Esquípulas del Norte',	   1, GETDATE(), NULL, NULL),
+		 (15, 'Gualaco',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Guarizama',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Guata',					   1, GETDATE(), NULL, NULL),
+		 (15, 'Guayape',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Jano',					   1, GETDATE(), NULL, NULL),
+		 (15, 'La Unión',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Mangulile',				   1, GETDATE(), NULL, NULL),
+		 (15, 'Manto',					   1, GETDATE(), NULL, NULL),
+		 (15, 'Salamá',					   1, GETDATE(), NULL, NULL),
+		 (15, 'San Esteban',			   1, GETDATE(), NULL, NULL),
+		 (15, 'San Francisco de Becerra',  1, GETDATE(), NULL, NULL),
+		 (15, 'San Francisco de La Paz',   1, GETDATE(), NULL, NULL),
+		 (15, 'San María del Real',		   1, GETDATE(), NULL, NULL),
+		 (15, 'Silca',					   1, GETDATE(), NULL, NULL),
+		 (15, 'Yocon',					   1, GETDATE(), NULL, NULL),
+		 (15, 'Patuca',					   1, GETDATE(), NULL, NULL),
+		 (16, 'Santa Bárbara',			   1, GETDATE(), NULL, NULL),
+		 (16, 'Arada',					   1, GETDATE(), NULL, NULL),
+		 (16, 'Atima',					   1, GETDATE(), NULL, NULL),
+		 (16, 'Azacualpa',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Ceguaca',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Concepción del Norte',	   1, GETDATE(), NULL, NULL),
+		 (16, 'Concepción del Sur',		   1, GETDATE(), NULL, NULL),
+		 (16, 'Chinda',					   1, GETDATE(), NULL, NULL),
+		 (16, 'El Níspero',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Gualala',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Ilama',					   1, GETDATE(), NULL, NULL),
+		 (16, 'Las Vegas',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Macuelizo',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Naranjito',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Nuevo Celilac',			   1, GETDATE(), NULL, NULL),
+		 (16, 'Nueva Frontera',			   1, GETDATE(), NULL, NULL),
+		 (16, 'Petoa',					   1, GETDATE(), NULL, NULL),
+		 (16, 'Protección',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Quimistán',				   1, GETDATE(), NULL, NULL),
+		 (16, 'San Francisco de Ojuera',   1, GETDATE(), NULL, NULL),
+		 (16, 'San José de Colinas',	   1, GETDATE(), NULL, NULL),
+		 (16, 'San Luis',				   1, GETDATE(), NULL, NULL),
+		 (16, 'San Marcos',				   1, GETDATE(), NULL, NULL),
+		 (16, 'San Nicolás',			   1, GETDATE(), NULL, NULL),
+		 (16, 'San Pedro Zacapa',		   1, GETDATE(), NULL, NULL),
+		 (16, 'San Vicente Centenario',    1, GETDATE(), NULL, NULL),
+		 (16, 'Santa Rita',				   1, GETDATE(), NULL, NULL),
+		 (16, 'Trinidad',				   1, GETDATE(), NULL, NULL),
+		 (17, 'Nacome',					   1, GETDATE(), NULL, NULL),
+		 (17, 'Alianza',				   1, GETDATE(), NULL, NULL),
+		 (17, 'Amapala',				   1, GETDATE(), NULL, NULL),
+		 (17, 'Aramecina',				   1, GETDATE(), NULL, NULL),
+		 (17, 'Caridad',				   1, GETDATE(), NULL, NULL),
+		 (17, 'Goascorán',				   1, GETDATE(), NULL, NULL),
+		 (17, 'Langue',					   1, GETDATE(), NULL, NULL),
+		 (17, 'San Francisco de Coray',    1, GETDATE(), NULL, NULL),
+		 (17, 'San Lorenzo',			   1, GETDATE(), NULL, NULL),
+		 (18, 'Yoro',					   1, GETDATE(), NULL, NULL),
+		 (18, 'Arenal',					   1, GETDATE(), NULL, NULL),
+		 (18, 'El Negrito',				   1, GETDATE(), NULL, NULL),
+		 (18, 'El Progreso',			   1, GETDATE(), NULL, NULL),
+		 (18, 'Jocón',					   1, GETDATE(), NULL, NULL),
+		 (18, 'Morazán',				   1, GETDATE(), NULL, NULL),
+		 (18, 'Olanchito',				   1, GETDATE(), NULL, NULL),
+		 (18, 'Santa Rita',				   1, GETDATE(), NULL, NULL),
+		 (18, 'Sulaco',					   1, GETDATE(), NULL, NULL),
+		 (18, 'Victoria',				   1, GETDATE(), NULL, NULL),
+		 (18, 'Yorito',					   1, GETDATE(), NULL, NULL);
+		
+
+
 
 CREATE TABLE Gral.tbSucursales (
 		suc_Id				INT IDENTITY(1,1)	NOT NULL PRIMARY KEY,
@@ -82,6 +392,28 @@ CREATE TABLE Gral.tbSucursales (
 		CONSTRAINT FK_Maqui_tbSucursales_Gral_tbMunicipios FOREIGN KEY (suc_Municipio) REFERENCES Gral.tbMunicipios(mun_Id)
 );
 
+
+INSERT INTO Gral.tbSucursales
+VALUES  ('Beaty Face', 64,				 1, GETDATE(), NULL, NULL, 1),
+		('Kriz Reales Studio', 64,		 1, GETDATE(), NULL, NULL, 1),
+		('Beauty Supply Honduras', 111,  1, GETDATE(), NULL, NULL, 1),
+		('Elf Cosmetics HN', 23,	     1, GETDATE(), NULL, NULL, 1),
+		('Miami Beaty HN', 45,			 1, GETDATE(), NULL, NULL, 1),
+		('Maquillajes Express', 230,	 1, GETDATE(), NULL, NULL, 1),
+		('Cosmetics Depot', 67,			 1, GETDATE(), NULL, NULL, 1),
+		('Makeup Studio', 98,			 1, GETDATE(), NULL, NULL, 1),
+		('Tiendas Alisson', 88,			 1, GETDATE(), NULL, NULL, 1),
+		('Tiendas Kelys', 29,			 1, GETDATE(), NULL, NULL, 1),
+		('Og Beaty',61,					 1, GETDATE(), NULL, NULL, 1),
+		('Sophis Beaty Studio', 130,	 1, GETDATE(), NULL, NULL, 1),
+		('Xicero Makeup', 210,			 1, GETDATE(), NULL, NULL, 1),
+	    ('Goc Makeup', 246,				 1, GETDATE(), NULL, NULL, 1),
+		('Magic Makeup', 176,			 1, GETDATE(), NULL, NULL, 1),
+		('Cosmética Mima', 132,			 1, GETDATE(), NULL, NULL, 1),
+		('AR Makeup', 155,				 1, GETDATE(), NULL, NULL, 1),
+		('Novedades Salomé', 110,		 1, GETDATE(), NULL, NULL, 1),
+		('Pretty Rose MakeUp', 284,		 1, GETDATE(), NULL, NULL, 1),
+		('Fedcp', 2,					 1, GETDATE(), NULL, NULL, 1);
 
 
 CREATE TABLE Gral.tbEmpleados(
@@ -107,8 +439,31 @@ CREATE TABLE Gral.tbEmpleados(
 		CONSTRAINT CK_Gral_tbEmpleados_emp_Sexo		CHECK		(emp_Sexo IN ('F', 'M')),
 		CONSTRAINT FK_Gral_tbEmpleados_emp_Sucursal_Gral_tbSucursales_emp_Sucursal_suc_Id	FOREIGN KEY (emp_Sucursal)		REFERENCES Gral.tbSucursales(suc_Id),
 		CONSTRAINT FK_Gral_tbEmpleados_emp_Municipio_Gral_tbMunicipios_mun_ID				FOREIGN KEY (emp_Municipio)		REFERENCES Gral.tbMunicipios  (mun_ID),
-		CONSTRAINT FK_Gral_tbEmpleados_emp_EstadoCivil_Gral_tbEstadoCivil_est_ID			FOREIGN KEY (emp_EstadoCivil)	REFERENCES Gral.tbEstadoCivil (est_ID)
+		CONSTRAINT FK_Gral_tbEmpleados_emp_EstadoCivil_Gral_tbEstadoCivil_est_ID			FOREIGN KEY (emp_EstadoCivil)	REFERENCES Gral.tbEstadosCiviles (est_ID)
 );
+
+INSERT INTO Gral.tbEmpleados
+VALUES  ('Hugo', 'Alcerro', '1615199009008', '1990-08-09', 'M', '+504 9009-6778', 200, 'hugalcerro@gmail.com', 2, 4,		1, GETDATE(), NULL, NULL, 1),
+		('Mariela', 'Vega', '0910197600977', '1998-10-23', 'F', '+504 9878-3241', 111, 'marvega@gmail.com', 1, 6,			1, GETDATE(), NULL, NULL, 1),
+		('Oliver', 'Membreño', '0901199209034', '1992-12-09', 'M', '+504 8909-3343', 23, 'olimem@gmail.com', 3, 7,			1, GETDATE(), NULL, NULL, 1),
+		('Ernestina', 'Mejía', '0304199790567', '1997-02-10', 'F', '+504 9780-5463', 89, 'ernesmia@gmail.com', 6, 14,		1, GETDATE(), NULL, NULL, 1),
+		('Sandro', 'Yanez', '0309199009890', '1990-10-26', 'M', '+504 9767-6657', 54, 'sandroyane@gmail.com', 7, 10,		1, GETDATE(), NULL, NULL, 1),
+		('Juana', 'Juarez', '1002199062718', '1990-05-21', 'F', '+504 9231-6512', 90, 'juajua@gmail.com', 3, 11,			1, GETDATE(), NULL, NULL, 1),
+		('Nelson', 'Umaña', '1102198900090', '1989-02-10', 'M', '+504 9345-5161', 54, 'neluña@gmail.com', 1, 8,				1, GETDATE(), NULL, NULL, 1),
+		('Carolina', 'Menjivar', '1109199908956', '1999-05-04', 'F', '+504 9789-5565', 87, 'caromen@gmail.com', 5, 19,		1, GETDATE(), NULL, NULL, 1),
+		('Victor', 'Carcasa', '1210197600097', '1976-09-10', 'M', '+504 9451-5643', 23, 'viccarra@gmail.com', 6, 2,			1, GETDATE(), NULL, NULL, 1),
+		('Tania', 'Lopez', '0912199090790', '1990-10-29', 'F', '+504 9134-5261', 180, 'tanlope@gmail.com', 1, 3,			1, GETDATE(), NULL, NULL, 1),
+		('Betulio', 'Nuñez', '1202199409890', '1997-12-18', 'M', '+504 8909-6473', 121, 'betunu@gmail.com', 2, 18,			1, GETDATE(), NULL, NULL, 1),
+		('Yulissa', 'Sanchez', '1202197809001', '1978-12-23', 'F', '+504 9809-6657', 150, 'yulisan@gmail.com', 3, 12,		1, GETDATE(), NULL, NULL, 1),
+		('Ilinois', 'Urquía', '1109198500909', '1985-06-25', 'M', '+504 8298-9089', 230, 'ilinourquia@gmail.com', 4, 15,	1, GETDATE(), NULL, NULL, 1),
+		('Carla', 'Oliva', '0413198809067', '1988-04-20', 'F', '+504 9567-7789', 241, 'caroli@gmail.com', 5, 14,			1, GETDATE(), NULL, NULL, 1),
+		('Rodrigo', 'Buena', '0412199089009', '1990-11-09', 'M', '+504 9587-4521', 143, 'rodribue@gmail.com', 6, 17,		1, GETDATE(), NULL, NULL, 1),
+		('Nidia', 'Rodríguez', '0911199809896', '1998-12-20', 'F', '+504 9954-7768', 25, 'nidirodri@gmail.com', 7, 5,		1, GETDATE(), NULL, NULL, 1),
+		('Ulises', 'Villega', '1514199609890', '1996-09-02', 'M', '+504 9888-0909', 54, 'uliville@gmail.com', 1, 6,			1, GETDATE(), NULL, NULL, 1),
+		('Tiana', 'Petoa', '0915199056281', '1990-10-15', 'F', '+504 9867-5546', 96, 'tuapetoa@gmail.com', 2, 7,			1, GETDATE(), NULL, NULL, 1),
+		('Mario', 'Herrera', '0912199072819', '1990-04-21', 'M', '+504 9123-5434', 77, 'marioherre@gmail.com', 3, 8,		1, GETDATE(), NULL, NULL, 1),
+		('Elia', 'Mejía', '0917199072819', '1990-09-11', 'F', '+504 9678-4453', 87, 'eliameji@gmail.com', 4, 9,				1, GETDATE(), NULL, NULL, 1);
+
 
 CREATE TABLE Gral.tbClientes(
 
@@ -132,8 +487,32 @@ CREATE TABLE Gral.tbClientes(
 		CONSTRAINT UQ_Gral_tbClientes_cli_DNI			UNIQUE		(cli_DNI),
 		CONSTRAINT CK_Gral_tbClientes_cli_Sexo		CHECK		(cli_Sexo IN ('F', 'M')),
 		CONSTRAINT FK_Gral_tbClientes_cli_Municipio_Gral_tbMunicipios_mun_ID	FOREIGN KEY (cli_Municipio)	    REFERENCES Gral.tbMunicipios  (mun_ID),
-		CONSTRAINT FK_Gral_tbClientes_cli_EstadoCivil_Gral_tbEstadoCivil_est_ID	FOREIGN KEY (cli_EstadoCivil)	REFERENCES Gral.tbEstadoCivil (est_ID)
+		CONSTRAINT FK_Gral_tbClientes_cli_EstadoCivil_Gral_tbEstadoCivil_est_ID	FOREIGN KEY (cli_EstadoCivil)	REFERENCES Gral.tbEstadosCiviles (est_ID)
 );
+
+
+INSERT INTO Gral.tbClientes
+VALUES  ('Hugo', 'Mendoza', '1904425167251', '1990-12-15', 'M', '+504 9341-9097', 112, 1, 			1, GETDATE(), NULL, NULL, 1),
+		('Sarai', 'Quintanilla', '1109199062781', '1990-12-15', 'F', '+504 9123-5543', 111, 1, 		1, GETDATE(), NULL, NULL, 1),
+		('Marco', 'Torrez', '1109199828192', '1998-09-12', 'M', '+504 8908-5463', 23, 3, 			1, GETDATE(), NULL, NULL, 1),
+		('Celina', 'Arias', '0912199064782', '1990-09-12', 'F', '+504 9657-7483', 89, 6, 			1, GETDATE(), NULL, NULL, 1),
+		('Luis', 'Chicas', '0910199298128', '1992-09-27', 'M', '+504 9834-5621', 54, 7, 			1, GETDATE(), NULL, NULL, 1),
+		('Angie', 'Andino', '0912199028739', '1990-05-21', 'F', '+504 9064-7869', 90, 3, 			1, GETDATE(), NULL, NULL, 1),
+		('Nelson', 'Umaña', '1102198900090', '1989-02-10', 'M', '+504 9345-5161', 54, 1, 			1, GETDATE(), NULL, NULL, 1),
+		('Marbella', 'Gómez', '0815199789023', '1997-09-02', 'F', '+504 9809-5461', 87, 5, 			1, GETDATE(), NULL, NULL, 1),
+		('Carlos', 'Amaya', '0914199567281', '1995-09-05', 'M', '+504 9109-6573', 23, 6, 			1, GETDATE(), NULL, NULL, 1),
+		('Dayana', 'Erazo', '1805199678934', '1995-03-21', 'F', '+504 9563-7381', 180, 1, 			1, GETDATE(), NULL, NULL, 1),
+		('Jasson', 'Zaldívar', '0912199856271', '1998-09-21', 'M', '+504 9100-7584', 121, 2, 		1, GETDATE(), NULL, NULL, 1),
+		('Marlin', 'Guzmán', '0213199456721', '1994-10-07', 'F', '+504 9822-5216', 150, 3, 			1, GETDATE(), NULL, NULL, 1),
+		('Yoner', 'Zaldívar', '0913199245162', '1992-09-25', 'M', '+504 8145-6627', 230, 4, 		1, GETDATE(), NULL, NULL, 1),
+		('Genesis', 'Sagastume', '0914199820192', '1988-09-07', 'F', '+504 9203-8749', 241, 5, 		1, GETDATE(), NULL, NULL, 1),
+		('Anthony', 'Leiva', '0415198962592', '1989-11-03', 'M', '+504 9631-7521', 143, 6, 			1, GETDATE(), NULL, NULL, 1),
+		('Paola', 'Decas', '0914199678291', '1996-09-23', 'F', '+504 9561-2331', 25, 7, 			1, GETDATE(), NULL, NULL, 1),
+		('Caleb', 'Benítez', '1401199078676', '1990-03-27', 'M', '+504 9521-5547', 54, 1, 			1, GETDATE(), NULL, NULL, 1),
+		('Exibia', 'Bueso', '0314199800989', '1998-02-15', 'F', '+504 9312-7584', 96, 2, 			1, GETDATE(), NULL, NULL, 1),
+		('Carlos', 'Herrera', '0314199062712', '1990-04-22', 'M', '+504 9623-9956', 77, 3, 			1, GETDATE(), NULL, NULL, 1),
+		('Ana', 'Fajardo', '0913199092738', '1998-09-23', 'F', '+504 9027-8867', 87, 4,				1, GETDATE(), NULL, NULL, 1);
+
 
 CREATE TABLE Gral.tbUsuarios(
 		usu_ID				INT IDENTITY(1,1) PRIMARY KEY,
@@ -150,9 +529,11 @@ CREATE TABLE Gral.tbUsuarios(
 		CONSTRAINT	UQ_Gral_tbUsuarios_usu_Usuario	UNIQUE (usu_Usuario),
 		CONSTRAINT	FK_Gral_tbUsuarios_usu_empID_Gral_tbEmpleados_emp_ID	FOREIGN KEY (usu_empID) REFERENCES Gral.tbEmpleados (emp_ID)
 
-)
+);
 
-
+INSERT INTO Gral.tbUsuarios
+VALUES  ('admin', 1, '123', 1, 1, GETDATE(), NULL, NULL, 1);
+		
 
 
 
@@ -179,11 +560,28 @@ CREATE TABLE Maqui.tbProveedores(
 		CONSTRAINT PK_Maqui_tbprveedores_Gral_tbMunicipios_prv_Municipio	FOREIGN KEY (prv_Municipio)	    REFERENCES Gral.tbMunicipios  (mun_ID),
 
 );
-
-
-
-
-
+INSERT INTO Maqui.tbProveedores
+VALUES  
+		('Lubre Cosmética Natural', 'Francsico Mejía', '+504 9878-4562', 25, 'Calle hacia Armenta, atras de Mall Altara.',	1, GETDATE(), NULL, NULL, 1),
+		('Ortrade', 'Blanca Wong', '+504 9809-4453', 32, '3ra Avenida, 2da Calle Prolonogación Pasaje Valle',				1, GETDATE(), NULL, NULL, 1),
+		('Yesensy', 'Marlon Lee', '+504 9856-6371', 173, '1ra Calle, Salida a La Lima',										1, GETDATE(), NULL, NULL, 1),
+		('Bamboo Cosmetcis', 'Tristan Thompson', '+504 9801-3561', 289, '1ra Calle, 3ra Avenida, Frente al Parque Central',	1, GETDATE(), NULL, NULL, 1),
+		('Laboratorios Anteii', 'Ulises Menjivar', '+504 8790-4352', 231, '5ta Calle, 5ta Avenida, Barrio El Centro',		1, GETDATE(), NULL, NULL, 1),
+		('Divasa Cosmetics', 'Pedro Urquía', '+504 8909-5564', 126, '4 y 5 Calle, 2da Avenida, Barrio El Centro',			1, GETDATE(), NULL, NULL, 1),
+		('CosmetiChile', 'Maryuri Lee', '+504 8909-5563', 149, '2da Calle, Avenida Junior',									1, GETDATE(), NULL, NULL, 1),
+		('Kylie Cosmetics', 'Angie Campos', '+504 9756-3311', 105, '1ra Calle, 4ta Avenida, Barrio Concepción',				1, GETDATE(), NULL, NULL, 1),
+		('Guangzhou Xiran Cosmetics Co.', 'Sandra Xiang', '+504 9867-8954', 209, 'Bo. del Norte',							1, GETDATE(), NULL, NULL, 1),
+		('Bause Cosmetcis', 'Julissa Liang', '+504 8756-3412', 243, '5ta Calle, 3ra Avenida, Atrás de Tropigas',			1, GETDATE(), NULL, NULL, 1),
+		('Frida Cosmetics', 'Karla Eraza', '+504 9756-3526', 122, '16 Avenida, Barrio Suyapa',								1, GETDATE(), NULL, NULL, 1),
+		('Paulis MakeUp', 'Yana Rodríguez', '+504 9786-4451', 245, 'Calle Salida Vieja a La Lima',							1, GETDATE(), NULL, NULL, 1),
+		('Maquillaje Stock', 'Oliver Memphis', '+504 8967-4251', 128, 'Barrio El Calvario, Calle Principal',				1, GETDATE(), NULL, NULL, 1),
+		('Seytú', 'Ernesto Lopez', '+504 9878-3300', 133, 'Col. El Carmen, Calle Principal',								1, GETDATE(), NULL, NULL, 1),
+		('Ibella', 'Vanessa Banegas', '+504 9878-5536', 244, 'Avenida Circunvalación',										1, GETDATE(), NULL, NULL, 1),
+		('Estudio Juvenil', 'Juana Jeréx', '+504 9299-5637', 267, 'Avenida los Olivos, 6ta Calle, 1ra Avenida',				1, GETDATE(), NULL, NULL, 1),
+		('Cosméticos al por Mayor', 'Paulina Guatusa', '+504 8900-6738', 128, 'Avenida Francisco Olivos',					1, GETDATE(), NULL, NULL, 1),
+		('DisDroper', 'Fanny Hungría', '+504 9877-5362', 162, 'Col. Trinidad Yanez',										1, GETDATE(), NULL, NULL, 1),
+		('Cosbelly Profesional', 'Deiby Guerra', '+504 9877-4412', 169, 'Col. Villa Nuria',									1, GETDATE(), NULL, NULL, 1),
+		('Fransua', 'Maicoll Hungaro', '+504 9677-3142', 169, 'Col. Yanez',													1, GETDATE(), NULL, NULL, 1);
 
 
 
@@ -198,6 +596,15 @@ CREATE TABLE Maqui.tbCategorias(
 		cat_Estado BIT DEFAULT 1
 );
 
+INSERT INTO Maqui.tbCategorias
+VALUES	('Labiales',				1, GETDATE(), NULL, NULL, 1),
+		('Sombras',					1, GETDATE(), NULL, NULL, 1),
+		('Rubores',					1, GETDATE(), NULL, NULL, 1),
+		('Polvos',					1, GETDATE(), NULL, NULL, 1),
+		('Bases',					1, GETDATE(), NULL, NULL, 1),
+		('Cuidado para la Piel',	1, GETDATE(), NULL, NULL, 1),
+		('Delineadores',			1, GETDATE(), NULL, NULL, 1),
+		('Rímeles',					1, GETDATE(), NULL, NULL, 1);
 
 
 
@@ -215,8 +622,13 @@ CREATE TABLE Maqui.tbMetodoPago (
 );
 
 
-
-
+INSERT INTO maqui.tbMetodoPago
+VALUES  ('Efectivo',							 1, GETDATE(), NULL, NULL, 1),
+		('Cheques',								 1, GETDATE(), NULL, NULL, 1),
+		('Tarjeta de Débito',					 1, GETDATE(), NULL, NULL, 1),
+		('Tarjeta de Crédito',					 1, GETDATE(), NULL, NULL, 1),
+		('Pagos Móviles',						 1, GETDATE(), NULL, NULL, 1),
+		('Tranferencias Bancarias Electrónicas', 1, GETDATE(), NULL, NULL, 1);
 
 
 CREATE TABLE Maqui.tbProductos(
@@ -238,8 +650,47 @@ CREATE TABLE Maqui.tbProductos(
 );
 
 
-
-
+INSERT INTO Maqui.tbProductos
+VALUES  ('LBLRM', 'Labial rojo líquido de tinta mate.', '200', 50.00, 1,		1, GETDATE(), NULL, NULL, 1),
+		('LBGLB', 'Labial gloss con brillantina.', '200', 60.00, 4,				1, GETDATE(), NULL, NULL, 1),
+		('LBROM', 'Labial rosado de tinta mate.', '200', 70.00, 7,				1, GETDATE(), NULL, NULL, 1),
+		('LBNTM', 'Labial nude de tinta mate.', '200', 80.00, 9,				1, GETDATE(), NULL, NULL, 1),
+		('LBMTC', 'Labial morado de tinta cremosa.', '200', 45.00, 10,			1, GETDATE(), NULL, NULL, 1),
+		('PTNNP', 'Paleta The New Nude Palette', '200', 200.00, 15,				1, GETDATE(), NULL, NULL, 1),
+		('PNLEP', 'Paleta Natural Lust Eye Palette', '200',  400.00, 19,		1, GETDATE(), NULL, NULL, 1),
+		('PNHPA', 'Paleta Naked Heat Palette', '200',  560.00, 12,				1, GETDATE(), NULL, NULL, 1),
+		('PTBPA', 'Paleta The Burgundy Palette', '200',450.00, 11,				1, GETDATE(), NULL, NULL, 1),
+		('PTIBP', 'Paleta Tartelette in Bloom Palette', '200',  3400.00, 15,	1, GETDATE(), NULL, NULL, 1),
+		('RBBBL', 'Rubor Baked Blush', '200', 2300.00, 3,						1, GETDATE(), NULL, NULL, 1),
+		('RBMON', 'Rubor Monochromatic', '200', 2350.00, 17,					1, GETDATE(), NULL, NULL, 1),
+		('RBFIT', 'Rubor FitMe', '200', 540.00, 18,								1, GETDATE(), NULL, NULL, 1),
+		('RBPPB', 'Rubor Pink Peach Bums', '200', 340.00, 20,					1, GETDATE(), NULL, NULL, 1),
+		('RBCHE', 'Rubor Cheekers', '200', 2300.00, 4,							1, GETDATE(), NULL, NULL, 1),
+		('POLPU', 'Polvo PUR', '200',  450.00, 17,								1, GETDATE(), NULL, NULL, 1),
+		('POLFM', 'Polvo FitMe Mate', '200',  340.00, 15,						1, GETDATE(), NULL, NULL, 1),
+		('POLHG', 'Polvo Halo Glow', '200', 570.00, 20,							1, GETDATE(), NULL, NULL, 1),
+		('POLSF', 'Polvo Soft Flex', '200',  230.00, 20,						1, GETDATE(), NULL, NULL, 1),
+		('POLTM', 'Polvo True Match', '200', 657.00, 19,						1, GETDATE(), NULL, NULL, 1),
+		('BASSA', 'Base Simply Ageless', '200',120.00, 12,						1, GETDATE(), NULL, NULL, 1),
+		('BASLI', 'Base Liquida', '200', 340.00, 15,							1, GETDATE(), NULL, NULL, 1),
+		('BASSM', 'Base StayMate', '200', 450.00, 9,							1, GETDATE(), NULL, NULL, 1),
+		('BASDM', 'Base Dermacol', '200', 100.00, 8,							1, GETDATE(), NULL, NULL, 1),
+		('BASCF', 'Base Clean Fresh', '200', 200.00, 7,							1, GETDATE(), NULL, NULL, 1),
+		('LIMAS', 'Limpiador de ácido salicílico.', '200', 1200.00, 7,			1, GETDATE(), NULL, NULL, 1),
+		('EXFLI', 'Exfoliante líquido.', '200', 500.00, 7,						1, GETDATE(), NULL, NULL, 1),
+		('CRENO', 'Crema renovación de noche', '200', 1980.00, 12,				1, GETDATE(), NULL, NULL, 1),
+		('SEVIC', 'Serúm con vitamina ', '200', 870.00, 5,						1, GETDATE(), NULL, NULL, 1),
+		('MABAN', 'Mascarilla de barro del mar.', '200', 560.00, 4,				1, GETDATE(), NULL, NULL, 1),
+		('DLIGR', 'Delineador Infallible Grip', '200',  460.00, 14,				1, GETDATE(), NULL, NULL, 1),
+		('DLNOB', 'Delineador No Budget', '200', 580.00, 12,					1, GETDATE(), NULL, NULL, 1),
+		('DLNYX', 'Delineador NYX Mecánico', '200', 1000.00, 17,				1, GETDATE(), NULL, NULL, 1),
+		('DLSRE', 'Delineador Stila resistente al agua.', '200', 450.00, 4,		1, GETDATE(), NULL, NULL, 1),
+		('DLCOL', 'Delineador Colorstay', '200', 235.00, 7,						1, GETDATE(), NULL, NULL, 1),
+		('RIEXA', 'Rimel Exaggerete', '200', 230.00, 3,							1, GETDATE(), NULL, NULL, 1),
+		('RIDUF', 'Rimel Durable ', '200', 450.00, 16,							1, GETDATE(), NULL, NULL, 1),
+		('RIMAE', 'Rimel Magnific Eyes', '200', 600.00, 17,						1, GETDATE(), NULL, NULL, 1),
+		('RILSM', 'Rimel London Stay Matte', '200', 700.00, 12,					1, GETDATE(), NULL, NULL, 1),
+		('RISGL', 'Rimel Stay Gloss', '200',500.00, 2,							1, GETDATE(), NULL, NULL, 1);
 
 
 CREATE TABLE Maqui.tbCategoriaProductos(
@@ -256,15 +707,54 @@ CREATE TABLE Maqui.tbCategoriaProductos(
 		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbProductos_cpr_Producto		FOREIGN KEY (cpr_Producto)	REFERENCES Maqui.tbProductos(pro_Id)
 );
 
-
+INSERT INTO Maqui.tbCategoriaProductos
+VALUES  (1,  1, 1, GETDATE(), NULL, NULL),
+		(1,  2, 1, GETDATE(), NULL, NULL),
+		(1,  3, 1, GETDATE(), NULL, NULL),
+		(1,  4, 1, GETDATE(), NULL, NULL),
+		(1,  5, 1, GETDATE(), NULL, NULL),
+		(2,  6, 1, GETDATE(), NULL, NULL),
+		(2,  7, 1, GETDATE(), NULL, NULL),
+		(2,  8, 1, GETDATE(), NULL, NULL),
+		(2,  9, 1, GETDATE(), NULL, NULL),
+		(2, 10, 1, GETDATE(), NULL, NULL),
+		(3, 11, 1, GETDATE(), NULL, NULL),
+		(3, 12, 1, GETDATE(), NULL, NULL),
+		(3, 13, 1, GETDATE(), NULL, NULL),
+		(3, 14, 1, GETDATE(), NULL, NULL),
+		(3, 15, 1, GETDATE(), NULL, NULL),
+		(4, 16, 1, GETDATE(), NULL, NULL),
+		(4, 17, 1, GETDATE(), NULL, NULL),
+		(4, 18, 1, GETDATE(), NULL, NULL),
+		(4, 19, 1, GETDATE(), NULL, NULL),
+		(4, 20, 1, GETDATE(), NULL, NULL),
+		(5, 21, 1, GETDATE(), NULL, NULL),
+		(5, 22, 1, GETDATE(), NULL, NULL),
+		(5, 23, 1, GETDATE(), NULL, NULL),
+		(5, 24, 1, GETDATE(), NULL, NULL),
+		(5, 25, 1, GETDATE(), NULL, NULL),
+		(6, 26, 1, GETDATE(), NULL, NULL),
+		(6, 27, 1, GETDATE(), NULL, NULL),
+		(6, 28, 1, GETDATE(), NULL, NULL),
+		(6, 29, 1, GETDATE(), NULL, NULL),
+		(6, 30, 1, GETDATE(), NULL, NULL),
+		(7, 31, 1, GETDATE(), NULL, NULL),
+		(7, 32, 1, GETDATE(), NULL, NULL),
+		(7, 33, 1, GETDATE(), NULL, NULL),
+		(7, 34, 1, GETDATE(), NULL, NULL),
+		(7, 35, 1, GETDATE(), NULL, NULL),
+		(8, 36, 1, GETDATE(), NULL, NULL),
+		(8, 37, 1, GETDATE(), NULL, NULL),
+		(8, 38, 1, GETDATE(), NULL, NULL),
+		(8, 39, 1, GETDATE(), NULL, NULL),
+		(8, 40, 1, GETDATE(), NULL, NULL);
 
 
 
 CREATE TABLE Maqui.tbInventario(
 		inv_Id				INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-		inv_Producto		INT NOT NULL,
 		inv_Cantidad		INT NOT NULL,
-		
+		inv_Producto		INT NOT NULL,
 
 		inv_UsuCrea			INT,
 		inv_FechaCrea		DATETIME DEFAULT GETDATE(),
@@ -274,13 +764,54 @@ CREATE TABLE Maqui.tbInventario(
 		CONSTRAINT FK_Maqui_tbInventario_Maqui_tbProducto FOREIGN KEY (inv_Producto) REFERENCES Maqui.tbProductos(pro_Id)
 );
 
-
+INSERT INTO Maqui.tbInventario
+VALUES  (230,  1, 1, GETDATE(), NULL, NULL),
+		(120,  2, 1, GETDATE(), NULL, NULL),
+		(320,  3, 1, GETDATE(), NULL, NULL),
+		(129,  4, 1, GETDATE(), NULL, NULL),
+		( 78,  5, 1, GETDATE(), NULL, NULL),
+		(435,  6, 1, GETDATE(), NULL, NULL),
+		(122,  7, 1, GETDATE(), NULL, NULL),
+		(133,  8, 1, GETDATE(), NULL, NULL),
+		(181,  9, 1, GETDATE(), NULL, NULL),
+		(174, 10, 1, GETDATE(), NULL, NULL),
+		(165, 11, 1, GETDATE(), NULL, NULL),
+		( 29, 12, 1, GETDATE(), NULL, NULL),
+		(163, 13, 1, GETDATE(), NULL, NULL),
+		(200, 14, 1, GETDATE(), NULL, NULL),
+		(203, 15, 1, GETDATE(), NULL, NULL),
+		(328, 16, 1, GETDATE(), NULL, NULL),
+		(139, 17, 1, GETDATE(), NULL, NULL),
+		(100, 18, 1, GETDATE(), NULL, NULL),
+		(107, 19, 1, GETDATE(), NULL, NULL),
+		(104, 20, 1, GETDATE(), NULL, NULL),
+		( 10, 21, 1, GETDATE(), NULL, NULL),
+		(109, 22, 1, GETDATE(), NULL, NULL),
+		(205, 23, 1, GETDATE(), NULL, NULL),
+		(258, 24, 1, GETDATE(), NULL, NULL),
+		(176, 25, 1, GETDATE(), NULL, NULL),
+		(189, 26, 1, GETDATE(), NULL, NULL),
+		(293, 27, 1, GETDATE(), NULL, NULL),
+		(301, 28, 1, GETDATE(), NULL, NULL),
+		(230, 29, 1, GETDATE(), NULL, NULL),
+		(231, 30, 1, GETDATE(), NULL, NULL),
+		(439, 31, 1, GETDATE(), NULL, NULL),
+		(126, 32, 1, GETDATE(), NULL, NULL),
+		(132, 33, 1, GETDATE(), NULL, NULL),
+		(231, 34, 1, GETDATE(), NULL, NULL),
+		(161, 35, 1, GETDATE(), NULL, NULL),
+		(182, 36, 1, GETDATE(), NULL, NULL),
+		(172, 37, 1, GETDATE(), NULL, NULL),
+		(281, 38, 1, GETDATE(), NULL, NULL),
+		(190, 39, 1, GETDATE(), NULL, NULL),
+		(192, 40, 1, GETDATE(), NULL, NULL);
 
 
 
 CREATE TABLE Maqui.tbVentas(
 		ven_Id				INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
 		ven_Cliente			INT NOT NULL,
+		ven_Empleado		INT NOT NULL,
 		ven_Fecha			DATETIME,
 		ven_Sucursal		INT NOT NULL,
 		ven_MetodoPago		INT NOT NULL,
@@ -293,11 +824,22 @@ CREATE TABLE Maqui.tbVentas(
 		ven_Estado			BIT DEFAULT 1
 
 		CONSTRAINT FK_Maqui_tbVentas_Gral_tbClientes_ven_Cliente		FOREIGN KEY (ven_Cliente)		REFERENCES Gral.tbClientes(cli_Id),
+		CONSTRAINT FK_Maqui_tbVentas_Gral_tbClientes_ven_Empleado		FOREIGN KEY (ven_Empleado)		REFERENCES Gral.tbEmpleados(emp_Id),
 		CONSTRAINT FK_Maqui_tbVentas_Maqui_tbSucursales_ven_Sucursal	FOREIGN KEY (ven_Sucursal)		REFERENCES  Gral.tbSucursales (suc_Id),
 		CONSTRAINT FK_Maqui_tbVentas_Maqui_tbMetodoPago_ven_MetodoPago	FOREIGN KEY (ven_MetodoPago)	REFERENCES Maqui.tbMetodoPago (met_Id)
 );
 
-
+INSERT INTO Maqui.tbVentas
+VALUES  (12, 10, '2023-09-10',  2, 1, 1, GETDATE(), NULL, NULL, 1),
+		(11, 02, '2023-09-10', 11, 3, 1, GETDATE(), NULL, NULL, 1),
+		(02, 08, '2023-09-10',  3, 2, 1, GETDATE(), NULL, NULL, 1),
+		(15, 19, '2023-09-10', 20, 4, 1, GETDATE(), NULL, NULL, 1),
+		(20, 14, '2023-09-10', 19, 5, 1, GETDATE(), NULL, NULL, 1),
+		(19,  1, '2023-09-10', 18, 6, 1, GETDATE(), NULL, NULL, 1),
+		(15,  2, '2023-09-10', 15, 1, 1, GETDATE(), NULL, NULL, 1),
+		(05, 04, '2023-09-10', 03, 2, 1, GETDATE(), NULL, NULL, 1),
+		(03, 09, '2023-09-10', 04, 3, 1, GETDATE(), NULL, NULL, 1),
+		(02, 01, '2023-09-10', 09, 4, 1, GETDATE(), NULL, NULL, 1);
 
 
 
@@ -308,7 +850,7 @@ CREATE TABLE Maqui.tbVentasDetalle(
 		vde_Producto	INT					NOT NULL,
 		vde_Precio		DECIMAL(18,2)		NOT NULL,
 		vde_Cantidad	INT					NOT NULL,
-
+		
 		vde_UsuCrea		INT,
 		vde_FechaCrea	DATETIME			DEFAULT GETDATE(),
 		vde_UsuModi		INT,
@@ -320,24 +862,306 @@ CREATE TABLE Maqui.tbVentasDetalle(
 );
 GO
 
+INSERT INTO Maqui.tbVentasDetalle
+VALUES  (1,  03, 300.00, 4, 1, GETDATE(), NULL, NULL, 1),
+		(1,  23, 239.00, 8, 1, GETDATE(), NULL, NULL, 1),
+		(1,  21, 238.00, 2, 1, GETDATE(), NULL, NULL, 1),
+		(2,  34, 320.00, 3, 1, GETDATE(), NULL, NULL, 1),
+		(2,  09, 199.00, 5, 1, GETDATE(), NULL, NULL, 1),
+		(2,  32, 320.00, 1, 1, GETDATE(), NULL, NULL, 1),
+		(3,  09, 899.00, 4, 1, GETDATE(), NULL, NULL, 1),
+		(3,  19, 210.00, 4, 1, GETDATE(), NULL, NULL, 1),
+		(3,  15, 111.00, 4, 1, GETDATE(), NULL, NULL, 1),
+		(4,  32, 241.00, 5, 1, GETDATE(), NULL, NULL, 1),
+		(4,  11, 210.00, 2, 1, GETDATE(), NULL, NULL, 1),
+		(4,  06, 291.00, 3, 1, GETDATE(), NULL, NULL, 1),
+		(5,  08, 344.00, 4, 1, GETDATE(), NULL, NULL, 1),
+	    (5,  12, 123.00, 6, 1, GETDATE(), NULL, NULL, 1),
+		(5,  13, 324.00, 7, 1, GETDATE(), NULL, NULL, 1),
+		(6,  40, 898.00, 3, 1, GETDATE(), NULL, NULL, 1),
+		(6,  33, 265.00, 4, 1, GETDATE(), NULL, NULL, 1),
+		(6,  34, 768.00, 2, 1, GETDATE(), NULL, NULL, 1),
+		(7,  21, 445.00, 1, 1, GETDATE(), NULL, NULL, 1),
+		(7,  36, 658.00, 6, 1, GETDATE(), NULL, NULL, 1),
+		(7,  21, 245.00, 9, 1, GETDATE(), NULL, NULL, 1),
+		(8,  11, 647.00, 3, 1, GETDATE(), NULL, NULL, 1),
+		(8,  30, 123.00, 8, 1, GETDATE(), NULL, NULL, 1),
+		(8,  29, 234.00, 4, 1, GETDATE(), NULL, NULL, 1),
+		(9,  21, 285.00, 8, 1, GETDATE(), NULL, NULL, 1),
+		(9,  24, 121.00, 6, 1, GETDATE(), NULL, NULL, 1),
+        (9,  29, 435.00, 3, 1, GETDATE(), NULL, NULL, 1),
+		(10, 37, 324.00, 9, 1, GETDATE(), NULL, NULL, 1),
+		(10, 23, 677.00, 9, 1, GETDATE(), NULL, NULL, 1),
+		(10, 12, 233.00, 9, 1, GETDATE(), NULL, NULL, 1);
+GO
+
+
+/************************UDPS VISTA************************/
+
+
+CREATE OR ALTER PROC UDP_tbClientes_VISTA
+AS BEGIN
+
+SELECT cli_ID, 
+	   cli_Nombre + ' ' + cli_Apellido AS cli_Nombre, 
+	   cli_DNI, 
+	   cli_FechaNacimiento, 
+	   CASE cli_Sexo
+	   WHEN 'F' THEN 'Femenino'
+	   WHEN 'M' THEN 'Masculino'
+	   ELSE 'Otro' END AS cli_sexo, 
+	   cli_Telefono, 
+	   cli_Municipio = mun_Descripcion, 
+	   cli_EstadoCivil = est_Descripcion
+	   FROM Gral.tbClientes T1
+	   INNER JOIN Gral.tbMunicipios T2
+	   ON T1.cli_Municipio = T2.mun_ID
+	   INNER JOIN Gral.tbEstadosCiviles T3
+	   ON T1.cli_EstadoCivil = T3.est_ID
+	   WHERE cli_Estado = 1;
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbEmpleados_VISTA
+AS BEGIN
+
+SELECT emp_ID, 
+	   emp_Nombre + ' ' + emp_Apellido AS emp_Nombre, 
+	   emp_DNI, 
+	   emp_FechaNacimiento, 
+	   CASE emp_Sexo
+	   WHEN 'F' THEN 'Femenino'
+	   WHEN 'M' THEN 'Masculino'
+	   ELSE 'Otro' END AS emp_Sexo, 
+	   emp_Telefono, 
+	   emp_Municipio = mun_Descripcion, 
+	   emp_Correo, 
+	   emp_EstadoCivil = est_Descripcion, 
+	   emp_Sucursal = suc_Descripcion
+	   FROM Gral.tbEmpleados T1
+	   INNER JOIN Gral.tbMunicipios T2
+	   ON T1.emp_Municipio = T2.mun_ID
+	   INNER JOIN Gral.tbEstadoCivil T3
+	   ON T1.emp_EstadosCiviles = T3.est_Descripcion
+	   INNER JOIN Gral.tbSucursales T4
+	   ON T1.emp_Sucursal = T4.suc_Id
+	   WHERE emp_Estado = 1;
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbDepartamentos_VISTA
+AS BEGIN
+
+SELECT dep_ID, 
+	   dep_Descripcion
+	   FROM Gral.tbDepartamentos
+
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbMunicipios_VISTA
+AS BEGIN
+
+SELECT mun_ID, 
+	   mun_depID = dep_Descripcion, 
+	   mun_Descripcion 
+	   FROM Gral.tbMunicipios T1
+	   INNER JOIN Gral.tbDepartamentos T2
+	   ON T1.mun_depID = T2.dep_ID
+END
+GO
+
+
+
+
+CREATE OR ALTER PROC UDP_tbSucursales_VISTA
+AS BEGIN
+
+SELECT suc_Id, 
+	   suc_Descripcion, 
+	   suc_Municipio = mun_Descripcion
+	   FROM Gral.tbSucursales T1
+	   INNER JOIN Gral.tbMunicipios T2
+	   ON T1.suc_Municipio = T2.mun_ID
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbEstadosCiviles_VISTA
+AS BEGIN
+
+SELECT est_ID, 
+	   est_Descripcion
+	   FROM Gral.tbEstadoCivil
+
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbCategoriasProducto_VISTA
+AS BEGIN
+
+SELECT cpr_Id, 
+	   cpr_Categoria, 
+	   cpr_Producto  
+	   FROM Maqui.tbCategoriaProductos
+
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbCategorias_VISTA
+AS BEGIN
+
+SELECT cat_Id, 
+	   cat_Descripcion
+	   FROM Maqui.tbCategorias
+	   WHERE cat_Estado = 1;
+
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbInventario_VISTA
+AS BEGIN
+
+SELECT inv_Id, 
+	   inv_Cantidad, 
+	   inv_Producto
+	   FROM Maqui.tbInventario
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDO_tbMetodoPago_VISTA
+AS BEGIN
+
+SELECT met_Id, 
+	   met_Descripcion
+	   FROM Maqui.tbMetodoPago
+	   WHERE met_Estado = 1;
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbProductos_VISTA
+AS BEGIN
+
+SELECT pro_Codigo, 
+	   pro_Nombre, 
+	   pro_StockInicial, 
+	   pro_Precio, 
+	   prv_NombreCompañia,
+	   pro_Proveedor = prv_NombreContacto
+	   FROM Maqui.tbProductos T1
+	   INNER JOIN Maqui.tbProveedores T2
+	   ON T1.pro_Proveedor = T2.prv_ID
+	   WHERE pro_Estado = 1;
+
+END
+GO
+
+
+
+
+
+CREATE OR ALTER PROC UDP_tbProveedores_VISTA
+AS BEGIN
+
+SELECT prv_NombreCompañia, 
+	   prv_NombreContacto, 
+	   prv_TelefonoContacto, 
+	   prv_Municipio = mun_Descripcion, 
+	   prv_Direccion 
+	   FROM Maqui.tbProveedores T1
+	   INNER JOIN Gral.tbMunicipios T2
+	   ON T1.prv_Municipio = T2.mun_Id
+	   WHERE prv_Estado = 1;
+
+END
+GO
 
 
 
 
 
 
+CREATE OR ALTER PROC UDP_tbVentas_VISTA
+AS BEGIN
+
+SELECT ven_Id, 
+	   ven_Cliente = cli_Nombre + ' ' + cli_Apellido, 
+	   ven_Empleado = emp_Nombre + ' ' + emp_Apellido,
+	   ven_Fecha, 
+	   ven_Sucursal = suc_Descripcion, 
+	   ven_MetodoPago = met_Descripcion
+	   FROM Maqui.tbVentas T1
+	   INNER JOIN Gral.tbSucursales T2
+	   ON T1.ven_Sucursal = T2.suc_Descripcion
+	   INNER JOIN Maqui.tbMetodoPago T3
+	   ON T1.ven_MetodoPago = T3.met_Descripcion
+	   INNER JOIN Gral.tbClientes T4
+	   ON T1.ven_Cliente = T4.cli_ID
+	   INNER JOIN Gral.tbEmpleados T5
+	   ON T1.ven_Empleado = T5.emp_ID
+	   WHERE ven_Estado = 1;
+END
+GO
 
 
 
 
 
+CREATE OR ALTER PROC UDP_tbVentasDetalle_VISTA
+AS BEGIN
+
+SELECT vde_Id, 
+	   vde_VentaId, 
+	   vde_Producto = pro_Nombre, 
+	   vde_Precio, 
+	   vde_Cantidad 
+	   FROM Maqui.tbVentasDetalle T1
+	   INNER JOIN Maqui.tbVentas T2
+	   ON T1.vde_Id = T2.ven_Id
+	   INNER JOIN Maqui.tbProductos T3
+	   ON T1.vde_Producto = T3.pro_Id
+	   WHERE vde_Estado = 1;
+END
+GO
 
 
 
-
-
-
-/************************UDPS************************/
+/************************UDPS INSERT************************/
 
 CREATE OR ALTER PROC UDP_tbEstadosCiviles_Crear(
 @est_Descripcion NVARCHAR(100),
