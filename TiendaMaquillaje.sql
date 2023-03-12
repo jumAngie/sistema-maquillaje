@@ -7,13 +7,36 @@ GO
 CREATE SCHEMA Gral
 GO
 
+CREATE TABLE Gral.tbUsuarios(
+		usu_ID				INT IDENTITY(1,1) PRIMARY KEY,
+		usu_Usuario			NVARCHAR(100)		NOT NULL,
+		usu_empID			INT					NOT NULL,
+		usu_Clave			NVARCHAR(MAX)		NOT NULL,
+		usu_EsAdmin			BIT					NOT NULL,
+		usu_UsuarioCrea		INT					NOT NULL,
+		usu_FechaCrea		DATETIME			DEFAULT GETDATE(),
+		usu_UsuarioModi		INT,
+		usu_FechaModi		DATETIME,
+		usu_Estado			BIT					DEFAULT 1
+
+		CONSTRAINT	UQ_Gral_tbUsuarios_usu_Usuario	UNIQUE (usu_Usuario)
+);
+
+INSERT INTO Gral.tbUsuarios
+VALUES  ('admin', 1, '123', 1, 1, GETDATE(), NULL, NULL, 1);
+
+
 CREATE TABLE Gral.tbEstadosCiviles(
 		est_ID				INT IDENTITY(1,1) PRIMARY KEY,
 		est_Descripcion		NVARCHAR(250)			NOT NULL,
+
 		est_UsuarioCrea		INT						NOT NULL,
 		est_FechaCrea		DATETIME				DEFAULT GETDATE(),
 		est_UsuarioModi		INT,
 		est_FechaModi		DATETIME
+
+		CONSTRAINT FK_Gral_tbEstadosCiviles_est_UsuarioCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(est_UsuarioCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Gral_tbEstadosCiviles_est_UsuarioModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(est_UsuarioModi) REFERENCES Gral.tbUsuarios(usu_ID)
 
 );
 
@@ -30,10 +53,14 @@ VALUES  ('Amante',			1, GETDATE(), null, null),
 CREATE TABLE Gral.tbDepartamentos(
 		dep_ID					INT IDENTITY(1,1) PRIMARY KEY,
 		dep_Descripcion			NVARCHAR(250)			NOT NULL,
+
 		dep_UsuarioCrea			INT						NOT NULL,
 		dep_FechaCrea			DATETIME				DEFAULT GETDATE(),
 		dep_UsuarioModi			INT,
 		dep_FechaModi			DATETIME
+
+		CONSTRAINT FK_Gral_tbDepartamentos_dep_UsuarioCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(dep_UsuarioCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Gral_tbDepartamentos_dep_UsuarioModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(dep_UsuarioModi) REFERENCES Gral.tbUsuarios(usu_ID)
 
 );
 
@@ -75,7 +102,9 @@ CREATE TABLE Gral.tbMunicipios(
 		mun_UsuarioModi		INT,
 		mun_FechaModi		DATETIME
 
-		CONSTRAINT FK_Gral_tbMunicipios_mun_depID_Gral_tbDepartamentos_dep_ID	FOREIGN KEY (mun_depID) REFERENCES Gral.tbDepartamentos (dep_ID)
+		CONSTRAINT FK_Gral_tbMunicipios_mun_depID_Gral_tbDepartamentos_dep_ID	FOREIGN KEY (mun_depID) REFERENCES Gral.tbDepartamentos (dep_ID),
+		CONSTRAINT FK_Gral_tbMunicipios_mun_UsuarioCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(mun_UsuarioCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Gral_tbMunicipios_mun_UsuarioModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(mun_UsuarioModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 INSERT INTO Gral.tbMunicipios
@@ -389,7 +418,9 @@ CREATE TABLE Gral.tbSucursales (
 		suc_FechaModi		DATETIME,
 		suc_Estado			BIT DEFAULT 1,
 
-		CONSTRAINT FK_Maqui_tbSucursales_Gral_tbMunicipios FOREIGN KEY (suc_Municipio) REFERENCES Gral.tbMunicipios(mun_Id)
+		CONSTRAINT FK_Maqui_tbSucursales_Gral_tbMunicipios FOREIGN KEY (suc_Municipio) REFERENCES Gral.tbMunicipios(mun_Id),
+		CONSTRAINT FK_Gral_tbSucursales_suc_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(suc_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Gral_tbSucursales_suc_usuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(suc_usuModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 
@@ -439,7 +470,9 @@ CREATE TABLE Gral.tbEmpleados(
 		CONSTRAINT CK_Gral_tbEmpleados_emp_Sexo		CHECK		(emp_Sexo IN ('F', 'M')),
 		CONSTRAINT FK_Gral_tbEmpleados_emp_Sucursal_Gral_tbSucursales_emp_Sucursal_suc_Id	FOREIGN KEY (emp_Sucursal)		REFERENCES Gral.tbSucursales(suc_Id),
 		CONSTRAINT FK_Gral_tbEmpleados_emp_Municipio_Gral_tbMunicipios_mun_ID				FOREIGN KEY (emp_Municipio)		REFERENCES Gral.tbMunicipios  (mun_ID),
-		CONSTRAINT FK_Gral_tbEmpleados_emp_EstadoCivil_Gral_tbEstadoCivil_est_ID			FOREIGN KEY (emp_EstadoCivil)	REFERENCES Gral.tbEstadosCiviles (est_ID)
+		CONSTRAINT FK_Gral_tbEmpleados_emp_EstadoCivil_Gral_tbEstadoCivil_est_ID			FOREIGN KEY (emp_EstadoCivil)	REFERENCES Gral.tbEstadosCiviles (est_ID),
+		CONSTRAINT FK_Gral_tbEmpleados_emp_UsuarioCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(emp_UsuarioCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Gral_tbEmpleados_emp_UsuarioModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(emp_UsuarioModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 INSERT INTO Gral.tbEmpleados
@@ -464,6 +497,10 @@ VALUES  ('Hugo', 'Alcerro', '1615199009008', '1990-08-09', 'M', '+504 9009-6778'
 		('Mario', 'Herrera', '0912199072819', '1990-04-21', 'M', '+504 9123-5434', 77, 'marioherre@gmail.com', 3, 8,		1, GETDATE(), NULL, NULL, 1),
 		('Elia', 'Mejía', '0917199072819', '1990-09-11', 'F', '+504 9678-4453', 87, 'eliameji@gmail.com', 4, 9,				1, GETDATE(), NULL, NULL, 1);
 
+--*****************************************CONSTRAINT DE EMPLEADOS EN LA TABLA USUARIOS*****************************************--
+ALTER TABLE Gral.tbUsuarios
+ADD CONSTRAINT FK_Gral_tbUsuarios_usu_empID_Gral_tbEmpleados_emp_ID	FOREIGN KEY (usu_empID) REFERENCES Gral.tbEmpleados (emp_ID)
+--*****************************************CONSTRAINT DE EMPLEADOS EN LA TABLA USUARIOS*****************************************--
 
 CREATE TABLE Gral.tbClientes(
 
@@ -487,7 +524,9 @@ CREATE TABLE Gral.tbClientes(
 		CONSTRAINT UQ_Gral_tbClientes_cli_DNI			UNIQUE		(cli_DNI),
 		CONSTRAINT CK_Gral_tbClientes_cli_Sexo		CHECK		(cli_Sexo IN ('F', 'M')),
 		CONSTRAINT FK_Gral_tbClientes_cli_Municipio_Gral_tbMunicipios_mun_ID	FOREIGN KEY (cli_Municipio)	    REFERENCES Gral.tbMunicipios  (mun_ID),
-		CONSTRAINT FK_Gral_tbClientes_cli_EstadoCivil_Gral_tbEstadoCivil_est_ID	FOREIGN KEY (cli_EstadoCivil)	REFERENCES Gral.tbEstadosCiviles (est_ID)
+		CONSTRAINT FK_Gral_tbClientes_cli_EstadoCivil_Gral_tbEstadoCivil_est_ID	FOREIGN KEY (cli_EstadoCivil)	REFERENCES Gral.tbEstadosCiviles (est_ID),
+		CONSTRAINT FK_Gral_tbClientes_cli_UsuarioCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(cli_UsuarioCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Gral_tbClientes_cli_UsuarioModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(cli_UsuarioModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 
@@ -514,25 +553,7 @@ VALUES  ('Hugo', 'Mendoza', '1904425167251', '1990-12-15', 'M', '+504 9341-9097'
 		('Ana', 'Fajardo', '0913199092738', '1998-09-23', 'F', '+504 9027-8867', 87, 4,				1, GETDATE(), NULL, NULL, 1);
 
 
-CREATE TABLE Gral.tbUsuarios(
-		usu_ID				INT IDENTITY(1,1) PRIMARY KEY,
-		usu_Usuario			NVARCHAR(100)		NOT NULL,
-		usu_empID			INT					NOT NULL,
-		usu_Clave			NVARCHAR(MAX)		NOT NULL,
-		usu_EsAdmin			BIT					NOT NULL,
-		usu_UsuarioCrea		INT					NOT NULL,
-		usu_FechaCrea		DATETIME			DEFAULT GETDATE(),
-		usu_UsuarioModi		INT,
-		usu_FechaModi		DATETIME,
-		usu_Estado			BIT					DEFAULT 1
 
-		CONSTRAINT	UQ_Gral_tbUsuarios_usu_Usuario	UNIQUE (usu_Usuario),
-		CONSTRAINT	FK_Gral_tbUsuarios_usu_empID_Gral_tbEmpleados_emp_ID	FOREIGN KEY (usu_empID) REFERENCES Gral.tbEmpleados (emp_ID)
-
-);
-
-INSERT INTO Gral.tbUsuarios
-VALUES  ('admin', 1, '123', 1, 1, GETDATE(), NULL, NULL, 1);
 		
 
 
@@ -557,7 +578,9 @@ CREATE TABLE Maqui.tbProveedores(
 		prv_Estado			    BIT					DEFAULT 1,
 
 		
-		CONSTRAINT PK_Maqui_tbprveedores_Gral_tbMunicipios_prv_Municipio	FOREIGN KEY (prv_Municipio)	    REFERENCES Gral.tbMunicipios  (mun_ID),
+		CONSTRAINT PK_Maqui_tbProveedores_Gral_tbMunicipios_prv_Municipio	FOREIGN KEY (prv_Municipio)	    REFERENCES Gral.tbMunicipios  (mun_ID),
+		CONSTRAINT FK_Maqui_tbProveedores_prv_UsuarioCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(prv_UsuarioCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbProveedores_prv_UsuarioModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(prv_UsuarioModi) REFERENCES Gral.tbUsuarios(usu_ID)
 
 );
 INSERT INTO Maqui.tbProveedores
@@ -594,6 +617,9 @@ CREATE TABLE Maqui.tbCategorias(
 		cat_UsuModi INT,
 		cat_FechaModi DATETIME,
 		cat_Estado BIT DEFAULT 1
+
+		CONSTRAINT FK_Maqui_tbCategorias_cat_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(cat_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbCategorias_cat_UsuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(cat_UsuModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 INSERT INTO Maqui.tbCategorias
@@ -619,6 +645,9 @@ CREATE TABLE Maqui.tbMetodoPago (
 		met_usuModi INT,
 		met_FechaModi DATETIME,
 		met_Estado BIT DEFAULT 1
+
+		CONSTRAINT FK_Maqui_tbMetodoPago_met_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(met_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbMetodoPago_met_usuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(met_usuModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 
@@ -646,7 +675,9 @@ CREATE TABLE Maqui.tbProductos(
 		pro_Estado			BIT								DEFAULT 1
 
 		CONSTRAINT UK_Maqui_tbProductos_pro_Codigo UNIQUE(pro_Codigo),
-		CONSTRAINT FK_Maqui_tbProductos_Maqui_tbProveedores_pro_Proveedor FOREIGN KEY (pro_Proveedor) REFERENCES Maqui.tbProveedores(prv_Id)
+		CONSTRAINT FK_Maqui_tbProductos_Maqui_tbProveedores_pro_Proveedor FOREIGN KEY (pro_Proveedor) REFERENCES Maqui.tbProveedores(prv_Id),
+		CONSTRAINT FK_Maqui_tbProductos_pro_usuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(pro_usuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbProductos_pro_UsuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(pro_UsuModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 
@@ -704,7 +735,9 @@ CREATE TABLE Maqui.tbCategoriaProductos(
 		cpr_FechaModi		DATETIME DEFAULT 1
 
 		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbCategorias_cpr_Categoria	FOREIGN KEY (cpr_Categoria) REFERENCES Maqui.tbCategorias(cat_Id),
-		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbProductos_cpr_Producto		FOREIGN KEY (cpr_Producto)	REFERENCES Maqui.tbProductos(pro_Id)
+		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbProductos_cpr_Producto		FOREIGN KEY (cpr_Producto)	REFERENCES Maqui.tbProductos(pro_Id),
+		CONSTRAINT FK_Maqui_tbCategoriaProductos_cpr_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(cpr_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbCategoriaProductos_cpr_usuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(cpr_usuModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 INSERT INTO Maqui.tbCategoriaProductos
@@ -761,7 +794,9 @@ CREATE TABLE Maqui.tbInventario(
 		inv_usuModi			INT,
 		inv_FechaModi		DATETIME
 
-		CONSTRAINT FK_Maqui_tbInventario_Maqui_tbProducto FOREIGN KEY (inv_Producto) REFERENCES Maqui.tbProductos(pro_Id)
+		CONSTRAINT FK_Maqui_tbInventario_Maqui_tbProducto FOREIGN KEY (inv_Producto) REFERENCES Maqui.tbProductos(pro_Id),
+		CONSTRAINT FK_Maqui_tbInventario_inv_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(inv_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbInventario_inv_usuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(inv_usuModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 INSERT INTO Maqui.tbInventario
@@ -826,7 +861,9 @@ CREATE TABLE Maqui.tbVentas(
 		CONSTRAINT FK_Maqui_tbVentas_Gral_tbClientes_ven_Cliente		FOREIGN KEY (ven_Cliente)		REFERENCES Gral.tbClientes(cli_Id),
 		CONSTRAINT FK_Maqui_tbVentas_Gral_tbClientes_ven_Empleado		FOREIGN KEY (ven_Empleado)		REFERENCES Gral.tbEmpleados(emp_Id),
 		CONSTRAINT FK_Maqui_tbVentas_Maqui_tbSucursales_ven_Sucursal	FOREIGN KEY (ven_Sucursal)		REFERENCES  Gral.tbSucursales (suc_Id),
-		CONSTRAINT FK_Maqui_tbVentas_Maqui_tbMetodoPago_ven_MetodoPago	FOREIGN KEY (ven_MetodoPago)	REFERENCES Maqui.tbMetodoPago (met_Id)
+		CONSTRAINT FK_Maqui_tbVentas_Maqui_tbMetodoPago_ven_MetodoPago	FOREIGN KEY (ven_MetodoPago)	REFERENCES Maqui.tbMetodoPago (met_Id),
+		CONSTRAINT FK_Maqui_tbVentas_ven_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(ven_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbVentas_ven_UsuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(ven_UsuModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 
 INSERT INTO Maqui.tbVentas
@@ -859,6 +896,8 @@ CREATE TABLE Maqui.tbVentasDetalle(
 
 		CONSTRAINT FK_Maqui_tbVentas_MaquiDetalles_tbVentasDetalle_VD_VentaId	FOREIGN KEY (vde_VentaId)		REFERENCES Maqui.tbVentas(ven_Id),
 		CONSTRAINT FK_Maqui_tbVentasDetalles_tbMaqui_Produtos_VD_Producto		FOREIGN KEY (vde_Producto)		REFERENCES Maqui.tbProductos(pro_Id),
+		CONSTRAINT FK_Maqui_tbVentasDetalle_vde_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(vde_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbVentasDetalle_vde_UsuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(vde_UsuModi) REFERENCES Gral.tbUsuarios(usu_ID)
 );
 GO
 
@@ -899,7 +938,7 @@ GO
 /************************UDPS VISTA************************/
 
 
-CREATE OR ALTER PROC UDP_tbClientes_VISTA
+CREATE OR ALTER PROC UDP_Gral_tbClientes_VISTA
 AS BEGIN
 
 SELECT cli_ID, 
@@ -926,7 +965,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbEmpleados_VISTA
+CREATE OR ALTER PROC UDP_Gral_tbEmpleados_VISTA
 AS BEGIN
 
 SELECT emp_ID, 
@@ -945,8 +984,8 @@ SELECT emp_ID,
 	   FROM Gral.tbEmpleados T1
 	   INNER JOIN Gral.tbMunicipios T2
 	   ON T1.emp_Municipio = T2.mun_ID
-	   INNER JOIN Gral.tbEstadoCivil T3
-	   ON T1.emp_EstadosCiviles = T3.est_Descripcion
+	   INNER JOIN Gral.tbEstadosCiviles T3
+	   ON T1.emp_EstadoCivil = T3.est_Descripcion
 	   INNER JOIN Gral.tbSucursales T4
 	   ON T1.emp_Sucursal = T4.suc_Id
 	   WHERE emp_Estado = 1;
@@ -957,7 +996,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbDepartamentos_VISTA
+CREATE OR ALTER PROC UDP_Gral_tbDepartamentos_VISTA
 AS BEGIN
 
 SELECT dep_ID, 
@@ -971,7 +1010,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbMunicipios_VISTA
+CREATE OR ALTER PROC UDP_Gral_tbMunicipios_VISTA
 AS BEGIN
 
 SELECT mun_ID, 
@@ -986,7 +1025,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbSucursales_VISTA
+CREATE OR ALTER PROC UDP_Gral_tbSucursales_VISTA
 AS BEGIN
 
 SELECT suc_Id, 
@@ -1002,12 +1041,12 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbEstadosCiviles_VISTA
+CREATE OR ALTER PROC UDP_Gral_tbEstadosCiviles_VISTA
 AS BEGIN
 
 SELECT est_ID, 
 	   est_Descripcion
-	   FROM Gral.tbEstadoCivil
+	   FROM Gral.tbEstadosCiviles
 
 END
 GO
@@ -1016,7 +1055,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbCategoriasProducto_VISTA
+CREATE OR ALTER PROC UDP_Maqui_tbCategoriasProducto_VISTA
 AS BEGIN
 
 SELECT cpr_Id, 
@@ -1031,7 +1070,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbCategorias_VISTA
+CREATE OR ALTER PROC UDP_Maqui_tbCategorias_VISTA
 AS BEGIN
 
 SELECT cat_Id, 
@@ -1046,7 +1085,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbInventario_VISTA
+CREATE OR ALTER PROC UDP_Maqui_tbInventario_VISTA
 AS BEGIN
 
 SELECT inv_Id, 
@@ -1060,7 +1099,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDO_tbMetodoPago_VISTA
+CREATE OR ALTER PROC UDO_Maqui_tbMetodoPago_VISTA
 AS BEGIN
 
 SELECT met_Id, 
@@ -1074,7 +1113,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbProductos_VISTA
+CREATE OR ALTER PROC UDP_Maqui_tbProductos_VISTA
 AS BEGIN
 
 SELECT pro_Codigo, 
@@ -1095,7 +1134,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbProveedores_VISTA
+CREATE OR ALTER PROC UDP_Maqui_tbProveedores_VISTA
 AS BEGIN
 
 SELECT prv_NombreCompañia, 
@@ -1116,7 +1155,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbVentas_VISTA
+CREATE OR ALTER PROC UDP_Maqui_tbVentas_VISTA
 AS BEGIN
 
 SELECT ven_Id, 
@@ -1142,7 +1181,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbVentasDetalle_VISTA
+CREATE OR ALTER PROC UDP_Maqui_tbVentasDetalle_VISTA
 AS BEGIN
 
 SELECT vde_Id, 
@@ -1163,7 +1202,7 @@ GO
 
 /************************UDPS INSERT************************/
 
-CREATE OR ALTER PROC UDP_tbEstadosCiviles_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbEstadosCiviles_Crear(
 @est_Descripcion NVARCHAR(100),
 @est_UsuCrea INT)
 AS BEGIN
@@ -1172,7 +1211,7 @@ DECLARE @est_UsuModi INT = NULL;
 DECLARE @est_FechaCrea DATETIME = GETDATE();
 DECLARE @est_FechaModi DATETIME = NULL;
 
-INSERT INTO Gral.tbEstadoCivil
+INSERT INTO Gral.tbEstadosCiviles
 VALUES  (@est_Descripcion,
 		 @est_UsuCrea,
 		 @est_FechaCrea,
@@ -1183,7 +1222,7 @@ END
 GO
 
 
-CREATE OR ALTER PROC UDP_tbDepartamentos_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbDepartamentos_Crear(
 @dep_Descripcion NVARCHAR(100),
 @dep_UsuCrea INT)
 AS BEGIN
@@ -1203,7 +1242,7 @@ END
 GO
 
 
-CREATE OR ALTER PROC UDP_tbMunicipios_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbMunicipios_Crear(
 @mun_Descripcion NVARCHAR(100),
 @mun_DepId INT,
 @mun_UsuCrea INT)
@@ -1225,7 +1264,7 @@ END
 GO
 
 
-CREATE OR ALTER PROC UDP_Empleados_Crear(
+CREATE OR ALTER PROC UDP_Gral_Empleados_Crear(
 @emp_Nombre				NVARCHAR(250),		
 @emp_Apellido			NVARCHAR(250),		
 @emp_DNI				VARCHAR(13)	,		
@@ -1266,7 +1305,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbClientes_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbClientes_Crear(
 @cli_Nombre				NVARCHAR(250),		
 @cli_Apellido			NVARCHAR(250),		
 @cli_DNI				VARCHAR(13)	,		
@@ -1303,7 +1342,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_tbUsuarios_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbUsuarios_Crear(
 @usu_Usuario			NVARCHAR(100)		,
 @usu_empID			INT					,
 @usu_Clave			NVARCHAR(MAX)		,
