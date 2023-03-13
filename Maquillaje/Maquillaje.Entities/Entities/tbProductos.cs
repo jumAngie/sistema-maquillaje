@@ -10,7 +10,6 @@ namespace Maquillaje.Entities.Entities
     {
         public tbProductos()
         {
-            tbCategoriaProductos = new HashSet<tbCategoriaProductos>();
             tbInventario = new HashSet<tbInventario>();
             tbVentasDetalle = new HashSet<tbVentasDetalle>();
         }
@@ -19,16 +18,19 @@ namespace Maquillaje.Entities.Entities
         public string pro_Codigo { get; set; }
         public string pro_Nombre { get; set; }
         public string pro_StockInicial { get; set; }
-        public decimal pro_Precio { get; set; }
+        public decimal pro_PrecioUnitario { get; set; }
         public int? pro_Proveedor { get; set; }
+        public int? pro_Categoria { get; set; }
         public int? pro_usuCrea { get; set; }
         public DateTime? pro_FechaCrea { get; set; }
         public int? pro_UsuModi { get; set; }
         public DateTime? pro_FechaModi { get; set; }
         public bool? pro_Estado { get; set; }
 
+        public virtual tbCategorias pro_CategoriaNavigation { get; set; }
         public virtual tbProveedores pro_ProveedorNavigation { get; set; }
-        public virtual ICollection<tbCategoriaProductos> tbCategoriaProductos { get; set; }
+        public virtual tbUsuarios pro_UsuModiNavigation { get; set; }
+        public virtual tbUsuarios pro_usuCreaNavigation { get; set; }
         public virtual ICollection<tbInventario> tbInventario { get; set; }
         public virtual ICollection<tbVentasDetalle> tbVentasDetalle { get; set; }
     }

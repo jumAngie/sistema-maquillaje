@@ -11,14 +11,21 @@ namespace Maquillaje.BusinessLogic.Services
     public class GeneralesService
     {
         private readonly CategoriaRepository _categoriaRepository;
+        private readonly ProductosRepository _productosRepository;
 
         public GeneralesService(CategoriaRepository categoriaRepository)
         {
             _categoriaRepository = categoriaRepository;
         }
 
+        public GeneralesService(ProductosRepository productosRepository)
+        {
+            _productosRepository = productosRepository;
+        }
+
+
         #region Categorias
-        public IEnumerable<tbCategorias> Listado()
+        public IEnumerable<tbCategorias> ListadoCategorias()
         {
             try
             {
@@ -29,6 +36,25 @@ namespace Maquillaje.BusinessLogic.Services
             {
 
                 return Enumerable.Empty<tbCategorias>();
+            }
+        }
+
+        #endregion
+
+        
+        #region Productos
+
+        public IEnumerable<tbProductos> ListadoProductos()
+        {
+            try
+            {
+                var result = _productosRepository.List();
+                return result;
+            }
+            catch (Exception)
+            {
+
+                return Enumerable.Empty<tbProductos>();
             }
         }
 

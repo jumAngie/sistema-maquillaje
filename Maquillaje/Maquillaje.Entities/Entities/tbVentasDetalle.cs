@@ -11,7 +11,6 @@ namespace Maquillaje.Entities.Entities
         public int vde_Id { get; set; }
         public int vde_VentaId { get; set; }
         public int vde_Producto { get; set; }
-        public decimal vde_Precio { get; set; }
         public int vde_Cantidad { get; set; }
         public int? vde_UsuCrea { get; set; }
         public DateTime? vde_FechaCrea { get; set; }
@@ -20,6 +19,8 @@ namespace Maquillaje.Entities.Entities
         public bool? vde_Estado { get; set; }
 
         public virtual tbProductos vde_ProductoNavigation { get; set; }
+        public virtual tbUsuarios vde_UsuCreaNavigation { get; set; }
+        public virtual tbUsuarios vde_UsuModiNavigation { get; set; }
         public virtual tbVentas vde_Venta { get; set; }
     }
 }

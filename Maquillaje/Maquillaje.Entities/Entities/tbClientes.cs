@@ -28,8 +28,9 @@ namespace Maquillaje.Entities.Entities
         public DateTime? cli_FechaModi { get; set; }
         public bool? cli_Estado { get; set; }
 
-        public virtual tbEstadoCivil cli_EstadoCivilNavigation { get; set; }
         public virtual tbMunicipios cli_MunicipioNavigation { get; set; }
+        public virtual tbUsuarios cli_UsuarioCreaNavigation { get; set; }
+        public virtual tbUsuarios cli_UsuarioModiNavigation { get; set; }
         public virtual ICollection<tbVentas> tbVentas { get; set; }
     }
 }

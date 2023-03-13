@@ -1,7 +1,10 @@
-﻿using Maquillaje.Entities.Entities;
+﻿using Dapper;
+using Maquillaje.Entities.Entities;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -34,10 +37,9 @@ namespace Maquillaje.DataAccess.Repositories
 
         public IEnumerable<tbCategorias> List()
         {
-            using var db = new TiendaContext();
-            var listado = db.tbCategorias.ToList();
-
-            return listado;
+            
+            using var db = new SqlConnection(TiendaContext.ConnectionString);
+            return db.Query<tbCategorias>(ScriptsDataBase.CategoriasList, null, commandType: CommandType.StoredProcedure);
         }
 
         public int Update(tbCategorias item)
@@ -50,3 +52,14 @@ namespace Maquillaje.DataAccess.Repositories
         }
     }
 }
+
+
+//////using var db = new TiendaContext();
+////var listado = db.tbCategorias.ToList();
+
+////return listado;
+//using var db = new SqlConnection(TiendaContext.ConnectionString);
+////var parametors = new DynamicParameters();
+////parametors.Add("@Parametro", "dd", DbType.String, ParameterDirection.Input);
+
+//return db.Query<tbCategorias>(ScriptsDataBase.CategoriasList, null, commandType: CommandType.StoredProcedure);

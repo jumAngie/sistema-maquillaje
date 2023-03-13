@@ -10,7 +10,7 @@ namespace Maquillaje.Entities.Entities
     {
         public tbCategorias()
         {
-            tbCategoriaProductos = new HashSet<tbCategoriaProductos>();
+            tbProductos = new HashSet<tbProductos>();
         }
 
         public int cat_Id { get; set; }
@@ -21,6 +21,8 @@ namespace Maquillaje.Entities.Entities
         public DateTime? cat_FechaModi { get; set; }
         public bool? cat_Estado { get; set; }
 
-        public virtual ICollection<tbCategoriaProductos> tbCategoriaProductos { get; set; }
+        public virtual tbUsuarios cat_UsuCreaNavigation { get; set; }
+        public virtual tbUsuarios cat_UsuModiNavigation { get; set; }
+        public virtual ICollection<tbProductos> tbProductos { get; set; }
     }
 }

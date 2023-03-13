@@ -21,6 +21,8 @@ namespace Maquillaje.Entities.Entities
         public DateTime? met_FechaModi { get; set; }
         public bool? met_Estado { get; set; }
 
+        public virtual tbUsuarios met_UsuCreaNavigation { get; set; }
+        public virtual tbUsuarios met_usuModiNavigation { get; set; }
         public virtual ICollection<tbVentas> tbVentas { get; set; }
     }
 }

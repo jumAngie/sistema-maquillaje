@@ -24,6 +24,8 @@ namespace Maquillaje.Entities.Entities
         public int? mun_UsuarioModi { get; set; }
         public DateTime? mun_FechaModi { get; set; }
 
+        public virtual tbUsuarios mun_UsuarioCreaNavigation { get; set; }
+        public virtual tbUsuarios mun_UsuarioModiNavigation { get; set; }
         public virtual tbDepartamentos mun_dep { get; set; }
         public virtual ICollection<tbClientes> tbClientes { get; set; }
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }

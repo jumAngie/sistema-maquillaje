@@ -20,6 +20,8 @@ namespace Maquillaje.Entities.Entities
         public int? dep_UsuarioModi { get; set; }
         public DateTime? dep_FechaModi { get; set; }
 
+        public virtual tbUsuarios dep_UsuarioCreaNavigation { get; set; }
+        public virtual tbUsuarios dep_UsuarioModiNavigation { get; set; }
         public virtual ICollection<tbMunicipios> tbMunicipios { get; set; }
     }
 }

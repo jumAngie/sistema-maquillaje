@@ -9,23 +9,23 @@ using System.Threading.Tasks;
 
 namespace Maquillaje.WebUI.Controllers
 {
-    public class CategoriaController : Controller
+    public class ProductoController : Controller
     {
         private readonly GeneralesService _generalesService;
         private readonly IMapper _mapper;
 
 
-        public CategoriaController(GeneralesService generalesService, IMapper mapper)
+        public ProductoController(GeneralesService generalesService, IMapper mapper)
         {
             _generalesService = generalesService;
             _mapper = mapper;
         }
 
-        [HttpGet("/Categorias/Listado")]
+        [HttpGet("/Producto/Listado")]
         public IActionResult Index()
         {
-            var listado = _generalesService.ListadoCategorias();
-            var listadoMapeado = _mapper.Map<IEnumerable<CategoriaViewModel>>(listado);
+            var listado = _generalesService.ListadoProductos();
+            var listadoMapeado = _mapper.Map<IEnumerable<ProductosViewModel>>(listado);
             return View(listadoMapeado);
         }
     }

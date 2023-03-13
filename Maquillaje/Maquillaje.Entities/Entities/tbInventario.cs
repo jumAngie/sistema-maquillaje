@@ -9,13 +9,16 @@ namespace Maquillaje.Entities.Entities
     public partial class tbInventario
     {
         public int inv_Id { get; set; }
-        public int inv_Producto { get; set; }
         public int inv_Cantidad { get; set; }
+        public int inv_Producto { get; set; }
         public int? inv_UsuCrea { get; set; }
         public DateTime? inv_FechaCrea { get; set; }
         public int? inv_usuModi { get; set; }
         public DateTime? inv_FechaModi { get; set; }
+        public bool? inv_Estado { get; set; }
 
         public virtual tbProductos inv_ProductoNavigation { get; set; }
+        public virtual tbUsuarios inv_UsuCreaNavigation { get; set; }
+        public virtual tbUsuarios inv_usuModiNavigation { get; set; }
     }
 }

@@ -19,12 +19,10 @@ namespace Maquillaje.DataAccess.Context
         {
         }
 
-        public virtual DbSet<tbCategoriaProductos> tbCategoriaProductos { get; set; }
         public virtual DbSet<tbCategorias> tbCategorias { get; set; }
         public virtual DbSet<tbClientes> tbClientes { get; set; }
         public virtual DbSet<tbDepartamentos> tbDepartamentos { get; set; }
         public virtual DbSet<tbEmpleados> tbEmpleados { get; set; }
-        public virtual DbSet<tbEstadoCivil> tbEstadoCivil { get; set; }
         public virtual DbSet<tbInventario> tbInventario { get; set; }
         public virtual DbSet<tbMetodoPago> tbMetodoPago { get; set; }
         public virtual DbSet<tbMunicipios> tbMunicipios { get; set; }
@@ -37,40 +35,12 @@ namespace Maquillaje.DataAccess.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "Modern_Spanish_CI_AS");
-
-            modelBuilder.Entity<tbCategoriaProductos>(entity =>
-            {
-                entity.HasKey(e => e.cpr_Id)
-                    .HasName("PK__tbCatego__4A20BB2C7B02E993");
-
-                entity.ToTable("tbCategoriaProductos", "Maqui");
-
-                entity.Property(e => e.cpr_FechaCrea)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.cpr_FechaModi)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("((1))");
-
-                entity.HasOne(d => d.cpr_CategoriaNavigation)
-                    .WithMany(p => p.tbCategoriaProductos)
-                    .HasForeignKey(d => d.cpr_Categoria)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Maqui_tbCategoriaProductos_Maqui_tbCategorias_cpr_Categoria");
-
-                entity.HasOne(d => d.cpr_ProductoNavigation)
-                    .WithMany(p => p.tbCategoriaProductos)
-                    .HasForeignKey(d => d.cpr_Producto)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Maqui_tbCategoriaProductos_Maqui_tbProductos_cpr_Producto");
-            });
+            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
             modelBuilder.Entity<tbCategorias>(entity =>
             {
                 entity.HasKey(e => e.cat_Id)
-                    .HasName("PK__tbCatego__DD5AD195E666D021");
+                    .HasName("PK__tbCatego__DD5AD195B7C6930C");
 
                 entity.ToTable("tbCategorias", "Maqui");
 
@@ -85,12 +55,22 @@ namespace Maquillaje.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.cat_FechaModi).HasColumnType("datetime");
+
+                entity.HasOne(d => d.cat_UsuCreaNavigation)
+                    .WithMany(p => p.tbCategoriascat_UsuCreaNavigation)
+                    .HasForeignKey(d => d.cat_UsuCrea)
+                    .HasConstraintName("FK_Maqui_tbCategorias_cat_UsuCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.cat_UsuModiNavigation)
+                    .WithMany(p => p.tbCategoriascat_UsuModiNavigation)
+                    .HasForeignKey(d => d.cat_UsuModi)
+                    .HasConstraintName("FK_Maqui_tbCategorias_cat_UsuModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbClientes>(entity =>
             {
                 entity.HasKey(e => e.cli_ID)
-                    .HasName("PK__tbClient__FFECE57703ED8CF4");
+                    .HasName("PK__tbClient__FFECE577F62FFA78");
 
                 entity.ToTable("tbClientes", "Gral");
 
@@ -130,23 +110,28 @@ namespace Maquillaje.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.HasOne(d => d.cli_EstadoCivilNavigation)
-                    .WithMany(p => p.tbClientes)
-                    .HasForeignKey(d => d.cli_EstadoCivil)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Gral_tbClientes_cli_EstadoCivil_Gral_tbEstadoCivil_est_ID");
-
                 entity.HasOne(d => d.cli_MunicipioNavigation)
                     .WithMany(p => p.tbClientes)
                     .HasForeignKey(d => d.cli_Municipio)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Gral_tbClientes_cli_Municipio_Gral_tbMunicipios_mun_ID");
+
+                entity.HasOne(d => d.cli_UsuarioCreaNavigation)
+                    .WithMany(p => p.tbClientescli_UsuarioCreaNavigation)
+                    .HasForeignKey(d => d.cli_UsuarioCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbClientes_cli_UsuarioCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.cli_UsuarioModiNavigation)
+                    .WithMany(p => p.tbClientescli_UsuarioModiNavigation)
+                    .HasForeignKey(d => d.cli_UsuarioModi)
+                    .HasConstraintName("FK_Gral_tbClientes_cli_UsuarioModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbDepartamentos>(entity =>
             {
                 entity.HasKey(e => e.dep_ID)
-                    .HasName("PK__tbDepart__BB4CBBC0348FE6BC");
+                    .HasName("PK__tbDepart__BB4CBBC09561CB9E");
 
                 entity.ToTable("tbDepartamentos", "Gral");
 
@@ -159,12 +144,23 @@ namespace Maquillaje.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.dep_FechaModi).HasColumnType("datetime");
+
+                entity.HasOne(d => d.dep_UsuarioCreaNavigation)
+                    .WithMany(p => p.tbDepartamentosdep_UsuarioCreaNavigation)
+                    .HasForeignKey(d => d.dep_UsuarioCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbDepartamentos_dep_UsuarioCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.dep_UsuarioModiNavigation)
+                    .WithMany(p => p.tbDepartamentosdep_UsuarioModiNavigation)
+                    .HasForeignKey(d => d.dep_UsuarioModi)
+                    .HasConstraintName("FK_Gral_tbDepartamentos_dep_UsuarioModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbEmpleados>(entity =>
             {
                 entity.HasKey(e => e.emp_ID)
-                    .HasName("PK__tbEmplea__128545C92F6C765A");
+                    .HasName("PK__tbEmplea__128545C9B5E66B66");
 
                 entity.ToTable("tbEmpleados", "Gral");
 
@@ -208,12 +204,6 @@ namespace Maquillaje.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.HasOne(d => d.emp_EstadoCivilNavigation)
-                    .WithMany(p => p.tbEmpleados)
-                    .HasForeignKey(d => d.emp_EstadoCivil)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_Gral_tbEmpleados_emp_EstadoCivil_Gral_tbEstadoCivil_est_ID");
-
                 entity.HasOne(d => d.emp_MunicipioNavigation)
                     .WithMany(p => p.tbEmpleados)
                     .HasForeignKey(d => d.emp_Municipio)
@@ -225,32 +215,27 @@ namespace Maquillaje.DataAccess.Context
                     .HasForeignKey(d => d.emp_Sucursal)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Gral_tbEmpleados_emp_Sucursal_Gral_tbSucursales_emp_Sucursal_suc_Id");
-            });
 
-            modelBuilder.Entity<tbEstadoCivil>(entity =>
-            {
-                entity.HasKey(e => e.est_ID)
-                    .HasName("PK__tbEstado__40ADEC904719FCCF");
+                entity.HasOne(d => d.emp_UsuarioCreaNavigation)
+                    .WithMany(p => p.tbEmpleadosemp_UsuarioCreaNavigation)
+                    .HasForeignKey(d => d.emp_UsuarioCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbEmpleados_emp_UsuarioCrea_Gral_tbUsuarios_usu_ID");
 
-                entity.ToTable("tbEstadoCivil", "Gral");
-
-                entity.Property(e => e.est_Descripcion)
-                    .IsRequired()
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.est_FechaCrea)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.est_FechaModi).HasColumnType("datetime");
+                entity.HasOne(d => d.emp_UsuarioModiNavigation)
+                    .WithMany(p => p.tbEmpleadosemp_UsuarioModiNavigation)
+                    .HasForeignKey(d => d.emp_UsuarioModi)
+                    .HasConstraintName("FK_Gral_tbEmpleados_emp_UsuarioModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbInventario>(entity =>
             {
                 entity.HasKey(e => e.inv_Id)
-                    .HasName("PK__tbInvent__A7F1E3E1A75715B1");
+                    .HasName("PK__tbInvent__A7F1E3E13E8F53A2");
 
                 entity.ToTable("tbInventario", "Maqui");
+
+                entity.Property(e => e.inv_Estado).HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.inv_FechaCrea)
                     .HasColumnType("datetime")
@@ -263,12 +248,22 @@ namespace Maquillaje.DataAccess.Context
                     .HasForeignKey(d => d.inv_Producto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Maqui_tbInventario_Maqui_tbProducto");
+
+                entity.HasOne(d => d.inv_UsuCreaNavigation)
+                    .WithMany(p => p.tbInventarioinv_UsuCreaNavigation)
+                    .HasForeignKey(d => d.inv_UsuCrea)
+                    .HasConstraintName("FK_Maqui_tbInventario_inv_UsuCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.inv_usuModiNavigation)
+                    .WithMany(p => p.tbInventarioinv_usuModiNavigation)
+                    .HasForeignKey(d => d.inv_usuModi)
+                    .HasConstraintName("FK_Maqui_tbInventario_inv_usuModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbMetodoPago>(entity =>
             {
                 entity.HasKey(e => e.met_Id)
-                    .HasName("PK__tbMetodo__820DEB1E6EC2B230");
+                    .HasName("PK__tbMetodo__820DEB1ED9345C64");
 
                 entity.ToTable("tbMetodoPago", "Maqui");
 
@@ -283,12 +278,22 @@ namespace Maquillaje.DataAccess.Context
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.met_FechaModi).HasColumnType("datetime");
+
+                entity.HasOne(d => d.met_UsuCreaNavigation)
+                    .WithMany(p => p.tbMetodoPagomet_UsuCreaNavigation)
+                    .HasForeignKey(d => d.met_UsuCrea)
+                    .HasConstraintName("FK_Maqui_tbMetodoPago_met_UsuCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.met_usuModiNavigation)
+                    .WithMany(p => p.tbMetodoPagomet_usuModiNavigation)
+                    .HasForeignKey(d => d.met_usuModi)
+                    .HasConstraintName("FK_Maqui_tbMetodoPago_met_usuModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbMunicipios>(entity =>
             {
                 entity.HasKey(e => e.mun_ID)
-                    .HasName("PK__tbMunici__130DA68F26D5DA9F");
+                    .HasName("PK__tbMunici__130DA68F2BCEE9B1");
 
                 entity.ToTable("tbMunicipios", "Gral");
 
@@ -302,6 +307,17 @@ namespace Maquillaje.DataAccess.Context
 
                 entity.Property(e => e.mun_FechaModi).HasColumnType("datetime");
 
+                entity.HasOne(d => d.mun_UsuarioCreaNavigation)
+                    .WithMany(p => p.tbMunicipiosmun_UsuarioCreaNavigation)
+                    .HasForeignKey(d => d.mun_UsuarioCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Gral_tbMunicipios_mun_UsuarioCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.mun_UsuarioModiNavigation)
+                    .WithMany(p => p.tbMunicipiosmun_UsuarioModiNavigation)
+                    .HasForeignKey(d => d.mun_UsuarioModi)
+                    .HasConstraintName("FK_Gral_tbMunicipios_mun_UsuarioModi_Gral_tbUsuarios_usu_ID");
+
                 entity.HasOne(d => d.mun_dep)
                     .WithMany(p => p.tbMunicipios)
                     .HasForeignKey(d => d.mun_depID)
@@ -312,7 +328,7 @@ namespace Maquillaje.DataAccess.Context
             modelBuilder.Entity<tbProductos>(entity =>
             {
                 entity.HasKey(e => e.pro_Id)
-                    .HasName("PK__tbProduc__335D708E971035E3");
+                    .HasName("PK__tbProduc__335D708E1C53F27B");
 
                 entity.ToTable("tbProductos", "Maqui");
 
@@ -335,26 +351,45 @@ namespace Maquillaje.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(100);
 
-                entity.Property(e => e.pro_Precio).HasColumnType("decimal(18, 2)");
+                entity.Property(e => e.pro_PrecioUnitario).HasColumnType("decimal(18, 2)");
 
                 entity.Property(e => e.pro_StockInicial)
                     .IsRequired()
                     .HasMaxLength(100);
 
+                entity.HasOne(d => d.pro_CategoriaNavigation)
+                    .WithMany(p => p.tbProductos)
+                    .HasForeignKey(d => d.pro_Categoria)
+                    .HasConstraintName("FK_Maqui_tbProductos_pro_Categoria_Maqui_tbCategorias_cat_ID");
+
                 entity.HasOne(d => d.pro_ProveedorNavigation)
                     .WithMany(p => p.tbProductos)
                     .HasForeignKey(d => d.pro_Proveedor)
                     .HasConstraintName("FK_Maqui_tbProductos_Maqui_tbProveedores_pro_Proveedor");
+
+                entity.HasOne(d => d.pro_UsuModiNavigation)
+                    .WithMany(p => p.tbProductospro_UsuModiNavigation)
+                    .HasForeignKey(d => d.pro_UsuModi)
+                    .HasConstraintName("FK_Maqui_tbProductos_pro_UsuModi_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.pro_usuCreaNavigation)
+                    .WithMany(p => p.tbProductospro_usuCreaNavigation)
+                    .HasForeignKey(d => d.pro_usuCrea)
+                    .HasConstraintName("FK_Maqui_tbProductos_pro_usuCrea_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbProveedores>(entity =>
             {
                 entity.HasKey(e => e.prv_ID)
-                    .HasName("PK__tbProvee__28A716C8EF64C927");
+                    .HasName("PK__tbProvee__28A716C87FD3FEBB");
 
                 entity.ToTable("tbProveedores", "Maqui");
 
-                entity.Property(e => e.prv_Direccion)
+                entity.Property(e => e.prv_DireccionContacto)
+                    .IsRequired()
+                    .HasMaxLength(200);
+
+                entity.Property(e => e.prv_DireccionEmpresa)
                     .IsRequired()
                     .HasMaxLength(200);
 
@@ -374,6 +409,12 @@ namespace Maquillaje.DataAccess.Context
                     .IsRequired()
                     .HasMaxLength(250);
 
+                entity.Property(e => e.prv_SexoContacto)
+                    .IsRequired()
+                    .HasMaxLength(1)
+                    .IsUnicode(false)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.prv_TelefonoContacto)
                     .IsRequired()
                     .HasMaxLength(100);
@@ -382,13 +423,24 @@ namespace Maquillaje.DataAccess.Context
                     .WithMany(p => p.tbProveedores)
                     .HasForeignKey(d => d.prv_Municipio)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("PK_Maqui_tbprveedores_Gral_tbMunicipios_prv_Municipio");
+                    .HasConstraintName("PK_Maqui_tbProveedores_Gral_tbMunicipios_prv_Municipio");
+
+                entity.HasOne(d => d.prv_UsuarioCreaNavigation)
+                    .WithMany(p => p.tbProveedoresprv_UsuarioCreaNavigation)
+                    .HasForeignKey(d => d.prv_UsuarioCrea)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Maqui_tbProveedores_prv_UsuarioCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.prv_UsuarioModiNavigation)
+                    .WithMany(p => p.tbProveedoresprv_UsuarioModiNavigation)
+                    .HasForeignKey(d => d.prv_UsuarioModi)
+                    .HasConstraintName("FK_Maqui_tbProveedores_prv_UsuarioModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbSucursales>(entity =>
             {
                 entity.HasKey(e => e.suc_Id)
-                    .HasName("PK__tbSucurs__C6E323773E479A3B");
+                    .HasName("PK__tbSucurs__C6E3237786487461");
 
                 entity.ToTable("tbSucursales", "Gral");
 
@@ -409,12 +461,22 @@ namespace Maquillaje.DataAccess.Context
                     .HasForeignKey(d => d.suc_Municipio)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Maqui_tbSucursales_Gral_tbMunicipios");
+
+                entity.HasOne(d => d.suc_UsuCreaNavigation)
+                    .WithMany(p => p.tbSucursalessuc_UsuCreaNavigation)
+                    .HasForeignKey(d => d.suc_UsuCrea)
+                    .HasConstraintName("FK_Gral_tbSucursales_suc_UsuCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.suc_usuModiNavigation)
+                    .WithMany(p => p.tbSucursalessuc_usuModiNavigation)
+                    .HasForeignKey(d => d.suc_usuModi)
+                    .HasConstraintName("FK_Gral_tbSucursales_suc_usuModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbUsuarios>(entity =>
             {
                 entity.HasKey(e => e.usu_ID)
-                    .HasName("PK__tbUsuari__43056324593B9193");
+                    .HasName("PK__tbUsuari__43056324E07A07E2");
 
                 entity.ToTable("tbUsuarios", "Gral");
 
@@ -445,7 +507,7 @@ namespace Maquillaje.DataAccess.Context
             modelBuilder.Entity<tbVentas>(entity =>
             {
                 entity.HasKey(e => e.ven_Id)
-                    .HasName("PK__tbVentas__7BA9B751E63F2D5C");
+                    .HasName("PK__tbVentas__7BA9B751E0011403");
 
                 entity.ToTable("tbVentas", "Maqui");
 
@@ -465,6 +527,12 @@ namespace Maquillaje.DataAccess.Context
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Maqui_tbVentas_Gral_tbClientes_ven_Cliente");
 
+                entity.HasOne(d => d.ven_EmpleadoNavigation)
+                    .WithMany(p => p.tbVentas)
+                    .HasForeignKey(d => d.ven_Empleado)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Maqui_tbVentas_Gral_tbClientes_ven_Empleado");
+
                 entity.HasOne(d => d.ven_MetodoPagoNavigation)
                     .WithMany(p => p.tbVentas)
                     .HasForeignKey(d => d.ven_MetodoPago)
@@ -476,12 +544,22 @@ namespace Maquillaje.DataAccess.Context
                     .HasForeignKey(d => d.ven_Sucursal)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Maqui_tbVentas_Maqui_tbSucursales_ven_Sucursal");
+
+                entity.HasOne(d => d.ven_UsuCreaNavigation)
+                    .WithMany(p => p.tbVentasven_UsuCreaNavigation)
+                    .HasForeignKey(d => d.ven_UsuCrea)
+                    .HasConstraintName("FK_Maqui_tbVentas_ven_UsuCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.ven_UsuModiNavigation)
+                    .WithMany(p => p.tbVentasven_UsuModiNavigation)
+                    .HasForeignKey(d => d.ven_UsuModi)
+                    .HasConstraintName("FK_Maqui_tbVentas_ven_UsuModi_Gral_tbUsuarios_usu_ID");
             });
 
             modelBuilder.Entity<tbVentasDetalle>(entity =>
             {
                 entity.HasKey(e => e.vde_Id)
-                    .HasName("PK__tbVentas__C993F9CFAC606E14");
+                    .HasName("PK__tbVentas__C993F9CF5D1BBDB5");
 
                 entity.ToTable("tbVentasDetalle", "Maqui");
 
@@ -493,13 +571,21 @@ namespace Maquillaje.DataAccess.Context
 
                 entity.Property(e => e.vde_FechaModi).HasColumnType("datetime");
 
-                entity.Property(e => e.vde_Precio).HasColumnType("decimal(18, 2)");
-
                 entity.HasOne(d => d.vde_ProductoNavigation)
                     .WithMany(p => p.tbVentasDetalle)
                     .HasForeignKey(d => d.vde_Producto)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Maqui_tbVentasDetalles_tbMaqui_Produtos_VD_Producto");
+
+                entity.HasOne(d => d.vde_UsuCreaNavigation)
+                    .WithMany(p => p.tbVentasDetallevde_UsuCreaNavigation)
+                    .HasForeignKey(d => d.vde_UsuCrea)
+                    .HasConstraintName("FK_Maqui_tbVentasDetalle_vde_UsuCrea_Gral_tbUsuarios_usu_ID");
+
+                entity.HasOne(d => d.vde_UsuModiNavigation)
+                    .WithMany(p => p.tbVentasDetallevde_UsuModiNavigation)
+                    .HasForeignKey(d => d.vde_UsuModi)
+                    .HasConstraintName("FK_Maqui_tbVentasDetalle_vde_UsuModi_Gral_tbUsuarios_usu_ID");
 
                 entity.HasOne(d => d.vde_Venta)
                     .WithMany(p => p.tbVentasDetalle)

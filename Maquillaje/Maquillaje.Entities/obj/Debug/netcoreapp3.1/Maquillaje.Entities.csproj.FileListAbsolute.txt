@@ -8,3 +8,13 @@ C:\Users\LAB02\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entitie
 C:\Users\LAB02\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.csproj.CoreCompileInputs.cache
 C:\Users\LAB02\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.dll
 C:\Users\LAB02\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.pdb
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\bin\Debug\netcoreapp3.1\Maquillaje.Entities.deps.json
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\bin\Debug\netcoreapp3.1\Maquillaje.Entities.dll
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\bin\Debug\netcoreapp3.1\Maquillaje.Entities.pdb
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.csproj.AssemblyReference.cache
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.AssemblyInfoInputs.cache
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.AssemblyInfo.cs
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.csproj.CoreCompileInputs.cache
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.dll
+C:\Users\Usuario\Documents\GitHub\sistema-maquillaje\Maquillaje\Maquillaje.Entities\obj\Debug\netcoreapp3.1\Maquillaje.Entities.pdb

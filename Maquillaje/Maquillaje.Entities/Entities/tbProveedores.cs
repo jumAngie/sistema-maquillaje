@@ -18,7 +18,9 @@ namespace Maquillaje.Entities.Entities
         public string prv_NombreContacto { get; set; }
         public string prv_TelefonoContacto { get; set; }
         public int prv_Municipio { get; set; }
-        public string prv_Direccion { get; set; }
+        public string prv_DireccionEmpresa { get; set; }
+        public string prv_DireccionContacto { get; set; }
+        public string prv_SexoContacto { get; set; }
         public int prv_UsuarioCrea { get; set; }
         public DateTime? prv_FechaCrea { get; set; }
         public int? prv_UsuarioModi { get; set; }
@@ -26,6 +28,8 @@ namespace Maquillaje.Entities.Entities
         public bool? prv_Estado { get; set; }
 
         public virtual tbMunicipios prv_MunicipioNavigation { get; set; }
+        public virtual tbUsuarios prv_UsuarioCreaNavigation { get; set; }
+        public virtual tbUsuarios prv_UsuarioModiNavigation { get; set; }
         public virtual ICollection<tbProductos> tbProductos { get; set; }
     }
 }

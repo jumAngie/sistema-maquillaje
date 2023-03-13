@@ -24,6 +24,8 @@ namespace Maquillaje.Entities.Entities
         public bool? suc_Estado { get; set; }
 
         public virtual tbMunicipios suc_MunicipioNavigation { get; set; }
+        public virtual tbUsuarios suc_UsuCreaNavigation { get; set; }
+        public virtual tbUsuarios suc_usuModiNavigation { get; set; }
         public virtual ICollection<tbEmpleados> tbEmpleados { get; set; }
         public virtual ICollection<tbVentas> tbVentas { get; set; }
     }
