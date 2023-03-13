@@ -13,18 +13,11 @@ namespace Maquillaje.BusinessLogic.Services
         private readonly CategoriaRepository _categoriaRepository;
         private readonly ProductosRepository _productosRepository;
 
-        public GeneralesService(CategoriaRepository categoriaRepository)
+        public GeneralesService(CategoriaRepository categoriaRepository, ProductosRepository productosRepository)
         {
             _categoriaRepository = categoriaRepository;
-        }
-
-
-
-        public GeneralesService(ProductosRepository productosRepository)
-        {
             _productosRepository = productosRepository;
         }
-
 
         #region Categorias
         public IEnumerable<tbCategorias> ListadoCategorias()
