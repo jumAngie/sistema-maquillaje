@@ -732,7 +732,8 @@ CREATE TABLE Maqui.tbCategoriaProductos(
 		cpr_UsuCrea			INT,
 		cpr_FechaCrea		DATETIME DEFAULT GETDATE(),
 		cpr_usuModi			INT,
-		cpr_FechaModi		DATETIME DEFAULT 1
+		cpr_FechaModi		DATETIME,
+		cpr_Estado			BIT DEFAULT 1
 
 		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbCategorias_cpr_Categoria	FOREIGN KEY (cpr_Categoria) REFERENCES Maqui.tbCategorias(cat_Id),
 		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbProductos_cpr_Producto		FOREIGN KEY (cpr_Producto)	REFERENCES Maqui.tbProductos(pro_Id),
@@ -741,46 +742,46 @@ CREATE TABLE Maqui.tbCategoriaProductos(
 );
 
 INSERT INTO Maqui.tbCategoriaProductos
-VALUES  (1,  1, 1, GETDATE(), NULL, NULL),
-		(1,  2, 1, GETDATE(), NULL, NULL),
-		(1,  3, 1, GETDATE(), NULL, NULL),
-		(1,  4, 1, GETDATE(), NULL, NULL),
-		(1,  5, 1, GETDATE(), NULL, NULL),
-		(2,  6, 1, GETDATE(), NULL, NULL),
-		(2,  7, 1, GETDATE(), NULL, NULL),
-		(2,  8, 1, GETDATE(), NULL, NULL),
-		(2,  9, 1, GETDATE(), NULL, NULL),
-		(2, 10, 1, GETDATE(), NULL, NULL),
-		(3, 11, 1, GETDATE(), NULL, NULL),
-		(3, 12, 1, GETDATE(), NULL, NULL),
-		(3, 13, 1, GETDATE(), NULL, NULL),
-		(3, 14, 1, GETDATE(), NULL, NULL),
-		(3, 15, 1, GETDATE(), NULL, NULL),
-		(4, 16, 1, GETDATE(), NULL, NULL),
-		(4, 17, 1, GETDATE(), NULL, NULL),
-		(4, 18, 1, GETDATE(), NULL, NULL),
-		(4, 19, 1, GETDATE(), NULL, NULL),
-		(4, 20, 1, GETDATE(), NULL, NULL),
-		(5, 21, 1, GETDATE(), NULL, NULL),
-		(5, 22, 1, GETDATE(), NULL, NULL),
-		(5, 23, 1, GETDATE(), NULL, NULL),
-		(5, 24, 1, GETDATE(), NULL, NULL),
-		(5, 25, 1, GETDATE(), NULL, NULL),
-		(6, 26, 1, GETDATE(), NULL, NULL),
-		(6, 27, 1, GETDATE(), NULL, NULL),
-		(6, 28, 1, GETDATE(), NULL, NULL),
-		(6, 29, 1, GETDATE(), NULL, NULL),
-		(6, 30, 1, GETDATE(), NULL, NULL),
-		(7, 31, 1, GETDATE(), NULL, NULL),
-		(7, 32, 1, GETDATE(), NULL, NULL),
-		(7, 33, 1, GETDATE(), NULL, NULL),
-		(7, 34, 1, GETDATE(), NULL, NULL),
-		(7, 35, 1, GETDATE(), NULL, NULL),
-		(8, 36, 1, GETDATE(), NULL, NULL),
-		(8, 37, 1, GETDATE(), NULL, NULL),
-		(8, 38, 1, GETDATE(), NULL, NULL),
-		(8, 39, 1, GETDATE(), NULL, NULL),
-		(8, 40, 1, GETDATE(), NULL, NULL);
+VALUES  (1,  1, 1, GETDATE(), NULL, NULL,1),
+		(1,  2, 1, GETDATE(), NULL, NULL, 1),
+		(1,  3, 1, GETDATE(), NULL, NULL,1),
+		(1,  4, 1, GETDATE(), NULL, NULL,1),
+		(1,  5, 1, GETDATE(), NULL, NULL,1),
+		(2,  6, 1, GETDATE(), NULL, NULL,1),
+		(2,  7, 1, GETDATE(), NULL, NULL,1),
+		(2,  8, 1, GETDATE(), NULL, NULL,1),
+		(2,  9, 1, GETDATE(), NULL, NULL,1),
+		(2, 10, 1, GETDATE(), NULL, NULL,1),
+		(3, 11, 1, GETDATE(), NULL, NULL,1),
+		(3, 12, 1, GETDATE(), NULL, NULL,1),
+		(3, 13, 1, GETDATE(), NULL, NULL,1),
+		(3, 14, 1, GETDATE(), NULL, NULL,1),
+		(3, 15, 1, GETDATE(), NULL, NULL,1),
+		(4, 16, 1, GETDATE(), NULL, NULL,1),
+		(4, 17, 1, GETDATE(), NULL, NULL,1),
+		(4, 18, 1, GETDATE(), NULL, NULL,1),
+		(4, 19, 1, GETDATE(), NULL, NULL,1),
+		(4, 20, 1, GETDATE(), NULL, NULL,1),
+		(5, 21, 1, GETDATE(), NULL, NULL,1),
+		(5, 22, 1, GETDATE(), NULL, NULL,1),
+		(5, 23, 1, GETDATE(), NULL, NULL,1),
+		(5, 24, 1, GETDATE(), NULL, NULL,1),
+		(5, 25, 1, GETDATE(), NULL, NULL,1),
+		(6, 26, 1, GETDATE(), NULL, NULL,1),
+		(6, 27, 1, GETDATE(), NULL, NULL,1),
+		(6, 28, 1, GETDATE(), NULL, NULL,1),
+		(6, 29, 1, GETDATE(), NULL, NULL,1),
+		(6, 30, 1, GETDATE(), NULL, NULL,1),
+		(7, 31, 1, GETDATE(), NULL, NULL,1),
+		(7, 32, 1, GETDATE(), NULL, NULL,1),
+		(7, 33, 1, GETDATE(), NULL, NULL,1),
+		(7, 34, 1, GETDATE(), NULL, NULL,1),
+		(7, 35, 1, GETDATE(), NULL, NULL,1),
+		(8, 36, 1, GETDATE(), NULL, NULL,1),
+		(8, 37, 1, GETDATE(), NULL, NULL,1),
+		(8, 38, 1, GETDATE(), NULL, NULL,1),
+		(8, 39, 1, GETDATE(), NULL, NULL,1),
+		(8, 40, 1, GETDATE(), NULL, NULL,1);
 
 
 
@@ -792,7 +793,8 @@ CREATE TABLE Maqui.tbInventario(
 		inv_UsuCrea			INT,
 		inv_FechaCrea		DATETIME DEFAULT GETDATE(),
 		inv_usuModi			INT,
-		inv_FechaModi		DATETIME
+		inv_FechaModi		DATETIME,
+		inv_Estado			BIT DEFAULT 1
 
 		CONSTRAINT FK_Maqui_tbInventario_Maqui_tbProducto FOREIGN KEY (inv_Producto) REFERENCES Maqui.tbProductos(pro_Id),
 		CONSTRAINT FK_Maqui_tbInventario_inv_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(inv_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
@@ -800,46 +802,46 @@ CREATE TABLE Maqui.tbInventario(
 );
 
 INSERT INTO Maqui.tbInventario
-VALUES  (230,  1, 1, GETDATE(), NULL, NULL),
-		(120,  2, 1, GETDATE(), NULL, NULL),
-		(320,  3, 1, GETDATE(), NULL, NULL),
-		(129,  4, 1, GETDATE(), NULL, NULL),
-		( 78,  5, 1, GETDATE(), NULL, NULL),
-		(435,  6, 1, GETDATE(), NULL, NULL),
-		(122,  7, 1, GETDATE(), NULL, NULL),
-		(133,  8, 1, GETDATE(), NULL, NULL),
-		(181,  9, 1, GETDATE(), NULL, NULL),
-		(174, 10, 1, GETDATE(), NULL, NULL),
-		(165, 11, 1, GETDATE(), NULL, NULL),
-		( 29, 12, 1, GETDATE(), NULL, NULL),
-		(163, 13, 1, GETDATE(), NULL, NULL),
-		(200, 14, 1, GETDATE(), NULL, NULL),
-		(203, 15, 1, GETDATE(), NULL, NULL),
-		(328, 16, 1, GETDATE(), NULL, NULL),
-		(139, 17, 1, GETDATE(), NULL, NULL),
-		(100, 18, 1, GETDATE(), NULL, NULL),
-		(107, 19, 1, GETDATE(), NULL, NULL),
-		(104, 20, 1, GETDATE(), NULL, NULL),
-		( 10, 21, 1, GETDATE(), NULL, NULL),
-		(109, 22, 1, GETDATE(), NULL, NULL),
-		(205, 23, 1, GETDATE(), NULL, NULL),
-		(258, 24, 1, GETDATE(), NULL, NULL),
-		(176, 25, 1, GETDATE(), NULL, NULL),
-		(189, 26, 1, GETDATE(), NULL, NULL),
-		(293, 27, 1, GETDATE(), NULL, NULL),
-		(301, 28, 1, GETDATE(), NULL, NULL),
-		(230, 29, 1, GETDATE(), NULL, NULL),
-		(231, 30, 1, GETDATE(), NULL, NULL),
-		(439, 31, 1, GETDATE(), NULL, NULL),
-		(126, 32, 1, GETDATE(), NULL, NULL),
-		(132, 33, 1, GETDATE(), NULL, NULL),
-		(231, 34, 1, GETDATE(), NULL, NULL),
-		(161, 35, 1, GETDATE(), NULL, NULL),
-		(182, 36, 1, GETDATE(), NULL, NULL),
-		(172, 37, 1, GETDATE(), NULL, NULL),
-		(281, 38, 1, GETDATE(), NULL, NULL),
-		(190, 39, 1, GETDATE(), NULL, NULL),
-		(192, 40, 1, GETDATE(), NULL, NULL);
+VALUES  (230,  1, 1, GETDATE(), NULL, NULL,1),
+		(120,  2, 1, GETDATE(), NULL, NULL,1),
+		(320,  3, 1, GETDATE(), NULL, NULL,1),
+		(129,  4, 1, GETDATE(), NULL, NULL,1),
+		( 78,  5, 1, GETDATE(), NULL, NULL,1),
+		(435,  6, 1, GETDATE(), NULL, NULL,1),
+		(122,  7, 1, GETDATE(), NULL, NULL,1),
+		(133,  8, 1, GETDATE(), NULL, NULL,1),
+		(181,  9, 1, GETDATE(), NULL, NULL,1),
+		(174, 10, 1, GETDATE(), NULL, NULL,1),
+		(165, 11, 1, GETDATE(), NULL, NULL,1),
+		( 29, 12, 1, GETDATE(), NULL, NULL,1),
+		(163, 13, 1, GETDATE(), NULL, NULL,1),
+		(200, 14, 1, GETDATE(), NULL, NULL,1),
+		(203, 15, 1, GETDATE(), NULL, NULL,1),
+		(328, 16, 1, GETDATE(), NULL, NULL,1),
+		(139, 17, 1, GETDATE(), NULL, NULL,1),
+		(100, 18, 1, GETDATE(), NULL, NULL,1),
+		(107, 19, 1, GETDATE(), NULL, NULL,1),
+		(104, 20, 1, GETDATE(), NULL, NULL,1),
+		( 10, 21, 1, GETDATE(), NULL, NULL,1),
+		(109, 22, 1, GETDATE(), NULL, NULL,1),
+		(205, 23, 1, GETDATE(), NULL, NULL,1),
+		(258, 24, 1, GETDATE(), NULL, NULL,1),
+		(176, 25, 1, GETDATE(), NULL, NULL,1),
+		(189, 26, 1, GETDATE(), NULL, NULL,1),
+		(293, 27, 1, GETDATE(), NULL, NULL,1),
+		(301, 28, 1, GETDATE(), NULL, NULL,1),
+		(230, 29, 1, GETDATE(), NULL, NULL,1),
+		(231, 30, 1, GETDATE(), NULL, NULL,1),
+		(439, 31, 1, GETDATE(), NULL, NULL,1),
+		(126, 32, 1, GETDATE(), NULL, NULL,1),
+		(132, 33, 1, GETDATE(), NULL, NULL,1),
+		(231, 34, 1, GETDATE(), NULL, NULL,1),
+		(161, 35, 1, GETDATE(), NULL, NULL,1),
+		(182, 36, 1, GETDATE(), NULL, NULL,1),
+		(172, 37, 1, GETDATE(), NULL, NULL,1),
+		(281, 38, 1, GETDATE(), NULL, NULL,1),
+		(190, 39, 1, GETDATE(), NULL, NULL,1),
+		(192, 40, 1, GETDATE(), NULL, NULL,1);
 
 
 
@@ -1008,8 +1010,6 @@ GO
 
 
 
-
-
 CREATE OR ALTER PROC UDP_Gral_tbMunicipios_VISTA
 AS BEGIN
 
@@ -1034,9 +1034,9 @@ SELECT suc_Id,
 	   FROM Gral.tbSucursales T1
 	   INNER JOIN Gral.tbMunicipios T2
 	   ON T1.suc_Municipio = T2.mun_ID
+	   WHERE suc_Estado = 1
 END
 GO
-
 
 
 
@@ -1051,22 +1051,33 @@ SELECT est_ID,
 END
 GO
 
+CREATE OR ALTER PROC UDP_Gral_tbUsuarios_VISTA
+AS BEGIN
 
+SELECT
+		usu.usu_ID,
+		usu.usu_Usuario,
+		emple.emp_Nombre + ' ' + emple.emp_Apellido AS 'Empleado'
+		FROM Gral.tbUsuarios usu INNER JOIN Gral.tbEmpleados emple 
+		ON	 usu.usu_empID = emple.emp_ID
+		WHERE usu.usu_Estado = 1
 
+END
+GO
 
 
 CREATE OR ALTER PROC UDP_Maqui_tbCategoriasProducto_VISTA
 AS BEGIN
 
 SELECT cpr_Id, 
-	   cpr_Categoria, 
-	   cpr_Producto  
-	   FROM Maqui.tbCategoriaProductos
+	   cate.cat_Descripcion, 
+	   produc.pro_Nombre  
+	   FROM Maqui.tbCategoriaProductos cateproduc  INNER JOIN Maqui.tbCategorias cate
+	   ON	cateproduc.cpr_Categoria = cate.cat_Id INNER JOIN Maqui.tbProductos produc
+	   ON	cateproduc.cpr_Producto = produc.pro_Id
 
 END
 GO
-
-
 
 
 
@@ -1088,10 +1099,12 @@ GO
 CREATE OR ALTER PROC UDP_Maqui_tbInventario_VISTA
 AS BEGIN
 
-SELECT inv_Id, 
-	   inv_Cantidad, 
-	   inv_Producto
-	   FROM Maqui.tbInventario
+SELECT  inv_Id,
+		produc.pro_Nombre,	
+	    inv_Cantidad
+	    FROM Maqui.tbInventario inven INNER JOIN Maqui.tbProductos produc
+		ON	 inven.inv_Producto = produc.pro_Id
+		WHERE inven.inv_Estado = 1
 END
 GO
 
@@ -1162,13 +1175,13 @@ SELECT ven_Id,
 	   ven_Cliente = cli_Nombre + ' ' + cli_Apellido, 
 	   ven_Empleado = emp_Nombre + ' ' + emp_Apellido,
 	   ven_Fecha, 
-	   ven_Sucursal = suc_Descripcion, 
-	   ven_MetodoPago = met_Descripcion
+	   suc_Descripcion, 
+	   met_Descripcion
 	   FROM Maqui.tbVentas T1
 	   INNER JOIN Gral.tbSucursales T2
-	   ON T1.ven_Sucursal = T2.suc_Descripcion
+	   ON T1.ven_Sucursal = T2.suc_Id
 	   INNER JOIN Maqui.tbMetodoPago T3
-	   ON T1.ven_MetodoPago = T3.met_Descripcion
+	   ON T1.ven_MetodoPago = T3.met_Id
 	   INNER JOIN Gral.tbClientes T4
 	   ON T1.ven_Cliente = T4.cli_ID
 	   INNER JOIN Gral.tbEmpleados T5
@@ -1185,7 +1198,7 @@ CREATE OR ALTER PROC UDP_Maqui_tbVentasDetalle_VISTA
 AS BEGIN
 
 SELECT vde_Id, 
-	   vde_VentaId, 
+	   vde_VentaId,
 	   vde_Producto = pro_Nombre, 
 	   vde_Precio, 
 	   vde_Cantidad 
@@ -1200,9 +1213,10 @@ GO
 
 
 
+
 /************************UDPS INSERT************************/
 
-CREATE OR ALTER PROC UDP_Gral_tbEstadosCiviles_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbEstadosCiviles_CREAR(
 @est_Descripcion NVARCHAR(100),
 @est_UsuCrea INT)
 AS BEGIN
@@ -1222,7 +1236,7 @@ END
 GO
 
 
-CREATE OR ALTER PROC UDP_Gral_tbDepartamentos_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbDepartamentos_CREAR(
 @dep_Descripcion NVARCHAR(100),
 @dep_UsuCrea INT)
 AS BEGIN
@@ -1241,8 +1255,26 @@ VALUES  (@dep_Descripcion,
 END
 GO
 
+CREATE OR ALTER PROC UDP_Gral_tbSucursales_CREAR
+	@suc_Descripcion	NVARCHAR(100),
+	@suc_Municipio		INT, 
+	@suc_UsuCrea		INT 	
+AS
+BEGIN
+	DECLARE @suc_FechaCrea  DATETIME = GETDATE()
+	DECLARE @suc_Estado		BIT = 1
 
-CREATE OR ALTER PROC UDP_Gral_tbMunicipios_Crear(
+		INSERT INTO Gral.tbSucursales
+			(suc_Descripcion, suc_Municipio, suc_UsuCrea, suc_FechaCrea, suc_usuModi, 
+			 suc_FechaModi, suc_Estado)
+		VALUES
+			(@suc_Descripcion, @suc_Municipio, @suc_UsuCrea, @suc_FechaCrea, NULL, 
+			 NULL, @suc_Estado)
+END
+GO
+
+
+CREATE OR ALTER PROC UDP_Gral_tbMunicipios_CREAR(
 @mun_Descripcion NVARCHAR(100),
 @mun_DepId INT,
 @mun_UsuCrea INT)
@@ -1264,7 +1296,7 @@ END
 GO
 
 
-CREATE OR ALTER PROC UDP_Gral_Empleados_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbEmpleados_CREAR(
 @emp_Nombre				NVARCHAR(250),		
 @emp_Apellido			NVARCHAR(250),		
 @emp_DNI				VARCHAR(13)	,		
@@ -1305,7 +1337,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_Gral_tbClientes_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbClientes_CREAR(
 @cli_Nombre				NVARCHAR(250),		
 @cli_Apellido			NVARCHAR(250),		
 @cli_DNI				VARCHAR(13)	,		
@@ -1342,7 +1374,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_Gral_tbUsuarios_Crear(
+CREATE OR ALTER PROC UDP_Gral_tbUsuarios_CREAR(
 @usu_Usuario			NVARCHAR(100)		,
 @usu_empID			INT					,
 @usu_Clave			NVARCHAR(MAX)		,
@@ -1367,3 +1399,33 @@ VALUES  (@usu_Usuario,
 		 @usu_Estado)
 END
 GO
+
+CREATE OR ALTER PROC UDP_Maqui_tbCategoriasProducto_CREAR
+	@cpr_Categoria		INT,
+	@cpr_Producto		INT, 
+	@cpr_UsuCrea		INT
+AS
+BEGIN
+
+DECLARE @cpr_FechaCrea DATETIME = GETDATE()
+DECLARE @cpr_Estado	   BIT = 1
+
+INSERT INTO Maqui.tbCategoriaProductos
+		(cpr_Categoria, cpr_Producto, cpr_UsuCrea, cpr_FechaCrea, cpr_usuModi, cpr_FechaModi, cpr_Estado)
+VALUES	(@cpr_Categoria, @cpr_Producto,@cpr_UsuCrea,@cpr_FechaCrea, NULL,		NULL,		  @cpr_Estado)
+
+END
+GO
+
+CREATE OR ALTER PROC UDP_Maqui_tbMetodoPago_CREAR
+	@met_Descripcion	NVARCHAR(100), 
+	@met_UsuCrea		INT
+AS
+BEGIN
+	DECLARE @met_FechaCrea	DATETIME = GETDATE()
+	DECLARE @met_Estado		BIT		 = 1
+	
+	INSERT INTO Maqui.tbMetodoPago
+			(met_Descripcion, met_UsuCrea, met_FechaCrea, met_usuModi, met_FechaModi, met_Estado)
+	VALUES	(@met_Descripcion,@met_UsuCrea,@met_FechaCrea, NULL,		NULL,		 @met_Estado)
+END
