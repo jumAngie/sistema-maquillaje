@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\Maquillaje.BusinessLogic.csproj": {}
+    "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\Maquillaje.BusinessLogic.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\Maquillaje.BusinessLogic.csproj": {
+    "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\Maquillaje.BusinessLogic.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\Maquillaje.BusinessLogic.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\Maquillaje.BusinessLogic.csproj",
         "projectName": "Maquillaje.BusinessLogic",
-        "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\Maquillaje.BusinessLogic.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\obj\\",
+        "projectPath": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\Maquillaje.BusinessLogic.csproj",
+        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.BusinessLogic\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -32,8 +32,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj"
+              "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj"
               }
             }
           }
@@ -62,24 +62,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj": {
+    "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj",
         "projectName": "Maquillaje.DataAccess",
-        "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\obj\\",
+        "projectPath": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\Maquillaje.DataAccess.csproj",
+        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -94,8 +94,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj": {
-                "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj"
+              "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj": {
+                "projectPath": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj"
               }
             }
           }
@@ -146,24 +146,24 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj": {
+    "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj",
         "projectName": "Maquillaje.Entities",
-        "projectPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj",
-        "packagesPath": "C:\\Users\\Usuario\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuario\\Documents\\GitHub\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\obj\\",
+        "projectPath": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\Maquillaje.Entities.csproj",
+        "packagesPath": "C:\\Users\\LAB01\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\LAB01\\OneDrive\\Escritorio\\Proyecto_Final\\sistema-maquillaje\\Maquillaje\\Maquillaje.Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\Usuario\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\LAB01\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -204,7 +204,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.416\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.409\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -18,6 +18,8 @@ namespace Maquillaje.BusinessLogic.Services
             _categoriaRepository = categoriaRepository;
         }
 
+
+
         public GeneralesService(ProductosRepository productosRepository)
         {
             _productosRepository = productosRepository;
