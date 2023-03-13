@@ -1112,7 +1112,7 @@ GO
 
 
 
-CREATE OR ALTER PROC UDO_Maqui_tbMetodoPago_VISTA
+CREATE OR ALTER PROC UDP_Maqui_tbMetodoPago_VISTA
 AS BEGIN
 
 SELECT met_Id, 
@@ -1428,4 +1428,122 @@ BEGIN
 	INSERT INTO Maqui.tbMetodoPago
 			(met_Descripcion, met_UsuCrea, met_FechaCrea, met_usuModi, met_FechaModi, met_Estado)
 	VALUES	(@met_Descripcion,@met_UsuCrea,@met_FechaCrea, NULL,		NULL,		 @met_Estado)
+END
+GO
+
+CREATE OR ALTER PROC UDP_Maqui_tbCategorias_CREAR
+	@cat_Descripcion	NVARCHAR(100), 
+	@cat_UsuCrea		INT
+AS
+BEGIN
+	DECLARE @cat_FechaCrea DATETIME = GETDATE()
+	DECLARE @cat_Estado	   BIT =		1
+
+	INSERT INTO Maqui.tbCategorias
+			(cat_Descripcion, cat_UsuCrea, cat_FechaCrea, cat_UsuModi, cat_FechaModi, cat_Estado)
+	VALUES	(@cat_Descripcion,@cat_UsuCrea,@cat_FechaCrea,  NULL,		NULL,		  @cat_Estado)
+END
+GO
+
+CREATE OR ALTER PROC UDP_Maqui_tbInventario_CREAR
+	@inv_Cantidad	INT,
+	@inv_Producto	INT, 
+	@inv_UsuCrea	INT
+AS
+BEGIN
+		DECLARE @inv_FechaCrea  DATETIME = GETDATE()
+		DECLARE @inv_Estado		BIT		 =	1
+
+		INSERT INTO Maqui.tbInventario
+				(inv_Cantidad, inv_Producto, inv_UsuCrea, inv_FechaCrea, inv_usuModi, inv_FechaModi, inv_Estado)
+		VALUES	(@inv_Cantidad,@inv_Producto,@inv_UsuCrea, @inv_FechaCrea, NULL,       NULL,		 @inv_Estado)
+
+END
+GO
+
+CREATE OR ALTER PROC UDP_Maqui_tbProductos_CREAR
+	@pro_Codigo			NVARCHAR(100),
+	@pro_Nombre			NVARCHAR(100), 
+	@pro_StockInicial	NVARCHAR(100), 
+	@pro_Precio			DECIMAL(18,2), 
+	@pro_Proveedor		INT, 
+	@pro_usuCrea		INT
+AS
+BEGIN
+	DECLARE @pro_FechaCrea  DATETIME = GETDATE()
+	DECLARE @pro_Estado		BIT		 = 1
+
+	INSERT INTO Maqui.tbProductos
+			(pro_Codigo, pro_Nombre, pro_StockInicial, pro_Precio, pro_Proveedor, pro_usuCrea, 
+			 pro_FechaCrea, pro_UsuModi, pro_FechaModi, pro_Estado)
+
+	VALUES  (@pro_Codigo, @pro_Nombre, @pro_StockInicial, @pro_Precio, @pro_Proveedor, @pro_usuCrea,
+			 @pro_FechaCrea, NULL, NULL, @pro_Estado)
+
+END
+GO
+
+CREATE OR ALTER PROC UDP_Maqui_tbProveedores_CREAR
+	@prv_NombreCompañia		NVARCHAR(250),
+	@prv_NombreContacto		NVARCHAR(250), 
+	@prv_TelefonoContacto   NVARCHAR(100), 
+	@prv_Municipio			INT, 
+	@prv_Direccion			NVARCHAR(200), 
+	@prv_UsuarioCrea		INT 
+AS
+BEGIN
+		DECLARE @prv_FechaCrea DATETIME = GETDATE() 
+		DECLARE @prv_Estado	   BIT =	1	
+
+		INSERT INTO Maqui.tbProveedores
+				(prv_NombreCompañia, prv_NombreContacto, prv_TelefonoContacto, prv_Municipio, 
+				 prv_Direccion, prv_UsuarioCrea, prv_FechaCrea, prv_UsuarioModi, 
+				 prv_FechaModi, prv_Estado)
+
+		VALUES	(@prv_NombreCompañia,@prv_NombreContacto, @prv_TelefonoContacto, @prv_Municipio,
+				 @prv_Direccion, @prv_UsuarioCrea, @prv_FechaCrea, NULL,
+				 NULL, @prv_Estado)
+
+END
+GO
+
+CREATE OR ALTER PROC UDP_Maqui_tbVentas_CREAR
+	@ven_Cliente		INT, 
+	@ven_Empleado		INT, 
+	@ven_Fecha			DATETIME, 
+	@ven_Sucursal		INT, 
+	@ven_MetodoPago		INT, 
+	@ven_UsuCrea		INT
+AS
+BEGIN
+	DECLARE @ven_FechaCrea  DATETIME = GETDATE()
+	DECLARE @ven_Estado		BIT		 = 1
+
+	INSERT INTO Maqui.tbVentas
+			(ven_Cliente, ven_Empleado, ven_Fecha, ven_Sucursal, ven_MetodoPago, ven_UsuCrea, 
+			 ven_FechaCrea, ven_UsuModi, ven_FechaModi, ven_Estado)
+
+	VALUES	 (@ven_Cliente,@ven_Empleado,@ven_Fecha,@ven_Sucursal,@ven_MetodoPago, @ven_UsuCrea,
+			  @ven_FechaCrea, NULL,		  NULL,          @ven_Estado)
+
+END
+GO
+
+CREATE OR ALTER PROC UDP_Maqui_tbVentasDetalle_CREAR
+	@vde_VentaId			INT, 
+	@vde_Producto			INT, 
+	@vde_Precio				DECIMAL, 
+	@vde_Cantidad			INT, 
+	@vde_UsuCrea			INT 
+AS
+BEGIN
+		DECLARE @vde_FechaCrea DATETIME = GETDATE() 
+		DECLARE @vde_Estado    BIT		= 1
+
+		INSERT INTO Maqui.tbVentasDetalle
+				(vde_VentaId, vde_Producto, vde_Precio, vde_Cantidad, vde_UsuCrea, vde_FechaCrea, 
+				 vde_UsuModi, vde_FechaModi, vde_Estado)
+
+		VALUES	(@vde_VentaId, @vde_Producto, @vde_Precio, @vde_Cantidad,@vde_UsuCrea,@vde_FechaCrea,
+				 NULL,         NULL,		@vde_Estado)
 END
