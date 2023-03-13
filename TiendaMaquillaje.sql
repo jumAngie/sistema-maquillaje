@@ -569,7 +569,9 @@ CREATE TABLE Maqui.tbProveedores(
 		prv_NombreContacto		NVARCHAR(250)		NOT NULL,
 		prv_TelefonoContacto	NVARCHAR(100)		NOT NULL,
 		prv_Municipio		    INT					NOT NULL,
-		prv_Direccion			NVARCHAR(200)		NOT NULL,
+		prv_DireccionEmpresa	NVARCHAR(200)		NOT NULL,
+		prv_DireccionContacto	NVARCHAR(200)		NOT NULL,
+		prv_SexoContacto		CHAR(1)				NOT NULL,
 
 		prv_UsuarioCrea			INT					NOT NULL,
 		prv_FechaCrea		    DATETIME			DEFAULT GETDATE(),
@@ -580,31 +582,32 @@ CREATE TABLE Maqui.tbProveedores(
 		
 		CONSTRAINT PK_Maqui_tbProveedores_Gral_tbMunicipios_prv_Municipio	FOREIGN KEY (prv_Municipio)	    REFERENCES Gral.tbMunicipios  (mun_ID),
 		CONSTRAINT FK_Maqui_tbProveedores_prv_UsuarioCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(prv_UsuarioCrea) REFERENCES Gral.tbUsuarios(usu_ID),
-		CONSTRAINT FK_Maqui_tbProveedores_prv_UsuarioModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(prv_UsuarioModi) REFERENCES Gral.tbUsuarios(usu_ID)
+		CONSTRAINT FK_Maqui_tbProveedores_prv_UsuarioModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(prv_UsuarioModi) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT CK_Maqui_tbProveedores_prv_SexoContacto CHECK (prv_SexoContacto IN ('F','M'))
 
 );
 INSERT INTO Maqui.tbProveedores
 VALUES  
-		('Lubre Cosmética Natural', 'Francsico Mejía', '+504 9878-4562', 25, 'Calle hacia Armenta, atras de Mall Altara.',	1, GETDATE(), NULL, NULL, 1),
-		('Ortrade', 'Blanca Wong', '+504 9809-4453', 32, '3ra Avenida, 2da Calle Prolonogación Pasaje Valle',				1, GETDATE(), NULL, NULL, 1),
-		('Yesensy', 'Marlon Lee', '+504 9856-6371', 173, '1ra Calle, Salida a La Lima',										1, GETDATE(), NULL, NULL, 1),
-		('Bamboo Cosmetcis', 'Tristan Thompson', '+504 9801-3561', 289, '1ra Calle, 3ra Avenida, Frente al Parque Central',	1, GETDATE(), NULL, NULL, 1),
-		('Laboratorios Anteii', 'Ulises Menjivar', '+504 8790-4352', 231, '5ta Calle, 5ta Avenida, Barrio El Centro',		1, GETDATE(), NULL, NULL, 1),
-		('Divasa Cosmetics', 'Pedro Urquía', '+504 8909-5564', 126, '4 y 5 Calle, 2da Avenida, Barrio El Centro',			1, GETDATE(), NULL, NULL, 1),
-		('CosmetiChile', 'Maryuri Lee', '+504 8909-5563', 149, '2da Calle, Avenida Junior',									1, GETDATE(), NULL, NULL, 1),
-		('Kylie Cosmetics', 'Angie Campos', '+504 9756-3311', 105, '1ra Calle, 4ta Avenida, Barrio Concepción',				1, GETDATE(), NULL, NULL, 1),
-		('Guangzhou Xiran Cosmetics Co.', 'Sandra Xiang', '+504 9867-8954', 209, 'Bo. del Norte',							1, GETDATE(), NULL, NULL, 1),
-		('Bause Cosmetcis', 'Julissa Liang', '+504 8756-3412', 243, '5ta Calle, 3ra Avenida, Atrás de Tropigas',			1, GETDATE(), NULL, NULL, 1),
-		('Frida Cosmetics', 'Karla Eraza', '+504 9756-3526', 122, '16 Avenida, Barrio Suyapa',								1, GETDATE(), NULL, NULL, 1),
-		('Paulis MakeUp', 'Yana Rodríguez', '+504 9786-4451', 245, 'Calle Salida Vieja a La Lima',							1, GETDATE(), NULL, NULL, 1),
-		('Maquillaje Stock', 'Oliver Memphis', '+504 8967-4251', 128, 'Barrio El Calvario, Calle Principal',				1, GETDATE(), NULL, NULL, 1),
-		('Seytú', 'Ernesto Lopez', '+504 9878-3300', 133, 'Col. El Carmen, Calle Principal',								1, GETDATE(), NULL, NULL, 1),
-		('Ibella', 'Vanessa Banegas', '+504 9878-5536', 244, 'Avenida Circunvalación',										1, GETDATE(), NULL, NULL, 1),
-		('Estudio Juvenil', 'Juana Jeréx', '+504 9299-5637', 267, 'Avenida los Olivos, 6ta Calle, 1ra Avenida',				1, GETDATE(), NULL, NULL, 1),
-		('Cosméticos al por Mayor', 'Paulina Guatusa', '+504 8900-6738', 128, 'Avenida Francisco Olivos',					1, GETDATE(), NULL, NULL, 1),
-		('DisDroper', 'Fanny Hungría', '+504 9877-5362', 162, 'Col. Trinidad Yanez',										1, GETDATE(), NULL, NULL, 1),
-		('Cosbelly Profesional', 'Deiby Guerra', '+504 9877-4412', 169, 'Col. Villa Nuria',									1, GETDATE(), NULL, NULL, 1),
-		('Fransua', 'Maicoll Hungaro', '+504 9677-3142', 169, 'Col. Yanez',													1, GETDATE(), NULL, NULL, 1);
+		('Lubre Cosmética Natural', 'Francsico Mejía', '+504 9878-4562', 25, 'Calle hacia Armenta, atras de Mall Altara.','1ra Calle, Salida a La Lima','F',	1, GETDATE(), NULL, NULL, 1),
+		('Ortrade', 'Blanca Wong', '+504 9809-4453', 32, '3ra Avenida, 2da Calle Prolonogación Pasaje Valle','1ra Calle, Salida a La Lima','F',				1, GETDATE(), NULL, NULL, 1),
+		('Yesensy', 'Marlon Lee', '+504 9856-6371', 173, '1ra Calle, Salida a La Lima',	'1ra Calle, Salida a La Lima','F',									1, GETDATE(), NULL, NULL, 1),
+		('Bamboo Cosmetcis', 'Tristan Thompson', '+504 9801-3561', 289, '1ra Calle, 3ra Avenida, Frente al Parque Central','1ra Calle, Salida a La Lima','F',	1, GETDATE(), NULL, NULL, 1),
+		('Laboratorios Anteii', 'Ulises Menjivar', '+504 8790-4352', 231, '5ta Calle, 5ta Avenida, Barrio El Centro','1ra Calle, Salida a La Lima','F',		1, GETDATE(), NULL, NULL, 1),
+		('Divasa Cosmetics', 'Pedro Urquía', '+504 8909-5564', 126, '4 y 5 Calle, 2da Avenida, Barrio El Centro','1ra Calle, Salida a La Lima','F',			1, GETDATE(), NULL, NULL, 1),
+		('CosmetiChile', 'Maryuri Lee', '+504 8909-5563', 149, '2da Calle, Avenida Junior',	'1ra Calle, Salida a La Lima','F',								1, GETDATE(), NULL, NULL, 1),
+		('Kylie Cosmetics', 'Angie Campos', '+504 9756-3311', 105, '1ra Calle, 4ta Avenida, Barrio Concepción',	'1ra Calle, Salida a La Lima','F',			1, GETDATE(), NULL, NULL, 1),
+		('Guangzhou Xiran Cosmetics Co.', 'Sandra Xiang', '+504 9867-8954', 209, 'Bo. del Norte', '1ra Calle, Salida a La Lima','F',						1, GETDATE(), NULL, NULL, 1),
+		('Bause Cosmetcis', 'Julissa Liang', '+504 8756-3412', 243, '5ta Calle, 3ra Avenida, Atrás de Tropigas','1ra Calle, Salida a La Lima','F',			1, GETDATE(), NULL, NULL, 1),
+		('Frida Cosmetics', 'Karla Eraza', '+504 9756-3526', 122, '16 Avenida, Barrio Suyapa',	'1ra Calle, Salida a La Lima','F',							1, GETDATE(), NULL, NULL, 1),
+		('Paulis MakeUp', 'Yana Rodríguez', '+504 9786-4451', 245, 'Calle Salida Vieja a La Lima',	'1ra Calle, Salida a La Lima','F',						1, GETDATE(), NULL, NULL, 1),
+		('Maquillaje Stock', 'Oliver Memphis', '+504 8967-4251', 128, 'Barrio El Calvario, Calle Principal',	'1ra Calle, Salida a La Lima','F',			1, GETDATE(), NULL, NULL, 1),
+		('Seytú', 'Ernesto Lopez', '+504 9878-3300', 133, 'Col. El Carmen, Calle Principal',		'1ra Calle, Salida a La Lima','F',						1, GETDATE(), NULL, NULL, 1),
+		('Ibella', 'Vanessa Banegas', '+504 9878-5536', 244, 'Avenida Circunvalación',	'1ra Calle, Salida a La Lima','F',									1, GETDATE(), NULL, NULL, 1),
+		('Estudio Juvenil', 'Juana Jeréx', '+504 9299-5637', 267, 'Avenida los Olivos, 6ta Calle, 1ra Avenida',	'1ra Calle, Salida a La Lima','F',			1, GETDATE(), NULL, NULL, 1),
+		('Cosméticos al por Mayor', 'Paulina Guatusa', '+504 8900-6738', 128, 'Avenida Francisco Olivos',	'1ra Calle, Salida a La Lima','F',				1, GETDATE(), NULL, NULL, 1),
+		('DisDroper', 'Fanny Hungría', '+504 9877-5362', 162, 'Col. Trinidad Yanez',	'1ra Calle, Salida a La Lima','F',									1, GETDATE(), NULL, NULL, 1),
+		('Cosbelly Profesional', 'Deiby Guerra', '+504 9877-4412', 169, 'Col. Villa Nuria',		'1ra Calle, Salida a La Lima','F',							1, GETDATE(), NULL, NULL, 1),
+		('Fransua', 'Maicoll Hungaro', '+504 9677-3142', 169, 'Col. Yanez',			'1ra Calle, Salida a La Lima','F',										1, GETDATE(), NULL, NULL, 1);
 
 
 
@@ -665,9 +668,9 @@ CREATE TABLE Maqui.tbProductos(
 		pro_Codigo			NVARCHAR(100)					NOT NULL,
 		pro_Nombre			NVARCHAR(100)					NOT NULL,
 		pro_StockInicial	NVARCHAR(100)					NOT NULL,
-		pro_Precio			DECIMAL(18,2)					NOT NULL,
+		pro_PrecioUnitario	DECIMAL(18,2)					NOT NULL,
 		pro_Proveedor		INT,
-
+		pro_Categoria		INT,
 		pro_usuCrea			INT,
 		pro_FechaCrea		DATETIME						DEFAULT GETDATE(),
 		pro_UsuModi			INT,
@@ -677,111 +680,111 @@ CREATE TABLE Maqui.tbProductos(
 		CONSTRAINT UK_Maqui_tbProductos_pro_Codigo UNIQUE(pro_Codigo),
 		CONSTRAINT FK_Maqui_tbProductos_Maqui_tbProveedores_pro_Proveedor FOREIGN KEY (pro_Proveedor) REFERENCES Maqui.tbProveedores(prv_Id),
 		CONSTRAINT FK_Maqui_tbProductos_pro_usuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(pro_usuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
-		CONSTRAINT FK_Maqui_tbProductos_pro_UsuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(pro_UsuModi) REFERENCES Gral.tbUsuarios(usu_ID)
+		CONSTRAINT FK_Maqui_tbProductos_pro_UsuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(pro_UsuModi) REFERENCES Gral.tbUsuarios(usu_ID),
+		CONSTRAINT FK_Maqui_tbProductos_pro_Categoria_Maqui_tbCategorias_cat_ID FOREIGN KEY(pro_Categoria) REFERENCES Maqui.tbCategorias (cat_ID)
 );
-
 
 INSERT INTO Maqui.tbProductos
-VALUES  ('LBLRM', 'Labial rojo líquido de tinta mate.', '200', 50.00, 1,		1, GETDATE(), NULL, NULL, 1),
-		('LBGLB', 'Labial gloss con brillantina.', '200', 60.00, 4,				1, GETDATE(), NULL, NULL, 1),
-		('LBROM', 'Labial rosado de tinta mate.', '200', 70.00, 7,				1, GETDATE(), NULL, NULL, 1),
-		('LBNTM', 'Labial nude de tinta mate.', '200', 80.00, 9,				1, GETDATE(), NULL, NULL, 1),
-		('LBMTC', 'Labial morado de tinta cremosa.', '200', 45.00, 10,			1, GETDATE(), NULL, NULL, 1),
-		('PTNNP', 'Paleta The New Nude Palette', '200', 200.00, 15,				1, GETDATE(), NULL, NULL, 1),
-		('PNLEP', 'Paleta Natural Lust Eye Palette', '200',  400.00, 19,		1, GETDATE(), NULL, NULL, 1),
-		('PNHPA', 'Paleta Naked Heat Palette', '200',  560.00, 12,				1, GETDATE(), NULL, NULL, 1),
-		('PTBPA', 'Paleta The Burgundy Palette', '200',450.00, 11,				1, GETDATE(), NULL, NULL, 1),
-		('PTIBP', 'Paleta Tartelette in Bloom Palette', '200',  3400.00, 15,	1, GETDATE(), NULL, NULL, 1),
-		('RBBBL', 'Rubor Baked Blush', '200', 2300.00, 3,						1, GETDATE(), NULL, NULL, 1),
-		('RBMON', 'Rubor Monochromatic', '200', 2350.00, 17,					1, GETDATE(), NULL, NULL, 1),
-		('RBFIT', 'Rubor FitMe', '200', 540.00, 18,								1, GETDATE(), NULL, NULL, 1),
-		('RBPPB', 'Rubor Pink Peach Bums', '200', 340.00, 20,					1, GETDATE(), NULL, NULL, 1),
-		('RBCHE', 'Rubor Cheekers', '200', 2300.00, 4,							1, GETDATE(), NULL, NULL, 1),
-		('POLPU', 'Polvo PUR', '200',  450.00, 17,								1, GETDATE(), NULL, NULL, 1),
-		('POLFM', 'Polvo FitMe Mate', '200',  340.00, 15,						1, GETDATE(), NULL, NULL, 1),
-		('POLHG', 'Polvo Halo Glow', '200', 570.00, 20,							1, GETDATE(), NULL, NULL, 1),
-		('POLSF', 'Polvo Soft Flex', '200',  230.00, 20,						1, GETDATE(), NULL, NULL, 1),
-		('POLTM', 'Polvo True Match', '200', 657.00, 19,						1, GETDATE(), NULL, NULL, 1),
-		('BASSA', 'Base Simply Ageless', '200',120.00, 12,						1, GETDATE(), NULL, NULL, 1),
-		('BASLI', 'Base Liquida', '200', 340.00, 15,							1, GETDATE(), NULL, NULL, 1),
-		('BASSM', 'Base StayMate', '200', 450.00, 9,							1, GETDATE(), NULL, NULL, 1),
-		('BASDM', 'Base Dermacol', '200', 100.00, 8,							1, GETDATE(), NULL, NULL, 1),
-		('BASCF', 'Base Clean Fresh', '200', 200.00, 7,							1, GETDATE(), NULL, NULL, 1),
-		('LIMAS', 'Limpiador de ácido salicílico.', '200', 1200.00, 7,			1, GETDATE(), NULL, NULL, 1),
-		('EXFLI', 'Exfoliante líquido.', '200', 500.00, 7,						1, GETDATE(), NULL, NULL, 1),
-		('CRENO', 'Crema renovación de noche', '200', 1980.00, 12,				1, GETDATE(), NULL, NULL, 1),
-		('SEVIC', 'Serúm con vitamina ', '200', 870.00, 5,						1, GETDATE(), NULL, NULL, 1),
-		('MABAN', 'Mascarilla de barro del mar.', '200', 560.00, 4,				1, GETDATE(), NULL, NULL, 1),
-		('DLIGR', 'Delineador Infallible Grip', '200',  460.00, 14,				1, GETDATE(), NULL, NULL, 1),
-		('DLNOB', 'Delineador No Budget', '200', 580.00, 12,					1, GETDATE(), NULL, NULL, 1),
-		('DLNYX', 'Delineador NYX Mecánico', '200', 1000.00, 17,				1, GETDATE(), NULL, NULL, 1),
-		('DLSRE', 'Delineador Stila resistente al agua.', '200', 450.00, 4,		1, GETDATE(), NULL, NULL, 1),
-		('DLCOL', 'Delineador Colorstay', '200', 235.00, 7,						1, GETDATE(), NULL, NULL, 1),
-		('RIEXA', 'Rimel Exaggerete', '200', 230.00, 3,							1, GETDATE(), NULL, NULL, 1),
-		('RIDUF', 'Rimel Durable ', '200', 450.00, 16,							1, GETDATE(), NULL, NULL, 1),
-		('RIMAE', 'Rimel Magnific Eyes', '200', 600.00, 17,						1, GETDATE(), NULL, NULL, 1),
-		('RILSM', 'Rimel London Stay Matte', '200', 700.00, 12,					1, GETDATE(), NULL, NULL, 1),
-		('RISGL', 'Rimel Stay Gloss', '200',500.00, 2,							1, GETDATE(), NULL, NULL, 1);
+VALUES  ('LBLRM', 'Labial rojo líquido de tinta mate.', '200', 50.00, 1,1,		1, GETDATE(), NULL, NULL, 1),
+		('LBGLB', 'Labial gloss con brillantina.', '200', 60.00, 4,1,				1, GETDATE(), NULL, NULL, 1),
+		('LBROM', 'Labial rosado de tinta mate.', '200', 70.00, 7,1	,			1, GETDATE(), NULL, NULL, 1),
+		('LBNTM', 'Labial nude de tinta mate.', '200', 80.00, 9,1	,			1, GETDATE(), NULL, NULL, 1),
+		('LBMTC', 'Labial morado de tinta cremosa.', '200', 45.00, 10,1,			1, GETDATE(), NULL, NULL, 1),
+		('PTNNP', 'Paleta The New Nude Palette', '200', 200.00, 15,	2	,		1, GETDATE(), NULL, NULL, 1),
+		('PNLEP', 'Paleta Natural Lust Eye Palette', '200',  400.00, 19,	2,	1, GETDATE(), NULL, NULL, 1),
+		('PNHPA', 'Paleta Naked Heat Palette', '200',  560.00, 12,	2			,1, GETDATE(), NULL, NULL, 1),
+		('PTBPA', 'Paleta The Burgundy Palette', '200',450.00, 11,		2		,1, GETDATE(), NULL, NULL, 1),
+		('PTIBP', 'Paleta Tartelette in Bloom Palette', '200',  3400.00, 15,2	,1, GETDATE(), NULL, NULL, 1),
+		('RBBBL', 'Rubor Baked Blush', '200', 2300.00, 3,	3					,1, GETDATE(), NULL, NULL, 1),
+		('RBMON', 'Rubor Monochromatic', '200', 2350.00, 17,	3				,1, GETDATE(), NULL, NULL, 1),
+		('RBFIT', 'Rubor FitMe', '200', 540.00, 18,				3				,1, GETDATE(), NULL, NULL, 1),
+		('RBPPB', 'Rubor Pink Peach Bums', '200', 340.00, 20,	3				,1, GETDATE(), NULL, NULL, 1),
+		('RBCHE', 'Rubor Cheekers', '200', 2300.00, 4,			3				,1, GETDATE(), NULL, NULL, 1),
+		('POLPU', 'Polvo PUR', '200',  450.00, 17,				4				,1, GETDATE(), NULL, NULL, 1),
+		('POLFM', 'Polvo FitMe Mate', '200',  340.00, 15,		4				,1, GETDATE(), NULL, NULL, 1),
+		('POLHG', 'Polvo Halo Glow', '200', 570.00, 20,			4				,1, GETDATE(), NULL, NULL, 1),
+		('POLSF', 'Polvo Soft Flex', '200',  230.00, 20,		4				,1, GETDATE(), NULL, NULL, 1),
+		('POLTM', 'Polvo True Match', '200', 657.00, 19,		4				,1, GETDATE(), NULL, NULL, 1),
+		('BASSA', 'Base Simply Ageless', '200',120.00, 12,		5				,1, GETDATE(), NULL, NULL, 1),
+		('BASLI', 'Base Liquida', '200', 340.00, 15,			5				,1, GETDATE(), NULL, NULL, 1),
+		('BASSM', 'Base StayMate', '200', 450.00, 9,			5				,1, GETDATE(), NULL, NULL, 1),
+		('BASDM', 'Base Dermacol', '200', 100.00, 8,			5				,1, GETDATE(), NULL, NULL, 1),
+		('BASCF', 'Base Clean Fresh', '200', 200.00, 7,			5				,1, GETDATE(), NULL, NULL, 1),
+		('LIMAS', 'Limpiador de ácido salicílico.', '200', 1200.00, 7, 6		,	1, GETDATE(), NULL, NULL, 1),
+		('EXFLI', 'Exfoliante líquido.', '200', 500.00, 7,				6		,1, GETDATE(), NULL, NULL, 1),
+		('CRENO', 'Crema renovación de noche', '200', 1980.00, 12,		6		,1, GETDATE(), NULL, NULL, 1),
+		('SEVIC', 'Serúm con vitamina ', '200', 870.00, 5,				6		,1, GETDATE(), NULL, NULL, 1),
+		('MABAN', 'Mascarilla de barro del mar.', '200', 560.00, 4,		6		,1, GETDATE(), NULL, NULL, 1),
+		('DLIGR', 'Delineador Infallible Grip', '200',  460.00, 14,		7		,1, GETDATE(), NULL, NULL, 1),
+		('DLNOB', 'Delineador No Budget', '200', 580.00, 12,			7		,1, GETDATE(), NULL, NULL, 1),
+		('DLNYX', 'Delineador NYX Mecánico', '200', 1000.00, 17,		7		,1, GETDATE(), NULL, NULL, 1),
+		('DLSRE', 'Delineador Stila resistente al agua.', '200', 450.00, 4,7	,	1, GETDATE(), NULL, NULL, 1),
+		('DLCOL', 'Delineador Colorstay', '200', 235.00, 7,				7		,1, GETDATE(), NULL, NULL, 1),
+		('RIEXA', 'Rimel Exaggerete', '200', 230.00, 3,					8		,1, GETDATE(), NULL, NULL, 1),
+		('RIDUF', 'Rimel Durable ', '200', 450.00, 16,					8		,1, GETDATE(), NULL, NULL, 1),
+		('RIMAE', 'Rimel Magnific Eyes', '200', 600.00, 17,				8		,1, GETDATE(), NULL, NULL, 1),
+		('RILSM', 'Rimel London Stay Matte', '200', 700.00, 12,			8		,1, GETDATE(), NULL, NULL, 1),
+		('RISGL', 'Rimel Stay Gloss', '200',500.00, 2,					8		,1, GETDATE(), NULL, NULL, 1);
 
 
-CREATE TABLE Maqui.tbCategoriaProductos(
-		cpr_Id				INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
-		cpr_Categoria		INT NOT NULL,
-		cpr_Producto		INT NOT NULL,
+--CREATE TABLE Maqui.tbCategoriaProductos(
+--		cpr_Id				INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+--		cpr_Categoria		INT NOT NULL,
+--		cpr_Producto		INT NOT NULL,
 		
-		cpr_UsuCrea			INT,
-		cpr_FechaCrea		DATETIME DEFAULT GETDATE(),
-		cpr_usuModi			INT,
-		cpr_FechaModi		DATETIME,
-		cpr_Estado			BIT DEFAULT 1
+--		cpr_UsuCrea			INT,
+--		cpr_FechaCrea		DATETIME DEFAULT GETDATE(),
+--		cpr_usuModi			INT,
+--		cpr_FechaModi		DATETIME,
+--		cpr_Estado			BIT DEFAULT 1
 
-		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbCategorias_cpr_Categoria	FOREIGN KEY (cpr_Categoria) REFERENCES Maqui.tbCategorias(cat_Id),
-		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbProductos_cpr_Producto		FOREIGN KEY (cpr_Producto)	REFERENCES Maqui.tbProductos(pro_Id),
-		CONSTRAINT FK_Maqui_tbCategoriaProductos_cpr_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(cpr_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
-		CONSTRAINT FK_Maqui_tbCategoriaProductos_cpr_usuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(cpr_usuModi) REFERENCES Gral.tbUsuarios(usu_ID)
-);
+--		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbCategorias_cpr_Categoria	FOREIGN KEY (cpr_Categoria) REFERENCES Maqui.tbCategorias(cat_Id),
+--		CONSTRAINT FK_Maqui_tbCategoriaProductos_Maqui_tbProductos_cpr_Producto		FOREIGN KEY (cpr_Producto)	REFERENCES Maqui.tbProductos(pro_Id),
+--		CONSTRAINT FK_Maqui_tbCategoriaProductos_cpr_UsuCrea_Gral_tbUsuarios_usu_ID FOREIGN KEY(cpr_UsuCrea) REFERENCES Gral.tbUsuarios(usu_ID),
+--		CONSTRAINT FK_Maqui_tbCategoriaProductos_cpr_usuModi_Gral_tbUsuarios_usu_ID FOREIGN KEY(cpr_usuModi) REFERENCES Gral.tbUsuarios(usu_ID)
+--);
 
-INSERT INTO Maqui.tbCategoriaProductos
-VALUES  (1,  1, 1, GETDATE(), NULL, NULL,1),
-		(1,  2, 1, GETDATE(), NULL, NULL, 1),
-		(1,  3, 1, GETDATE(), NULL, NULL,1),
-		(1,  4, 1, GETDATE(), NULL, NULL,1),
-		(1,  5, 1, GETDATE(), NULL, NULL,1),
-		(2,  6, 1, GETDATE(), NULL, NULL,1),
-		(2,  7, 1, GETDATE(), NULL, NULL,1),
-		(2,  8, 1, GETDATE(), NULL, NULL,1),
-		(2,  9, 1, GETDATE(), NULL, NULL,1),
-		(2, 10, 1, GETDATE(), NULL, NULL,1),
-		(3, 11, 1, GETDATE(), NULL, NULL,1),
-		(3, 12, 1, GETDATE(), NULL, NULL,1),
-		(3, 13, 1, GETDATE(), NULL, NULL,1),
-		(3, 14, 1, GETDATE(), NULL, NULL,1),
-		(3, 15, 1, GETDATE(), NULL, NULL,1),
-		(4, 16, 1, GETDATE(), NULL, NULL,1),
-		(4, 17, 1, GETDATE(), NULL, NULL,1),
-		(4, 18, 1, GETDATE(), NULL, NULL,1),
-		(4, 19, 1, GETDATE(), NULL, NULL,1),
-		(4, 20, 1, GETDATE(), NULL, NULL,1),
-		(5, 21, 1, GETDATE(), NULL, NULL,1),
-		(5, 22, 1, GETDATE(), NULL, NULL,1),
-		(5, 23, 1, GETDATE(), NULL, NULL,1),
-		(5, 24, 1, GETDATE(), NULL, NULL,1),
-		(5, 25, 1, GETDATE(), NULL, NULL,1),
-		(6, 26, 1, GETDATE(), NULL, NULL,1),
-		(6, 27, 1, GETDATE(), NULL, NULL,1),
-		(6, 28, 1, GETDATE(), NULL, NULL,1),
-		(6, 29, 1, GETDATE(), NULL, NULL,1),
-		(6, 30, 1, GETDATE(), NULL, NULL,1),
-		(7, 31, 1, GETDATE(), NULL, NULL,1),
-		(7, 32, 1, GETDATE(), NULL, NULL,1),
-		(7, 33, 1, GETDATE(), NULL, NULL,1),
-		(7, 34, 1, GETDATE(), NULL, NULL,1),
-		(7, 35, 1, GETDATE(), NULL, NULL,1),
-		(8, 36, 1, GETDATE(), NULL, NULL,1),
-		(8, 37, 1, GETDATE(), NULL, NULL,1),
-		(8, 38, 1, GETDATE(), NULL, NULL,1),
-		(8, 39, 1, GETDATE(), NULL, NULL,1),
-		(8, 40, 1, GETDATE(), NULL, NULL,1);
+--INSERT INTO Maqui.tbCategoriaProductos
+--VALUES  (1,  1, 1, GETDATE(), NULL, NULL,1),
+--		(1,  2, 1, GETDATE(), NULL, NULL, 1),
+--		(1,  3, 1, GETDATE(), NULL, NULL,1),
+--		(1,  4, 1, GETDATE(), NULL, NULL,1),
+--		(1,  5, 1, GETDATE(), NULL, NULL,1),
+--		(2,  6, 1, GETDATE(), NULL, NULL,1),
+--		(2,  7, 1, GETDATE(), NULL, NULL,1),
+--		(2,  8, 1, GETDATE(), NULL, NULL,1),
+--		(2,  9, 1, GETDATE(), NULL, NULL,1),
+--		(2, 10, 1, GETDATE(), NULL, NULL,1),
+--		(3, 11, 1, GETDATE(), NULL, NULL,1),
+--		(3, 12, 1, GETDATE(), NULL, NULL,1),
+--		(3, 13, 1, GETDATE(), NULL, NULL,1),
+--		(3, 14, 1, GETDATE(), NULL, NULL,1),
+--		(3, 15, 1, GETDATE(), NULL, NULL,1),
+--		(4, 16, 1, GETDATE(), NULL, NULL,1),
+--		(4, 17, 1, GETDATE(), NULL, NULL,1),
+--		(4, 18, 1, GETDATE(), NULL, NULL,1),
+--		(4, 19, 1, GETDATE(), NULL, NULL,1),
+--		(4, 20, 1, GETDATE(), NULL, NULL,1),
+--		(5, 21, 1, GETDATE(), NULL, NULL,1),
+--		(5, 22, 1, GETDATE(), NULL, NULL,1),
+--		(5, 23, 1, GETDATE(), NULL, NULL,1),
+--		(5, 24, 1, GETDATE(), NULL, NULL,1),
+--		(5, 25, 1, GETDATE(), NULL, NULL,1),
+--		(6, 26, 1, GETDATE(), NULL, NULL,1),
+--		(6, 27, 1, GETDATE(), NULL, NULL,1),
+--		(6, 28, 1, GETDATE(), NULL, NULL,1),
+--		(6, 29, 1, GETDATE(), NULL, NULL,1),
+--		(6, 30, 1, GETDATE(), NULL, NULL,1),
+--		(7, 31, 1, GETDATE(), NULL, NULL,1),
+--		(7, 32, 1, GETDATE(), NULL, NULL,1),
+--		(7, 33, 1, GETDATE(), NULL, NULL,1),
+--		(7, 34, 1, GETDATE(), NULL, NULL,1),
+--		(7, 35, 1, GETDATE(), NULL, NULL,1),
+--		(8, 36, 1, GETDATE(), NULL, NULL,1),
+--		(8, 37, 1, GETDATE(), NULL, NULL,1),
+--		(8, 38, 1, GETDATE(), NULL, NULL,1),
+--		(8, 39, 1, GETDATE(), NULL, NULL,1),
+--		(8, 40, 1, GETDATE(), NULL, NULL,1);
 
 
 
@@ -887,7 +890,6 @@ CREATE TABLE Maqui.tbVentasDetalle(
 		vde_Id			INT IDENTITY(1,1)	NOT NULL PRIMARY KEY,
 		vde_VentaId		INT					NOT NULL,
 		vde_Producto	INT					NOT NULL,
-		vde_Precio		DECIMAL(18,2)		NOT NULL,
 		vde_Cantidad	INT					NOT NULL,
 		
 		vde_UsuCrea		INT,
@@ -904,36 +906,36 @@ CREATE TABLE Maqui.tbVentasDetalle(
 GO
 
 INSERT INTO Maqui.tbVentasDetalle
-VALUES  (1,  03, 300.00, 4, 1, GETDATE(), NULL, NULL, 1),
-		(1,  23, 239.00, 8, 1, GETDATE(), NULL, NULL, 1),
-		(1,  21, 238.00, 2, 1, GETDATE(), NULL, NULL, 1),
-		(2,  34, 320.00, 3, 1, GETDATE(), NULL, NULL, 1),
-		(2,  09, 199.00, 5, 1, GETDATE(), NULL, NULL, 1),
-		(2,  32, 320.00, 1, 1, GETDATE(), NULL, NULL, 1),
-		(3,  09, 899.00, 4, 1, GETDATE(), NULL, NULL, 1),
-		(3,  19, 210.00, 4, 1, GETDATE(), NULL, NULL, 1),
-		(3,  15, 111.00, 4, 1, GETDATE(), NULL, NULL, 1),
-		(4,  32, 241.00, 5, 1, GETDATE(), NULL, NULL, 1),
-		(4,  11, 210.00, 2, 1, GETDATE(), NULL, NULL, 1),
-		(4,  06, 291.00, 3, 1, GETDATE(), NULL, NULL, 1),
-		(5,  08, 344.00, 4, 1, GETDATE(), NULL, NULL, 1),
-	    (5,  12, 123.00, 6, 1, GETDATE(), NULL, NULL, 1),
-		(5,  13, 324.00, 7, 1, GETDATE(), NULL, NULL, 1),
-		(6,  40, 898.00, 3, 1, GETDATE(), NULL, NULL, 1),
-		(6,  33, 265.00, 4, 1, GETDATE(), NULL, NULL, 1),
-		(6,  34, 768.00, 2, 1, GETDATE(), NULL, NULL, 1),
-		(7,  21, 445.00, 1, 1, GETDATE(), NULL, NULL, 1),
-		(7,  36, 658.00, 6, 1, GETDATE(), NULL, NULL, 1),
-		(7,  21, 245.00, 9, 1, GETDATE(), NULL, NULL, 1),
-		(8,  11, 647.00, 3, 1, GETDATE(), NULL, NULL, 1),
-		(8,  30, 123.00, 8, 1, GETDATE(), NULL, NULL, 1),
-		(8,  29, 234.00, 4, 1, GETDATE(), NULL, NULL, 1),
-		(9,  21, 285.00, 8, 1, GETDATE(), NULL, NULL, 1),
-		(9,  24, 121.00, 6, 1, GETDATE(), NULL, NULL, 1),
-        (9,  29, 435.00, 3, 1, GETDATE(), NULL, NULL, 1),
-		(10, 37, 324.00, 9, 1, GETDATE(), NULL, NULL, 1),
-		(10, 23, 677.00, 9, 1, GETDATE(), NULL, NULL, 1),
-		(10, 12, 233.00, 9, 1, GETDATE(), NULL, NULL, 1);
+VALUES  (1,  03,  4, 1, GETDATE(), NULL, NULL, 1),
+		(1,  23,  8, 1, GETDATE(), NULL, NULL, 1),
+		(1,  21,  2, 1, GETDATE(), NULL, NULL, 1),
+		(2,  34,  3, 1, GETDATE(), NULL, NULL, 1),
+		(2,  09,  5, 1, GETDATE(), NULL, NULL, 1),
+		(2,  32,  1, 1, GETDATE(), NULL, NULL, 1),
+		(3,  09,  4, 1, GETDATE(), NULL, NULL, 1),
+		(3,  19, 4, 1, GETDATE(), NULL, NULL, 1),
+		(3,  15,  4, 1, GETDATE(), NULL, NULL, 1),
+		(4,  32,  5, 1, GETDATE(), NULL, NULL, 1),
+		(4,  11,  2, 1, GETDATE(), NULL, NULL, 1),
+		(4,  06,  3, 1, GETDATE(), NULL, NULL, 1),
+		(5,  08,  4, 1, GETDATE(), NULL, NULL, 1),
+	    (5,  12,  6, 1, GETDATE(), NULL, NULL, 1),
+		(5,  13,  7, 1, GETDATE(), NULL, NULL, 1),
+		(6,  40,  3, 1, GETDATE(), NULL, NULL, 1),
+		(6,  33, 4, 1, GETDATE(), NULL, NULL, 1),
+		(6,  34,  2, 1, GETDATE(), NULL, NULL, 1),
+		(7,  21,  1, 1, GETDATE(), NULL, NULL, 1),
+		(7,  36, 6, 1, GETDATE(), NULL, NULL, 1),
+		(7,  21,  9, 1, GETDATE(), NULL, NULL, 1),
+		(8,  11,  3, 1, GETDATE(), NULL, NULL, 1),
+		(8,  30, 8, 1, GETDATE(), NULL, NULL, 1),
+		(8,  29,  4, 1, GETDATE(), NULL, NULL, 1),
+		(9,  21,  8, 1, GETDATE(), NULL, NULL, 1),
+		(9,  24,  6, 1, GETDATE(), NULL, NULL, 1),
+        (9,  29,  3, 1, GETDATE(), NULL, NULL, 1),
+		(10, 37,  9, 1, GETDATE(), NULL, NULL, 1),
+		(10, 23,  9, 1, GETDATE(), NULL, NULL, 1),
+		(10, 12,  9, 1, GETDATE(), NULL, NULL, 1);
 GO
 
 
@@ -987,7 +989,7 @@ SELECT emp_ID,
 	   INNER JOIN Gral.tbMunicipios T2
 	   ON T1.emp_Municipio = T2.mun_ID
 	   INNER JOIN Gral.tbEstadosCiviles T3
-	   ON T1.emp_EstadoCivil = T3.est_Descripcion
+	   ON T1.emp_EstadoCivil = T3.est_ID
 	   INNER JOIN Gral.tbSucursales T4
 	   ON T1.emp_Sucursal = T4.suc_Id
 	   WHERE emp_Estado = 1;
@@ -1066,18 +1068,18 @@ END
 GO
 
 
-CREATE OR ALTER PROC UDP_Maqui_tbCategoriasProducto_VISTA
-AS BEGIN
+--CREATE OR ALTER PROC UDP_Maqui_tbCategoriasProducto_VISTA
+--AS BEGIN
 
-SELECT cpr_Id, 
-	   cate.cat_Descripcion, 
-	   produc.pro_Nombre  
-	   FROM Maqui.tbCategoriaProductos cateproduc  INNER JOIN Maqui.tbCategorias cate
-	   ON	cateproduc.cpr_Categoria = cate.cat_Id INNER JOIN Maqui.tbProductos produc
-	   ON	cateproduc.cpr_Producto = produc.pro_Id
+--SELECT cpr_Id, 
+--	   cate.cat_Descripcion, 
+--	   produc.pro_Nombre  
+--	   FROM Maqui.tbCategoriaProductos cateproduc  INNER JOIN Maqui.tbCategorias cate
+--	   ON	cateproduc.cpr_Categoria = cate.cat_Id INNER JOIN Maqui.tbProductos produc
+--	   ON	cateproduc.cpr_Producto = produc.pro_Id
 
-END
-GO
+--END
+--GO
 
 
 
@@ -1132,12 +1134,15 @@ AS BEGIN
 SELECT pro_Codigo, 
 	   pro_Nombre, 
 	   pro_StockInicial, 
-	   pro_Precio, 
+	   pro_PrecioUnitario,
+	   cate.cat_Descripcion,
 	   prv_NombreCompañia,
 	   pro_Proveedor = prv_NombreContacto
 	   FROM Maqui.tbProductos T1
 	   INNER JOIN Maqui.tbProveedores T2
 	   ON T1.pro_Proveedor = T2.prv_ID
+	   INNER JOIN Maqui.tbCategorias cate
+	   ON T1.pro_Categoria = cate.cat_Id
 	   WHERE pro_Estado = 1;
 
 END
@@ -1154,7 +1159,9 @@ SELECT prv_NombreCompañia,
 	   prv_NombreContacto, 
 	   prv_TelefonoContacto, 
 	   prv_Municipio = mun_Descripcion, 
-	   prv_Direccion 
+	   prv_DireccionEmpresa,
+	   prv_DireccionContacto,
+	   prv_SexoContacto
 	   FROM Maqui.tbProveedores T1
 	   INNER JOIN Gral.tbMunicipios T2
 	   ON T1.prv_Municipio = T2.mun_Id
@@ -1199,8 +1206,7 @@ AS BEGIN
 
 SELECT vde_Id, 
 	   vde_VentaId,
-	   vde_Producto = pro_Nombre, 
-	   vde_Precio, 
+	   vde_Producto = pro_Nombre,
 	   vde_Cantidad 
 	   FROM Maqui.tbVentasDetalle T1
 	   INNER JOIN Maqui.tbVentas T2
@@ -1400,22 +1406,22 @@ VALUES  (@usu_Usuario,
 END
 GO
 
-CREATE OR ALTER PROC UDP_Maqui_tbCategoriasProducto_CREAR
-	@cpr_Categoria		INT,
-	@cpr_Producto		INT, 
-	@cpr_UsuCrea		INT
-AS
-BEGIN
+--CREATE OR ALTER PROC UDP_Maqui_tbCategoriasProducto_CREAR
+--	@cpr_Categoria		INT,
+--	@cpr_Producto		INT, 
+--	@cpr_UsuCrea		INT
+--AS
+--BEGIN
 
-DECLARE @cpr_FechaCrea DATETIME = GETDATE()
-DECLARE @cpr_Estado	   BIT = 1
+--DECLARE @cpr_FechaCrea DATETIME = GETDATE()
+--DECLARE @cpr_Estado	   BIT = 1
 
-INSERT INTO Maqui.tbCategoriaProductos
-		(cpr_Categoria, cpr_Producto, cpr_UsuCrea, cpr_FechaCrea, cpr_usuModi, cpr_FechaModi, cpr_Estado)
-VALUES	(@cpr_Categoria, @cpr_Producto,@cpr_UsuCrea,@cpr_FechaCrea, NULL,		NULL,		  @cpr_Estado)
+--INSERT INTO Maqui.tbCategoriaProductos
+--		(cpr_Categoria, cpr_Producto, cpr_UsuCrea, cpr_FechaCrea, cpr_usuModi, cpr_FechaModi, cpr_Estado)
+--VALUES	(@cpr_Categoria, @cpr_Producto,@cpr_UsuCrea,@cpr_FechaCrea, NULL,		NULL,		  @cpr_Estado)
 
-END
-GO
+--END
+--GO
 
 CREATE OR ALTER PROC UDP_Maqui_tbMetodoPago_CREAR
 	@met_Descripcion	NVARCHAR(100), 
@@ -1465,19 +1471,20 @@ CREATE OR ALTER PROC UDP_Maqui_tbProductos_CREAR
 	@pro_Codigo			NVARCHAR(100),
 	@pro_Nombre			NVARCHAR(100), 
 	@pro_StockInicial	NVARCHAR(100), 
-	@pro_Precio			DECIMAL(18,2), 
+	@pro_PrecioUnitario	DECIMAL(18,2), 
 	@pro_Proveedor		INT, 
-	@pro_usuCrea		INT
+	@pro_usuCrea		INT,
+	@pro_Categoria		INT
 AS
 BEGIN
 	DECLARE @pro_FechaCrea  DATETIME = GETDATE()
 	DECLARE @pro_Estado		BIT		 = 1
 
 	INSERT INTO Maqui.tbProductos
-			(pro_Codigo, pro_Nombre, pro_StockInicial, pro_Precio, pro_Proveedor, pro_usuCrea, 
+			(pro_Codigo, pro_Nombre, pro_StockInicial, pro_PrecioUnitario, pro_Proveedor, pro_Categoria, pro_usuCrea, 
 			 pro_FechaCrea, pro_UsuModi, pro_FechaModi, pro_Estado)
 
-	VALUES  (@pro_Codigo, @pro_Nombre, @pro_StockInicial, @pro_Precio, @pro_Proveedor, @pro_usuCrea,
+	VALUES  (@pro_Codigo, @pro_Nombre, @pro_StockInicial, @pro_PrecioUnitario, @pro_Proveedor, @pro_Categoria, @pro_usuCrea,
 			 @pro_FechaCrea, NULL, NULL, @pro_Estado)
 
 END
@@ -1488,7 +1495,9 @@ CREATE OR ALTER PROC UDP_Maqui_tbProveedores_CREAR
 	@prv_NombreContacto		NVARCHAR(250), 
 	@prv_TelefonoContacto   NVARCHAR(100), 
 	@prv_Municipio			INT, 
-	@prv_Direccion			NVARCHAR(200), 
+	@prv_DireccionEmpresa	NVARCHAR(200), 
+	@prv_DireccionContacto	NVARCHAR(200),
+	@prv_SexoContacto		CHAR(1),
 	@prv_UsuarioCrea		INT 
 AS
 BEGIN
@@ -1497,11 +1506,11 @@ BEGIN
 
 		INSERT INTO Maqui.tbProveedores
 				(prv_NombreCompañia, prv_NombreContacto, prv_TelefonoContacto, prv_Municipio, 
-				 prv_Direccion, prv_UsuarioCrea, prv_FechaCrea, prv_UsuarioModi, 
+				 prv_DireccionEmpresa, prv_DireccionContacto, prv_SexoContacto, prv_UsuarioCrea, prv_FechaCrea, prv_UsuarioModi, 
 				 prv_FechaModi, prv_Estado)
 
 		VALUES	(@prv_NombreCompañia,@prv_NombreContacto, @prv_TelefonoContacto, @prv_Municipio,
-				 @prv_Direccion, @prv_UsuarioCrea, @prv_FechaCrea, NULL,
+				 @prv_DireccionEmpresa, @prv_DireccionContacto, @prv_SexoContacto, @prv_UsuarioCrea, @prv_FechaCrea, NULL,
 				 NULL, @prv_Estado)
 
 END
@@ -1531,8 +1540,7 @@ GO
 
 CREATE OR ALTER PROC UDP_Maqui_tbVentasDetalle_CREAR
 	@vde_VentaId			INT, 
-	@vde_Producto			INT, 
-	@vde_Precio				DECIMAL, 
+	@vde_Producto			INT,
 	@vde_Cantidad			INT, 
 	@vde_UsuCrea			INT 
 AS
@@ -1541,9 +1549,24 @@ BEGIN
 		DECLARE @vde_Estado    BIT		= 1
 
 		INSERT INTO Maqui.tbVentasDetalle
-				(vde_VentaId, vde_Producto, vde_Precio, vde_Cantidad, vde_UsuCrea, vde_FechaCrea, 
+				(vde_VentaId, vde_Producto, vde_Cantidad, vde_UsuCrea, vde_FechaCrea, 
 				 vde_UsuModi, vde_FechaModi, vde_Estado)
 
-		VALUES	(@vde_VentaId, @vde_Producto, @vde_Precio, @vde_Cantidad,@vde_UsuCrea,@vde_FechaCrea,
+		VALUES	(@vde_VentaId, @vde_Producto, @vde_Cantidad,@vde_UsuCrea,@vde_FechaCrea,
 				 NULL,         NULL,		@vde_Estado)
 END
+GO
+
+EXEC UDP_Maqui_tbCategorias_VISTA
+EXEC UDP_Maqui_tbInventario_VISTA
+EXEC UDP_Maqui_tbProductos_VISTA
+EXEC UDP_Maqui_tbMetodoPago_VISTA
+EXEC UDP_Gral_tbClientes_VISTA
+EXEC UDP_Gral_tbDepartamentos_VISTA
+EXEC UDP_Gral_tbEmpleados_VISTA
+EXEC UDP_Maqui_tbProveedores_VISTA
+EXEC UDP_Maqui_tbVentas_VISTA
+EXEC UDP_Maqui_tbVentasDetalle_VISTA
+EXEC UDP_Gral_tbUsuarios_VISTA
+EXEC UDP_Gral_tbMunicipios_VISTA
+EXEC UDP_Gral_tbSucursales_VISTA
