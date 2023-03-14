@@ -942,8 +942,8 @@ GO
 /************************UDPS VISTA************************/
 
 
-CREATE OR ALTER PROC UDP_Gral_tbClientes_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Gral_tbClientes_LIST
+AS
 
 SELECT cli_ID, 
 	   cli_Nombre + ' ' + cli_Apellido AS cli_Nombre, 
@@ -962,15 +962,15 @@ SELECT cli_ID,
 	   INNER JOIN Gral.tbEstadosCiviles T3
 	   ON T1.cli_EstadoCivil = T3.est_ID
 	   WHERE cli_Estado = 1;
-END
+
 GO
 
 
 
 
 
-CREATE OR ALTER PROC UDP_Gral_tbEmpleados_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Gral_tbEmpleados_LIST
+AS 
 
 SELECT emp_ID, 
 	   emp_Nombre + ' ' + emp_Apellido AS emp_Nombre, 
@@ -993,27 +993,27 @@ SELECT emp_ID,
 	   INNER JOIN Gral.tbSucursales T4
 	   ON T1.emp_Sucursal = T4.suc_Id
 	   WHERE emp_Estado = 1;
-END
+
 GO
 
 
 
 
 
-CREATE OR ALTER PROC UDP_Gral_tbDepartamentos_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Gral_tbDepartamentos_LIST
+AS 
 
 SELECT dep_ID, 
 	   dep_Descripcion
 	   FROM Gral.tbDepartamentos
 
-END
+
 GO
 
 
 
-CREATE OR ALTER PROC UDP_Gral_tbMunicipios_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Gral_tbMunicipios_LIST
+AS 
 
 SELECT mun_ID, 
 	   mun_depID = dep_Descripcion, 
@@ -1021,14 +1021,14 @@ SELECT mun_ID,
 	   FROM Gral.tbMunicipios T1
 	   INNER JOIN Gral.tbDepartamentos T2
 	   ON T1.mun_depID = T2.dep_ID
-END
+
 GO
 
 
 
 
-CREATE OR ALTER PROC UDP_Gral_tbSucursales_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Gral_tbSucursales_LIST
+AS 
 
 SELECT suc_Id, 
 	   suc_Descripcion, 
@@ -1037,24 +1037,24 @@ SELECT suc_Id,
 	   INNER JOIN Gral.tbMunicipios T2
 	   ON T1.suc_Municipio = T2.mun_ID
 	   WHERE suc_Estado = 1
-END
+
 GO
 
 
 
 
-CREATE OR ALTER PROC UDP_Gral_tbEstadosCiviles_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Gral_tbEstadosCiviles_LIST
+AS 
 
 SELECT est_ID, 
 	   est_Descripcion
 	   FROM Gral.tbEstadosCiviles
 
-END
+
 GO
 
-CREATE OR ALTER PROC UDP_Gral_tbUsuarios_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Gral_tbUsuarios_LIST
+AS
 
 SELECT
 		usu.usu_ID,
@@ -1064,42 +1064,28 @@ SELECT
 		ON	 usu.usu_empID = emple.emp_ID
 		WHERE usu.usu_Estado = 1
 
-END
+
 GO
 
 
---CREATE OR ALTER PROC UDP_Maqui_tbCategoriasProducto_VISTA
---AS BEGIN
 
---SELECT cpr_Id, 
---	   cate.cat_Descripcion, 
---	   produc.pro_Nombre  
---	   FROM Maqui.tbCategoriaProductos cateproduc  INNER JOIN Maqui.tbCategorias cate
---	   ON	cateproduc.cpr_Categoria = cate.cat_Id INNER JOIN Maqui.tbProductos produc
---	   ON	cateproduc.cpr_Producto = produc.pro_Id
-
---END
---GO
-
-
-
-CREATE OR ALTER PROC UDP_Maqui_tbCategorias_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Maqui_tbCategorias_LIST
+AS 
 
 SELECT cat_Id, 
 	   cat_Descripcion
 	   FROM Maqui.tbCategorias
 	   WHERE cat_Estado = 1;
 
-END
+
 GO
 
 
 
 
 
-CREATE OR ALTER PROC UDP_Maqui_tbInventario_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Maqui_tbInventario_LIST
+AS 
 
 SELECT  inv_Id,
 		produc.pro_Nombre,	
@@ -1107,29 +1093,29 @@ SELECT  inv_Id,
 	    FROM Maqui.tbInventario inven INNER JOIN Maqui.tbProductos produc
 		ON	 inven.inv_Producto = produc.pro_Id
 		WHERE inven.inv_Estado = 1
-END
+
 GO
 
 
 
 
 
-CREATE OR ALTER PROC UDP_Maqui_tbMetodoPago_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Maqui_tbMetodoPago_LIST
+AS 
 
 SELECT met_Id, 
 	   met_Descripcion
 	   FROM Maqui.tbMetodoPago
 	   WHERE met_Estado = 1;
-END
+
 GO
 
 
 
 
 
-CREATE OR ALTER PROC UDP_Maqui_tbProductos_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Maqui_tbProductos_LIST
+AS 
 
 SELECT pro_Codigo, 
 	   pro_Nombre, 
@@ -1145,15 +1131,14 @@ SELECT pro_Codigo,
 	   ON T1.pro_Categoria = cate.cat_Id
 	   WHERE pro_Estado = 1;
 
-END
 GO
 
 
 
 
 
-CREATE OR ALTER PROC UDP_Maqui_tbProveedores_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Maqui_tbProveedores_LIST
+AS
 
 SELECT prv_NombreCompañia, 
 	   prv_NombreContacto, 
@@ -1167,7 +1152,7 @@ SELECT prv_NombreCompañia,
 	   ON T1.prv_Municipio = T2.mun_Id
 	   WHERE prv_Estado = 1;
 
-END
+
 GO
 
 
@@ -1175,8 +1160,8 @@ GO
 
 
 
-CREATE OR ALTER PROC UDP_Maqui_tbVentas_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Maqui_tbVentas_LIST
+AS 
 
 SELECT ven_Id, 
 	   ven_Cliente = cli_Nombre + ' ' + cli_Apellido, 
@@ -1194,15 +1179,15 @@ SELECT ven_Id,
 	   INNER JOIN Gral.tbEmpleados T5
 	   ON T1.ven_Empleado = T5.emp_ID
 	   WHERE ven_Estado = 1;
-END
+
 GO
 
 
 
 
 
-CREATE OR ALTER PROC UDP_Maqui_tbVentasDetalle_VISTA
-AS BEGIN
+CREATE OR ALTER VIEW Vw_Maqui_tbVentasDetalle_LIST
+AS 
 
 SELECT vde_Id, 
 	   vde_VentaId,
@@ -1214,7 +1199,6 @@ SELECT vde_Id,
 	   INNER JOIN Maqui.tbProductos T3
 	   ON T1.vde_Producto = T3.pro_Id
 	   WHERE vde_Estado = 1;
-END
 GO
 
 
@@ -1556,17 +1540,3 @@ BEGIN
 				 NULL,         NULL,		@vde_Estado)
 END
 GO
-
-EXEC UDP_Maqui_tbCategorias_VISTA
-EXEC UDP_Maqui_tbInventario_VISTA
-EXEC UDP_Maqui_tbProductos_VISTA
-EXEC UDP_Maqui_tbMetodoPago_VISTA
-EXEC UDP_Gral_tbClientes_VISTA
-EXEC UDP_Gral_tbDepartamentos_VISTA
-EXEC UDP_Gral_tbEmpleados_VISTA
-EXEC UDP_Maqui_tbProveedores_VISTA
-EXEC UDP_Maqui_tbVentas_VISTA
-EXEC UDP_Maqui_tbVentasDetalle_VISTA
-EXEC UDP_Gral_tbUsuarios_VISTA
-EXEC UDP_Gral_tbMunicipios_VISTA
-EXEC UDP_Gral_tbSucursales_VISTA
